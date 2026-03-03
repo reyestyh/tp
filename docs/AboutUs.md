@@ -27,6 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/reyestyh)]
 
 * Role: Team Lead
+* Responsibilities: Integration
 
 ### Jiaxiang Zhang
 
@@ -36,16 +37,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Tristan Lim Yi Rong
 
