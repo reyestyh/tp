@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[homepage](https://shainegan1407.github.io/portfolio/)]
 [[github](https://github.com/shainegan1407)]
 
-* Role: Project Advisor
+* Role: Documentation
 
 ### Jane Doe
 
