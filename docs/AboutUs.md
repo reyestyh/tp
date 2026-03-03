@@ -11,13 +11,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Shaine Annalisse Gan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shainegan1407.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://shainegan1407.github.io/portfolio/)]
+[[github](https://github.com/shainegan1407)]
 
 * Role: Project Advisor
 
