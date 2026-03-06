@@ -277,13 +277,13 @@ _{Explain here how the data archiving feature will be implemented}_
 Operations executives in small to mid-size tour agencies who
 
 * need to manage a significant client bookings and itineraries
-* handle frequent updates to itineraries, client details and vendor booking notes 
+* handle frequent updates to itineraries, client details and vendor booking notes
 * coordinate between multiple groups (e.g. transport, tour guides, tourists, vendor)
 * prefer desktop apps over other types
-* can type fast 
+* can type fast
 * prefers using CLI interfaces over mouse-based interfaces
 
-**Value proposition**: 
+**Value proposition**:
 
 Existing tools are too heavy or fragmented. Our app is a lightweight, single‑user solution for tour agency executives, enabling rapid typed commands to manage client contacts, addresses, itineraries, and vendor details. Data is stored locally in editable text files.
 
