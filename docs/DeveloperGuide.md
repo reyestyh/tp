@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Itinerary**: A plan for a tour that includes the tour name, start and end dates, the clients participating in the tour, and the vendors involved.
 * **Mainstream OS**: Windows, Linux, Unix and macOS
 * **Tag**: A label used to categorise any number of entries together.
-* **Universally Unique Identifier (UUID)**: A unique 36-character value used to distinguish entries in TripScribe.
+* **Universally Unique Identifier (UUID)**: A unique 36-character value used to distinguish entries in TripScribe. In particular, it consists of numbers (0 - 9) and letters (a - f) separated by hyphens. (e.g.123e4567-e89b-12d3-a456-426614174000).
 * **Vendor**: A party that provides goods or services for a tour.
 
 --------------------------------------------------------------------------------------------------------------------
