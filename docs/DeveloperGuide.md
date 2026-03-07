@@ -302,19 +302,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TripScribe` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC01: Delete a person**
+**UC01: Add a contact**
 
 **MSS**
 
 1. User requests to add a contact and provides the contact details.
 2. TripScribe creates the contact and displays a success message and the updated contact list.
 
-Use case ends
+Use case ends.
 
 **Extensions**
 
-* 1a. TripScribe detects an error in the entered command format
-    * 1a1. TripScribe shows a format error message and displays the correct command usage
+* 1a. TripScribe detects an error in the entered command format.
+    * 1a1. TripScribe shows a format error message and displays the correct command usage.
       
       Use case ends.
 
@@ -328,16 +328,16 @@ Use case ends
     * 1c1. TripScribe shows a duplicate message and does not create the
       contact.
     
-      Use case ends
+      Use case ends.
 ---
 **UC02: Add an itinerary**
 
 **MSS**
 
-1. User requests to add an itinerary and provides the itinerary details
-2. TripScribe creates the itinerary and displays a success message and the updated itinerary list
+1. User requests to add an itinerary and provides the itinerary details.
+2. TripScribe creates the itinerary and displays a success message and the updated itinerary list.
 
-Use case ends
+Use case ends.
 
 **Extensions**
 
@@ -345,54 +345,54 @@ Use case ends
     * 1a1. TripScribe displays a format error message with the
       correct command usage.
 
-      Use case ends
+      Use case ends.
 
 * 1b. TripScribe detects invalid values in the entered itinerary details (e.g., end date earlier than start date, invalid date format).
-    * 1b1. TripScribe shows a validation error message and displays the correct command usage  (and/or which field is invalid).
+    * 1b1. TripScribe shows a validation error message and displays the correct command usage (and/or which field is invalid).
 
-      Use case ends
+      Use case ends.
 * 1c. TripScribe cannot find the referenced client (e.g., provided client id does not exist).
     * 1c1. TripScribe displays an error message indicating the contact is
       not found and does not create the itinerary.
     
-      Use case ends
+      Use case ends.
 ---
 **UC03: List**
 
 **MSS**
 
-1. User requests to view a list of entries by specifying a category (e.g. contact / itinerary / vendor / client)
-2. TripScribe retrieves the matching entries
-3. TripScribe displays the list of entries
+1. User requests to view a list of entries by specifying a category (e.g., contact / itinerary / vendor / client).
+2. TripScribe retrieves the matching entries.
+3. TripScribe displays the list of entries.
 
-Use case ends
+Use case ends.
 
 **Extensions**
 
-* 1a. TripScribe detects an error in the entered command format (e.g. Typo).
+* 1a. TripScribe detects an error in the entered command format (e.g., Typo).
     * 1a1. TripScribe displays a format error message with the
       correct command usage.
 
-      Use case ends
-* 1b. TripScribe detects an error in the entered command details (e.g. missing category / unrecognised category)
+      Use case ends.
+* 1b. TripScribe detects an error in the entered command details (e.g., missing category / unrecognised category).
     * 1b1. TripScribe displays a format error message with the correct command usage and list of supported categories.
 
-      Use case ends
-* 2a. TripScribe finds zero entries matching No entries match the criteria.
+      Use case ends.
+* 2a. TripScribe finds zero entries matching.
     * 2a1. TripScribe displays an empty result message.
   
-      Use case ends
+      Use case ends.
 
 ---
 **UC04: Delete**
 
 **MSS**
 1. User requests to delete a contact or itinerary by specifying the entry
-   identifier (e.g., delete contact INDEX / delete itinerary INDEX)
+   identifier (e.g., delete contact INDEX / delete itinerary INDEX).
 2. TripScribe deletes the entry and displays a success message and the
    updated list.
 
-Use case ends
+Use case ends.
 
 **Extensions**
 
@@ -400,19 +400,18 @@ Use case ends
     * 1a1. TripScribe displays a format error message with the
       correct command usage.
     
-      Use case ends
+      Use case ends.
 * 1b. TripScribe detects an invalid identifier (e.g., not a number / out of range / not found).
     * 1b1. TripScribe shows an error message indicating the target does
       not exist and does not delete anything.
   
-      Use cases ends
+      Use case ends.
 * 1c. TripScribe detects that the specified entry is referenced by itineraries.
     * 1c1. TripScribe shows an error message describing the dependency
       and aborts deletion.
     
-      Use cases ends
+      Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
