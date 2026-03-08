@@ -351,11 +351,16 @@ Use case ends.
     * 1b1. TripScribe shows a validation error message and displays the correct command usage (and/or which field is invalid).
 
       Use case ends.
-* 1c. TripScribe cannot find the referenced client (e.g., provided client id does not exist).
+* 1c. TripScribe cannot find the referenced client or vendor(e.g., provided client id/vendor id does not exist).
     * 1c1. TripScribe displays an error message indicating the contact is
       not found and does not create the itinerary.
     
       Use case ends.
+* 1d. TripScribe detects a duplicate itinerary.
+    * 1d1. TripScribe shows a duplicate message and does not create the itinerary.
+      
+      Use case ends
+
 ---
 **UC03: List**
 
@@ -388,7 +393,7 @@ Use case ends.
 
 **MSS**
 1. User requests to delete a contact or itinerary by specifying the entry
-   identifier (e.g., delete contact INDEX / delete itinerary NAME).
+   identifier.
 2. TripScribe deletes the entry and displays a success message and the
    updated list.
 
