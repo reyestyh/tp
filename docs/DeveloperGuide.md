@@ -373,7 +373,7 @@ Use case ends.
 * 1d. TripScribe detects a duplicate itinerary.
     * 1d1. TripScribe shows a duplicate message and does not create the itinerary.
       
-      Use case ends
+      Use case ends.
 
 ---
 **UC03: List**
