@@ -335,16 +335,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should run on any mainstream OS that has Java 17 or above installed.
+2. The system should be able to support up to 1000 entries without a noticeable sluggishness in performance during typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should function without an Internet connection, allowing users to access and run the application offline.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Case-Insensitive Text**: Text where uppercase and lowercase letters are treated as equivalent.
+* **Client**: A person who participates in a tour organised by the agency.
+* **Command Line Interface (CLI) Application**: An application that users interact with by typing commands.
+* **Flag**: An option used with a command to specify or modify its behaviour.
+* **Graphical User Interface (GUI) Application**: An application that users interact with through graphical elements such as buttons, icons, and menus using a mouse or keyboard.
+* **Itinerary**: A plan for a tour that includes the tour name, start and end dates, the clients participating in the tour, and the vendors involved.
+* **Mainstream OS**: Windows, Linux, Unix and macOS
+* **Tag**: A label used to categorise any number of entries together.
+* **Universally Unique Identifier (UUID)**: A unique 36-character value used to distinguish contacts in TripScribe. In particular, it consists of numbers (0 - 9) and letters (a - f) separated by hyphens. (e.g.123e4567-e89b-12d3-a456-426614174000).
+* **Vendor**: A party that provides goods or services for a tour.
 
 --------------------------------------------------------------------------------------------------------------------
 
