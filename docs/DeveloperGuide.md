@@ -388,7 +388,7 @@ Use case ends.
 
 **MSS**
 1. User requests to delete a contact or itinerary by specifying the entry
-   identifier (e.g., delete contact INDEX / delete itinerary INDEX).
+   identifier (e.g., delete contact INDEX / delete itinerary NAME).
 2. TripScribe deletes the entry and displays a success message and the
    updated list.
 
