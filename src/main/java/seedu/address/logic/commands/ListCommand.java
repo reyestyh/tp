@@ -2,11 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
-// import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITINERARIES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 
-import seedu.address.logic.commands.exceptions.*;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
