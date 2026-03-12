@@ -166,7 +166,7 @@ TripScribe data are saved in the hard disk automatically after any command that 
 
 TripScribe data are saved automatically as a JSON file `[JAR file location]/data/tripscribe.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+</box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, TripScribe will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
