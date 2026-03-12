@@ -14,6 +14,21 @@
     -fx-background-color: darkgray;
 }
 
-#helpMessageContainer {
+#helpMessage {
     -fx-background-color: derive(#1d1d1d, 20%);
+    background-color: #383838;
+}
+
+#helpScrollPane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#helpScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+#helpScrollPane .content {
+    -fx-background-color: transparent;
 }
