@@ -1,11 +1,11 @@
 package seedu.address.model.itinerary;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an Itinerary's date range in the address book.
@@ -21,6 +21,12 @@ public class DateRange {
     public final LocalDate startDate;
     public final LocalDate endDate;
 
+    /**
+     * Constructs a {@code DateRange}.
+     *
+     * @param startDate A valid start date.
+     * @param endDate A valid end date.
+     */
     public DateRange(String startDate, String endDate) {
         requireNonNull(startDate, endDate);
         checkArgument(isValidDateRange(startDate, endDate), MESSAGE_CONSTRAINTS);

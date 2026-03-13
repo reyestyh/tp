@@ -1,8 +1,8 @@
 package seedu.address.model.itinerary;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents an Itinerary in the address book.
@@ -25,19 +25,19 @@ public class Itinerary {
         this.name = name;
         this.destination = destination;
         this.dateRange = dateRange;
-     }
+    }
 
-     public Name getName() {
-         return name;
-     }
+    public Name getName() {
+        return name;
+    }
 
-     public Destination getDestination() {
-         return destination;
-     }
+    public Destination getDestination() {
+        return destination;
+    }
 
-     public DateRange getDateRange() {
-         return dateRange;
-     }
+    public DateRange getDateRange() {
+        return dateRange;
+    }
 
     /**
      * Returns true if both itineraries have the same name.
