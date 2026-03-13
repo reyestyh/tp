@@ -36,6 +36,11 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+    public static final String VALID_ITINERARY_NAME = "3D2N Bali";
+    public static final LocalDate VALID_DATE = LocalDate.of(2020, 2, 2);
+    public static final String VALID_DATE_STRING = "2020-02-02";
+    public static final String INVALID_DATE_STR = "02-02-2020";
+    public static final String VALID_ITINERARY_DESTNATION = "France";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -197,27 +202,27 @@ public class ParserUtilTest {
 
     @Test
     public void parseItineraryName_validValueWithoutWhitespace_returnsItineraryName() throws Exception {
-        assertEquals("3D2N Bali", ParserUtil.parseItineraryName("     3D2N Bali     "));
+        assertEquals(VALID_ITINERARY_NAME, ParserUtil.parseItineraryName("3D2N Bali"));
     }
 
     @Test
     public void parseDestination_validValueWithoutWhiteSpace_returnsItineraryDestination() throws Exception {
-        assertEquals("France", ParserUtil.parseDestination("France"));
+        assertEquals(VALID_ITINERARY_DESTNATION, ParserUtil.parseDestination("France"));
     }
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsItineraryDate() throws Exception {
-        assertEquals(LocalDate.of(2020, 2, 2), ParserUtil.parseDate("2020-02-02"));
+        assertEquals(VALID_DATE, ParserUtil.parseDate(VALID_DATE_STRING));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsItineraryDate() throws Exception {
-        assertEquals(LocalDate.of(2020, 2, 2), ParserUtil.parseDate("       2020-02-02       "));
+        assertEquals(VALID_DATE, ParserUtil.parseDate(WHITESPACE + VALID_DATE_STRING + WHITESPACE));
     }
 
     @Test
     public void parseDate_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDate("02-02-2020"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_STR));
     }
 
 }
