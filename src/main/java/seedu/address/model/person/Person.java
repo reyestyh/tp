@@ -39,6 +39,10 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Creates a {@code Person} with the given role and details.
+     * Every field must be present and not null.
+     */
     public Person(Role role, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(role, name, phone, email, address, tags);
         this.role = role;
@@ -107,7 +111,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return  role.equals(otherPerson.role)
+        return role.equals(otherPerson.role)
                 && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
