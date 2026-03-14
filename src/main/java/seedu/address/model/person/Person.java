@@ -17,6 +17,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final Role role;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -30,11 +31,30 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
+        this.role = new Role(Role.DEFAULT_ROLE);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a {@code Person} with the given role and details.
+     * Every field must be present and not null.
+     */
+    public Person(Role role, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(role, name, phone, email, address, tags);
+        this.role = role;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public Name getName() {
@@ -83,7 +103,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -102,7 +123,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return role.equals(otherPerson.role)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -112,12 +134,13 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(role, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("role", role)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)

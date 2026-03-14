@@ -11,8 +11,9 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Invalid phone number format. Please use the format: (+<Country Code>) <Phone Number> "
+                    + "(e.g., (+65) 98765432).";
+    public static final String VALIDATION_REGEX = "\\(\\+\\d{1,3}\\)\\d{3,12}";
     public final String value;
 
     /**
@@ -22,20 +23,34 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        String normalized = normalizePhone(phone);
+        checkArgument(isValidPhone(normalized), MESSAGE_CONSTRAINTS);
+        value = normalized;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        requireNonNull(test);
+        return normalizePhone(test).matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Removes whitespace so UI input and JSON storage are validated consistently.
+     */
+    private static String normalizePhone(String phone) {
+        return phone.replaceAll("\\s+", "");
     }
 
     @Override
     public String toString() {
-        return value;
+        int closeBracketIndex = value.indexOf(')');
+        if (closeBracketIndex == -1) {
+            return value;
+        }
+        return value.substring(0, closeBracketIndex + 1) + " "
+                + value.substring(closeBracketIndex + 1);
     }
 
     @Override
