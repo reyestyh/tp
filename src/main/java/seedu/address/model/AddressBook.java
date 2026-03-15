@@ -33,13 +33,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         itineraries = new UniqueItineraryList();
     }
 
-    /*  Temporary, to review again after adding Itinerary class
-    private final UniqueItineraryList itineraries;
-    {
-        itineraries = new UniqueItineraryList();
-    }
-    */
-
     public AddressBook() {}
 
     /**
