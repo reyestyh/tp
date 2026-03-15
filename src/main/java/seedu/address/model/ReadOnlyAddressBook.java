@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,12 +15,10 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    /*  Temporary, to review again after adding Itinerary class
-     /**
+    /**
      * Returns an unmodifiable view of the itineraries list.
      * This list will not contain any duplicate itineraries.
-
-    ObservableList<Itinerary> getItineraryList();
      */
+    ObservableList<Itinerary> getItineraryList();
 
 }
