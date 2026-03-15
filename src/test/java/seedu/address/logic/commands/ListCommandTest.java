@@ -8,13 +8,18 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.*;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.*;
+
+import java.util.*;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -66,33 +71,37 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_clientListIsNotFiltered_showsClientsOnly() {
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CLIENTS);
-        assertCommandSuccess(new ListCommand(ListCommand.Flag.CONTACT), model,
-                ListCommand.MESSAGE_SUCCESS_CLIENTS, expectedModel);
+    public void execute_clientListIsNotFiltered_showsClientsOnly() throws CommandException {
+        CommandResult result = new ListCommand(ListCommand.Flag.CLIENT).execute(model);
+        assertEquals(ListCommand.MESSAGE_SUCCESS_CLIENTS, result.getFeedbackToUser());
+        assertTrue(model.getFilteredPersonList().stream()
+                .allMatch(p -> p.getRole().equals(new Role("client"))));
     }
 
     @Test
-    public void execute_clientListIsFiltered_showsClientsOnly() {
+    public void execute_clientListIsFiltered_showsClientsOnly() throws CommandException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CLIENTS);
-        assertCommandSuccess(new ListCommand(ListCommand.Flag.CONTACT), model,
-                ListCommand.MESSAGE_SUCCESS_CLIENTS, expectedModel);
+        CommandResult result = new ListCommand(ListCommand.Flag.CLIENT).execute(model);
+        assertEquals(ListCommand.MESSAGE_SUCCESS_CLIENTS, result.getFeedbackToUser());
+        assertTrue(model.getFilteredPersonList().stream()
+                .allMatch(p -> p.getRole().equals(new Role("client"))));
     }
 
     @Test
-    public void execute_vendorListIsNotFiltered_showsVendorsOnly() {
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_VENDORS);
-        assertCommandSuccess(new ListCommand(ListCommand.Flag.VENDOR), model,
-                ListCommand.MESSAGE_SUCCESS_VENDORS, expectedModel);
+    public void execute_vendorListIsNotFiltered_showsVendorsOnly() throws CommandException {
+        CommandResult result = new ListCommand(ListCommand.Flag.VENDOR).execute(model);
+        assertEquals(ListCommand.MESSAGE_SUCCESS_VENDORS, result.getFeedbackToUser());
+        assertTrue(model.getFilteredPersonList().stream()
+                .allMatch(p -> p.getRole().equals(new Role("vendor"))));
     }
 
     @Test
-    public void execute_vendorListIsFiltered_showsVendorsOnly() {
+    public void execute_vendorListIsFiltered_showsVendorsOnly() throws CommandException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_VENDORS);
-        assertCommandSuccess(new ListCommand(ListCommand.Flag.VENDOR), model,
-                ListCommand.MESSAGE_SUCCESS_VENDORS, expectedModel);
+        CommandResult result = new ListCommand(ListCommand.Flag.VENDOR).execute(model);
+        assertEquals(ListCommand.MESSAGE_SUCCESS_VENDORS, result.getFeedbackToUser());
+        assertTrue(model.getFilteredPersonList().stream()
+                .allMatch(p -> p.getRole().equals(new Role("vendor"))));
     }
 
     @Test
