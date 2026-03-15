@@ -101,11 +101,6 @@ public class AddiCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -126,6 +121,11 @@ public class AddiCommandTest {
         }
 
         @Override
+        public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -137,6 +137,36 @@ public class AddiCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasItinerary(Itinerary itinerary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteItinerary(Itinerary target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addItinerary(Itinerary itinerary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setItinerary(Itinerary target, Itinerary editedItinerary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Itinerary> getFilteredItineraryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItineraryList(Predicate<Itinerary> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -160,6 +190,5 @@ public class AddiCommandTest {
         }
 
     }
-
 
 }
