@@ -7,7 +7,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +28,7 @@ import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.ItineraryBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -93,11 +93,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addi() throws Exception {
-        Itinerary itinerary = new Itinerary("3D2N Bali", "Bali",
-                                            LocalDate.of(2020, 5, 1),
-                                            LocalDate.of(2020, 5, 4));
-        AddiCommand command = (AddiCommand) parser.parseCommand("addi n/3D2N Bali dest/Bali "
-                                                                + "from/2020-05-01 to/2020-05-04");
+        Itinerary itinerary = new ItineraryBuilder().build();
+        AddiCommand command = (AddiCommand) parser.parseCommand("addi n/5D4N Trip to France dest/France "
+                                                                + "from/2024-12-01 to/2024-12-05");
         assertEquals(new AddiCommand(itinerary), command);
     }
 

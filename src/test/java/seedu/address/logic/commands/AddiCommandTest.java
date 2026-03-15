@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -19,12 +18,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ItineraryBuilder;
 
 public class AddiCommandTest {
 
-    private static Itinerary validItineraryA = new Itinerary("3D2N Bali", "Bali",
-            LocalDate.of(2025, 2, 2),
-            LocalDate.of(2025, 2, 5));
 
     @Test
     public void constructor_nullItinerary_throwsNullPointerException() {
@@ -34,7 +31,7 @@ public class AddiCommandTest {
     @Test
     public void execute_itineraryAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingItineraryAdded modelStub = new ModelStubAcceptingItineraryAdded();
-        Itinerary validItinerary = AddiCommandTest.validItineraryA;
+        Itinerary validItinerary = new ItineraryBuilder().build();
 
         CommandResult commandResult = new AddiCommand(validItinerary).execute(modelStub);
 
