@@ -14,6 +14,9 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.itinerary.DateRange;
+import seedu.address.model.itinerary.Destination;
+import seedu.address.model.itinerary.ItineraryName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -34,7 +37,16 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
+    private static final String INVALID_START_DATE_STR = "02-02-2020";
+    private static final String INVALID_END_DATE_STR = "04-02-2020";
+
+    private static final String VALID_ITINERARY_NAME = "3D2N Bali";
+    private static final String VALID_ITINERARY_DESTNATION = "France";
+    private static final String VALID_START_DATE_STRING = "2020-02-02";
+    private static final String VALID_END_DATE_STRING = "2020-02-04";
+
     private static final String WHITESPACE = " \t\r\n";
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -193,4 +205,44 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseItineraryName_validValueWithoutWhitespace_returnsItineraryName() throws Exception {
+        ItineraryName expectedItineraryName = new ItineraryName(VALID_ITINERARY_NAME);
+        assertEquals(expectedItineraryName, ParserUtil.parseItineraryName("3D2N Bali"));
+    }
+
+    @Test
+    public void parseDestination_validValueWithoutWhiteSpace_returnsItineraryDestination() throws Exception {
+        Destination expectedDestination = new Destination(VALID_ITINERARY_DESTNATION);
+        assertEquals(expectedDestination, ParserUtil.parseDestination("France"));
+    }
+
+    @Test
+    public void parseDateRange_validValueWithoutWhitespace_returnsItineraryItineraryDates() throws Exception {
+        DateRange expectedDateRange = new DateRange(VALID_START_DATE_STRING, VALID_END_DATE_STRING);
+        assertEquals(expectedDateRange, ParserUtil.parseItineraryDates(VALID_START_DATE_STRING, VALID_END_DATE_STRING));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsItineraryItineraryDates() throws Exception {
+        DateRange expectedDateRange = new DateRange(VALID_START_DATE_STRING, VALID_END_DATE_STRING);
+        String startDateWithWhitespace = WHITESPACE + VALID_START_DATE_STRING + WHITESPACE;
+        String endDateWithWhitespace = WHITESPACE + VALID_END_DATE_STRING + WHITESPACE;
+        assertEquals(expectedDateRange, ParserUtil.parseItineraryDates(startDateWithWhitespace, endDateWithWhitespace));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseItineraryDates(INVALID_START_DATE_STR,
+                                                                                VALID_END_DATE_STRING));
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseItineraryDates(VALID_START_DATE_STRING,
+                                                                                INVALID_END_DATE_STR));
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseItineraryDates(INVALID_START_DATE_STR,
+                                                                                INVALID_END_DATE_STR));
+
+    }
+
 }

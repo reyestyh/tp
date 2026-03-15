@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,6 +46,19 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code itinerary} for display to the user.
+     */
+    public static String format(Itinerary itinerary) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(itinerary.getName())
+                .append("; Destination: ")
+                .append(itinerary.getDestination())
+                .append("; Date Range: ")
+                .append(itinerary.getDateRange());
         return builder.toString();
     }
 

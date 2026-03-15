@@ -10,8 +10,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Itinerary {
 
+
     // Identity fields
-    private final Name name;
+    private final ItineraryName itineraryName;
 
     // Data fields
     private final Destination destination;
@@ -20,15 +21,15 @@ public class Itinerary {
     /**
      * Every field must be present and not null.
      */
-    public Itinerary(Name name, Destination destination, DateRange dateRange) {
-        requireAllNonNull(name, destination, dateRange);
-        this.name = name;
+    public Itinerary(ItineraryName itineraryName, Destination destination, DateRange dateRange) {
+        requireAllNonNull(itineraryName, destination, dateRange);
+        this.itineraryName = itineraryName;
         this.destination = destination;
         this.dateRange = dateRange;
     }
 
-    public Name getName() {
-        return name;
+    public ItineraryName getName() {
+        return itineraryName;
     }
 
     public Destination getDestination() {
@@ -54,7 +55,7 @@ public class Itinerary {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("itineraryName", itineraryName)
                 .add("destination", destination)
                 .add("date range", dateRange)
                 .toString();

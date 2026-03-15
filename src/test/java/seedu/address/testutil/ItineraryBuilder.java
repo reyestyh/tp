@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.Itinerary;
-import seedu.address.model.itinerary.Name;
+import seedu.address.model.itinerary.ItineraryName;
 
 /**
  * A utility class to help with building Itinerary objects.
@@ -15,7 +15,7 @@ public class ItineraryBuilder {
     public static final String DEFAULT_START_DATE = "2024-12-01";
     public static final String DEFAULT_END_DATE = "2024-12-05";
 
-    private Name name;
+    private ItineraryName itineraryName;
     private Destination destination;
     private DateRange dateRange;
 
@@ -23,7 +23,7 @@ public class ItineraryBuilder {
      * Creates a {@code ItineraryBuilder} with the default details.
      */
     public ItineraryBuilder() {
-        name = new Name(DEFAULT_NAME);
+        itineraryName = new ItineraryName(DEFAULT_NAME);
         destination = new Destination(DEFAULT_DESTINATION);
         dateRange = new DateRange(DEFAULT_START_DATE, DEFAULT_END_DATE);
     }
@@ -32,16 +32,16 @@ public class ItineraryBuilder {
      * Initializes the ItineraryBuilder with the data of {@code itineraryToCopy}.
      */
     public ItineraryBuilder(Itinerary itineraryToCopy) {
-        name = itineraryToCopy.getName();
+        itineraryName = itineraryToCopy.getName();
         destination = itineraryToCopy.getDestination();
         dateRange = itineraryToCopy.getDateRange();
     }
 
     /**
-     * Sets the {@code Name} of the {@code Itinerary} that we are building.
+     * Sets the {@code ItineraryName} of the {@code Itinerary} that we are building.
      */
     public ItineraryBuilder withName(String name) {
-        this.name = new Name(name);
+        this.itineraryName = new ItineraryName(name);
         return this;
     }
 
@@ -62,6 +62,6 @@ public class ItineraryBuilder {
     }
 
     public Itinerary build() {
-        return new Itinerary(name, destination, dateRange);
+        return new Itinerary(itineraryName, destination, dateRange);
     }
 }

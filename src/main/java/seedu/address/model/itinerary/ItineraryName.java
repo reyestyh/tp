@@ -9,7 +9,7 @@ import java.util.Locale;
  * Represents an Itinerary's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class ItineraryName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -19,11 +19,11 @@ public class Name {
     public final String fullName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code ItineraryName}.
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public ItineraryName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
@@ -48,13 +48,13 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof ItineraryName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
+        ItineraryName otherItineraryName = (ItineraryName) other;
         return fullName.toLowerCase(Locale.ROOT)
-                .equals(otherName.fullName.toLowerCase(Locale.ROOT));
+                .equals(otherItineraryName.fullName.toLowerCase(Locale.ROOT));
     }
 
     @Override

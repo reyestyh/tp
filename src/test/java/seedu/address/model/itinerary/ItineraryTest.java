@@ -46,7 +46,7 @@ public class ItineraryTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Itinerary.class.getCanonicalName() + "{name=" + TRIP_TO_FRANCE.getName()
+        String expected = Itinerary.class.getCanonicalName() + "{itineraryName=" + TRIP_TO_FRANCE.getName()
                 + ", destination=" + TRIP_TO_FRANCE.getDestination()
                 + ", date range=" + TRIP_TO_FRANCE.getDateRange() + "}";
         assertEquals(expected, TRIP_TO_FRANCE.toString());

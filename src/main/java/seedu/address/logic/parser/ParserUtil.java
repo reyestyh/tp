@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.itinerary.DateRange;
+import seedu.address.model.itinerary.Destination;
+import seedu.address.model.itinerary.ItineraryName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -137,5 +140,52 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code itineraryName} into a {@code ItineraryName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code itineraryName} is invalid.
+     */
+    public static ItineraryName parseItineraryName(String itineraryName) throws ParseException {
+        requireNonNull(itineraryName);
+        String trimmedItineraryName = itineraryName.trim();
+        if (!ItineraryName.isValidName(trimmedItineraryName)) {
+            throw new ParseException(ItineraryName.MESSAGE_CONSTRAINTS);
+        }
+        return new ItineraryName(itineraryName.trim());
+    }
+
+    /**
+     * Parses {@code destName} into a {@code Destination}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code destName} is invalid.
+     */
+    public static Destination parseDestination(String destName) throws ParseException {
+        requireNonNull(destName);
+        String trimmedDestName = destName.trim();
+        if (!Destination.isValidDestination(trimmedDestName)) {
+            throw new ParseException(Destination.MESSAGE_CONSTRAINTS);
+        }
+        return new Destination(trimmedDestName);
+    }
+
+    /**
+     * Parses a {@code starDateStr} and {@code endDateStr} into an {@code DateRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given dates is invalid.
+     */
+    public static DateRange parseItineraryDates(String startDateStr, String endDateStr) throws ParseException {
+        requireNonNull(startDateStr);
+        requireNonNull(endDateStr);
+        String startDateStrTrimmed = startDateStr.trim();
+        String endDateStrTrimmed = endDateStr.trim();
+        if (!DateRange.isValidDateRange(startDateStrTrimmed, endDateStrTrimmed)) {
+            throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+        }
+        return new DateRange(startDateStrTrimmed, endDateStrTrimmed);
     }
 }

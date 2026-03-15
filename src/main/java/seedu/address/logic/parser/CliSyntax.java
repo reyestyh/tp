@@ -12,5 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-
+    public static final Prefix PREFIX_ITINERARY_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_ITINERARY_DESTINATION = new Prefix("dest/");
+    public static final Prefix PREFIX_ITINERARY_START = new Prefix("from/");
+    public static final Prefix PREFIX_ITINERARY_END = new Prefix("to/");
 }
