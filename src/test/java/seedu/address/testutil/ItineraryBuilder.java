@@ -5,6 +5,10 @@ import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.itinerary.ItineraryName;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  * A utility class to help with building Itinerary objects.
  */
@@ -18,6 +22,8 @@ public class ItineraryBuilder {
     private ItineraryName itineraryName;
     private Destination destination;
     private DateRange dateRange;
+    private Set<UUID> clientIds;
+    private Set<UUID> vendorIds;
 
     /**
      * Creates a {@code ItineraryBuilder} with the default details.
@@ -26,6 +32,8 @@ public class ItineraryBuilder {
         itineraryName = new ItineraryName(DEFAULT_NAME);
         destination = new Destination(DEFAULT_DESTINATION);
         dateRange = new DateRange(DEFAULT_START_DATE, DEFAULT_END_DATE);
+        clientIds = new HashSet<>();
+        vendorIds = new HashSet<>();
     }
 
     /**
@@ -35,6 +43,8 @@ public class ItineraryBuilder {
         itineraryName = itineraryToCopy.getName();
         destination = itineraryToCopy.getDestination();
         dateRange = itineraryToCopy.getDateRange();
+        clientIds = new HashSet<>(itineraryToCopy.getClientIds());
+        vendorIds = new HashSet<>(itineraryToCopy.getVendorIds());
     }
 
     /**
@@ -61,7 +71,23 @@ public class ItineraryBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ClientIds} of the {@code Itinerary} that we are building.
+     */
+    public ItineraryBuilder withClientIds(Set<UUID> clientIds) {
+        this.clientIds = clientIds;
+        return this;
+    }
+
+    /**
+     * Sets the {@code VendorIds} of the {@code Itinerary} that we are building.
+     */
+    public ItineraryBuilder withVendorIds(Set<UUID> vendorIds) {
+        this.vendorIds = vendorIds;
+        return this;
+    }
+
     public Itinerary build() {
-        return new Itinerary(itineraryName, destination, dateRange);
+        return new Itinerary(itineraryName, destination, dateRange, clientIds, vendorIds);
     }
 }

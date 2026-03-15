@@ -2,6 +2,10 @@ package seedu.address.model.itinerary;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -10,22 +14,26 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Itinerary {
 
-
     // Identity fields
     private final ItineraryName itineraryName;
 
     // Data fields
     private final Destination destination;
     private final DateRange dateRange;
+    private final Set<UUID> clientIds;
+    private final Set<UUID> vendorIds;
 
     /**
      * Every field must be present and not null.
      */
-    public Itinerary(ItineraryName itineraryName, Destination destination, DateRange dateRange) {
-        requireAllNonNull(itineraryName, destination, dateRange);
+    public Itinerary(ItineraryName itineraryName, Destination destination,
+                     DateRange dateRange, Set<UUID> clientIds, Set<UUID> vendorIds) {
+        requireAllNonNull(itineraryName, destination, dateRange, clientIds, vendorIds);
         this.itineraryName = itineraryName;
         this.destination = destination;
         this.dateRange = dateRange;
+        this.clientIds = clientIds;
+        this.vendorIds = vendorIds;
     }
 
     public ItineraryName getName() {
@@ -38,6 +46,14 @@ public class Itinerary {
 
     public DateRange getDateRange() {
         return dateRange;
+    }
+
+    public Set<UUID> getClientIds() {
+        return clientIds;
+    }
+
+    public Set<UUID> getVendorIds() {
+        return vendorIds;
     }
 
     /**
@@ -53,11 +69,37 @@ public class Itinerary {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Itinerary)) {
+            return false;
+        }
+
+        Itinerary otherItinerary = (Itinerary) other;
+        return itineraryName.equals(otherItinerary.itineraryName)
+                && destination.equals(otherItinerary.destination)
+                && dateRange.equals(otherItinerary.dateRange)
+                && clientIds.equals(otherItinerary.clientIds)
+                && vendorIds.equals(otherItinerary.vendorIds);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itineraryName, destination, dateRange, clientIds, vendorIds);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("itineraryName", itineraryName)
                 .add("destination", destination)
                 .add("date range", dateRange)
+                .add("clientIds", clientIds)
+                .add("vendorIds", vendorIds)
                 .toString();
     }
 
