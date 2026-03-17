@@ -2,6 +2,8 @@ package seedu.address.model.itinerary;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -32,8 +34,8 @@ public class Itinerary {
         this.itineraryName = itineraryName;
         this.destination = destination;
         this.dateRange = dateRange;
-        this.clientIds = clientIds;
-        this.vendorIds = vendorIds;
+        this.clientIds = new HashSet<>(clientIds);
+        this.vendorIds = new HashSet<>(vendorIds);
     }
 
     public ItineraryName getName() {
@@ -49,11 +51,11 @@ public class Itinerary {
     }
 
     public Set<UUID> getClientIds() {
-        return clientIds;
+        return Collections.unmodifiableSet(clientIds);
     }
 
     public Set<UUID> getVendorIds() {
-        return vendorIds;
+        return Collections.unmodifiableSet(vendorIds);
     }
 
     /**
@@ -66,6 +68,23 @@ public class Itinerary {
 
         return otherItinerary != null
                 && otherItinerary.getName().equals(getName());
+    }
+
+    /**
+     * Removes a person from the itinerary.
+     * @param id UUID of the removed person.
+     */
+    public void removePersonId(UUID id) {
+        clientIds.remove(id);
+        vendorIds.remove(id);
+    }
+
+    /**
+     * Checks whether the Itinerary contain specific person.
+     * @param id The UUID of specific person.
+     */
+    public boolean containsPerson(UUID id) {
+        return clientIds.contains(id) || vendorIds.contains(id);
     }
 
     @Override

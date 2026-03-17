@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -21,6 +22,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final UUID id;
 
     // Data fields
     private final Address address;
@@ -37,6 +39,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.id = UUID.randomUUID();
     }
 
     /**
@@ -45,6 +48,22 @@ public class Person {
      */
     public Person(Role role, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(role, name, phone, email, address, tags);
+        this.role = role;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.id = UUID.randomUUID();
+    }
+
+    /**
+     * Creates a {@code Person} with the given id, role and details.
+     * Every field must be present and not null.
+     */
+    public Person(UUID id, Role role, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(id, role, name, phone, email, address, tags);
+        this.id = id;
         this.role = role;
         this.name = name;
         this.phone = phone;
@@ -71,6 +90,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     /**

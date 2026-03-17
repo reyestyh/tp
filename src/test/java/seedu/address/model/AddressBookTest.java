@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.ItineraryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -82,6 +84,24 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void removePerson_personReferencedByItinerary_removesPersonIdFromItineraries() {
+        Person person = new PersonBuilder().build();
+        Itinerary itinerary = new ItineraryBuilder()
+                .withClientIds(Set.of(person.getId()))
+                .withVendorIds(Set.of(person.getId()))
+                .build();
+        addressBook.addPerson(person);
+        addressBook.addItinerary(itinerary);
+
+        addressBook.removePerson(person);
+
+        assertFalse(addressBook.hasPerson(person));
+        Itinerary updatedItinerary = addressBook.getItineraryList().get(0);
+        assertFalse(updatedItinerary.getClientIds().contains(person.getId()));
+        assertFalse(updatedItinerary.getVendorIds().contains(person.getId()));
     }
 
     @Test

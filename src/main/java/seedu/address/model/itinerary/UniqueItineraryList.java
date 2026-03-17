@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -96,6 +97,14 @@ public class UniqueItineraryList implements Iterable<Itinerary> {
         }
 
         internalList.setAll(itineraries);
+    }
+
+    /**
+     * Removes a person from all its related itineraries.
+     * @param id The UUID of the removed person.
+     */
+    public void removePerson(UUID id) {
+        internalList.forEach(itinerary -> itinerary.removePersonId(id));
     }
 
     /**

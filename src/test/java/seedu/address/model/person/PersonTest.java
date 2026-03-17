@@ -32,7 +32,7 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name and phone, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
@@ -88,6 +88,10 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different id only -> returns true because id is not part of equality
+        editedAlice = new PersonBuilder(ALICE).withId("22222222-2222-2222-2222-222222222222").build();
+        assertTrue(ALICE.equals(editedAlice));
     }
 
     @Test
