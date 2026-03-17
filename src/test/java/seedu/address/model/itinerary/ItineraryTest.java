@@ -20,6 +20,40 @@ import seedu.address.testutil.ItineraryBuilder;
 public class ItineraryTest {
 
     @Test
+    public void removePersonId_idExists_removesFromClientAndVendorSets() {
+        UUID personId = UUID.randomUUID();
+        UUID otherClientId = UUID.randomUUID();
+        UUID otherVendorId = UUID.randomUUID();
+        Itinerary itinerary = new ItineraryBuilder()
+                .withClientIds(Set.of(personId, otherClientId))
+                .withVendorIds(Set.of(personId, otherVendorId))
+                .build();
+
+        itinerary.removePersonId(personId);
+
+        assertFalse(itinerary.getClientIds().contains(personId));
+        assertFalse(itinerary.getVendorIds().contains(personId));
+        assertTrue(itinerary.getClientIds().contains(otherClientId));
+        assertTrue(itinerary.getVendorIds().contains(otherVendorId));
+    }
+
+    @Test
+    public void removePersonId_idDoesNotExist_noChange() {
+        UUID existingClientId = UUID.randomUUID();
+        UUID existingVendorId = UUID.randomUUID();
+        UUID missingId = UUID.randomUUID();
+        Itinerary itinerary = new ItineraryBuilder()
+                .withClientIds(Set.of(existingClientId))
+                .withVendorIds(Set.of(existingVendorId))
+                .build();
+
+        itinerary.removePersonId(missingId);
+
+        assertEquals(Set.of(existingClientId), itinerary.getClientIds());
+        assertEquals(Set.of(existingVendorId), itinerary.getVendorIds());
+    }
+
+    @Test
     public void isSameItinerary() {
         // same object -> returns true
         assertTrue(TRIP_TO_FRANCE.isSameItinerary(TRIP_TO_FRANCE));

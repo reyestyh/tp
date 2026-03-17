@@ -57,6 +57,10 @@ public class Person {
         this.id = UUID.randomUUID();
     }
 
+    /**
+     * Creates a {@code Person} with the given id, role and details.
+     * Every field must be present and not null.
+     */
     public Person(UUID id, Role role, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(role, name, phone, email, address, tags);
         this.id = id;
