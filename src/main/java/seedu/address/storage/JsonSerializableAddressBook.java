@@ -20,15 +20,19 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_ITINERARY = "Itineraries list contains duplicate itinerary(ies).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedItinerary> itineraries = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and itineraries.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("itineraries") List<JsonAdaptedItinerary> itineraries) {
         this.persons.addAll(persons);
+        this.itineraries.addAll(itineraries);
     }
 
     /**
@@ -38,6 +42,8 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        itineraries.addAll(source.getItineraryList().stream().map(JsonAdaptedItinerary::new)
+                .collect(Collectors.toList()));
     }
 
     /**
