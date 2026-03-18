@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.AddressBookBuilder.getTypicalAddressBook;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -22,6 +23,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.ItineraryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -91,7 +93,6 @@ public class AddressBookTest {
         Person person = new PersonBuilder().build();
         Itinerary itinerary = new ItineraryBuilder()
                 .withClientIds(Set.of(person.getId()))
-                .withVendorIds(Set.of(person.getId()))
                 .build();
         addressBook.addPerson(person);
         addressBook.addItinerary(itinerary);
@@ -100,8 +101,50 @@ public class AddressBookTest {
 
         assertFalse(addressBook.hasPerson(person));
         Itinerary updatedItinerary = addressBook.getItineraryList().get(0);
-        assertFalse(updatedItinerary.getClientIds().contains(person.getId()));
         assertFalse(updatedItinerary.getVendorIds().contains(person.getId()));
+    }
+
+    @Test
+    public void addItinerary_personReferencedByItineraryDoesNotExist() {
+        Person person = new PersonBuilder().build();
+        Itinerary itinerary = new ItineraryBuilder().withClientIds(Set.of(person.getId())).build();
+        assertThrows(PersonNotFoundException.class, () -> addressBook.addItinerary(itinerary));
+    }
+
+    @Test
+    public void setItinerary_personReferencedByItineraryDoesNotExist() {
+        Person person = new PersonBuilder().build();
+        Itinerary itinerary = new ItineraryBuilder().build();
+        addressBook.addItinerary(itinerary);
+        Itinerary editedItinerary = new ItineraryBuilder().withName(VALID_ITINERARY_NAME_BALI)
+                .withClientIds(Set.of(person.getId())).build();
+        assertThrows(PersonNotFoundException.class, () -> addressBook.setItinerary(itinerary, editedItinerary));
+    }
+
+    @Test
+    public void addItinerary_personReferencedByItineraryHasWrongRole() {
+        Person person = new PersonBuilder().build(); // client
+        Itinerary itinerary = new ItineraryBuilder().withVendorIds(Set.of(person.getId())).build();
+        addressBook.addPerson(person);
+        assertThrows(PersonNotFoundException.class, () -> addressBook.addItinerary(itinerary));
+    }
+
+    @Test
+    public void setItinerary_personReferencedByItineraryHasWrongRole() {
+        Person person = new PersonBuilder().build(); // client
+        Itinerary itinerary = new ItineraryBuilder().build();
+        addressBook.addPerson(person);
+        addressBook.addItinerary(itinerary);
+        Itinerary editedItinerary = new ItineraryBuilder().withName(VALID_ITINERARY_NAME_BALI)
+                .withVendorIds(Set.of(person.getId())).build();
+        assertThrows(PersonNotFoundException.class, () -> addressBook.setItinerary(itinerary, editedItinerary));
+    }
+
+    @Test
+    public void setItineraries_personReferencedByItinerariesDoesNotExist() {
+        Person person = new PersonBuilder().build();
+        Itinerary itinerary = new ItineraryBuilder().withClientIds(Set.of(person.getId())).build();
+        assertThrows(PersonNotFoundException.class, () -> addressBook.setItineraries(List.of(itinerary)));
     }
 
     @Test

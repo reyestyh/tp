@@ -8,13 +8,21 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidRole(String)}
  */
 public class Role {
+    /**
+     * Represents the possible roles a Person can have.
+     */
+    public enum RoleType {
+        CLIENT,
+        VENDOR
+    }
+
     public static final String DEFAULT_ROLE = "client";
     public static final String MESSAGE_CONSTRAINTS =
             "Role should be either client or vendor";
 
     public static final String VALIDATION_REGEX = "(?i)client|vendor";
 
-    public final String value;
+    public final RoleType value;
 
     /**
      * Constructs an {@code Role}.
@@ -24,7 +32,7 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        value = role.trim().toLowerCase();
+        value = RoleType.valueOf(role.trim().toUpperCase());
     }
 
     /**
@@ -36,7 +44,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return value;
+        return value.name().toLowerCase();
     }
 
     @Override

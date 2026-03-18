@@ -59,7 +59,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         id = source.getId().toString();
-        role = source.getRole().value;
+        role = source.getRole().toString();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
