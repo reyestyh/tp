@@ -1,6 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalItineraries.getTypicalItineraries;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+
 import seedu.address.model.AddressBook;
+import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,6 +30,28 @@ public class AddressBookBuilder {
     public AddressBookBuilder withPerson(Person person) {
         addressBook.addPerson(person);
         return this;
+    }
+
+    /**
+     * Adds a new {@code Itinerary} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withItinerary(Itinerary itinerary) {
+        addressBook.addItinerary(itinerary);
+        return this;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and itineraries.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        for (Itinerary itinerary : getTypicalItineraries()) {
+            ab.addItinerary(itinerary);
+        }
+        return ab;
     }
 
     public AddressBook build() {

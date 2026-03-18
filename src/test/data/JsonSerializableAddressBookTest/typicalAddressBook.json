@@ -42,5 +42,22 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
-  } ]
+  } ],
+  "itineraries": [ {
+    "name": "5D4N Trip to France",
+    "destination": "France",
+    "start date": "2024-12-01",
+    "end date": "2024-12-05",
+    "client ids": [ ],
+    "vendor ids": [ ]
+  }, {
+    "name": "Island Time: Bali",
+    "destination": "Bali",
+    "start date": "2026-03-10",
+    "end date": "2026-03-15",
+    "client ids": [ ],
+    "vendor ids": [ ]
+  }
+
+  ]
 }

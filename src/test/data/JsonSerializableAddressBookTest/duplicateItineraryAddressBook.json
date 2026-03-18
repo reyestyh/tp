@@ -1,0 +1,18 @@
+{
+  "persons": [ ],
+  "itineraries": [ {
+    "name": "Trip to Bali",
+    "destination": "Bali",
+    "start date": "2026-03-10",
+    "end date": "2026-03-15",
+    "client ids": [ ],
+    "vendor ids": [ ]
+    }, {
+    "name": "Trip to Bali",
+    "destination": "Bali",
+    "start date": "2026-03-10",
+    "end date": "2026-03-15",
+    "client ids": [ ],
+    "vendor ids": [ ]
+  } ]
+}
