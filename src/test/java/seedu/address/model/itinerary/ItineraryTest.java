@@ -10,11 +10,48 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_START_DATE_BALI;
 import static seedu.address.testutil.TypicalItinerary.TRIP_TO_FRANCE;
 
+import java.util.Set;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ItineraryBuilder;
 
 public class ItineraryTest {
+
+    @Test
+    public void removePersonId_idExists_removesFromClientAndVendorSets() {
+        UUID personId = UUID.randomUUID();
+        UUID otherClientId = UUID.randomUUID();
+        UUID otherVendorId = UUID.randomUUID();
+        Itinerary itinerary = new ItineraryBuilder()
+                .withClientIds(Set.of(personId, otherClientId))
+                .withVendorIds(Set.of(personId, otherVendorId))
+                .build();
+
+        itinerary.removePersonId(personId);
+
+        assertFalse(itinerary.getClientIds().contains(personId));
+        assertFalse(itinerary.getVendorIds().contains(personId));
+        assertTrue(itinerary.getClientIds().contains(otherClientId));
+        assertTrue(itinerary.getVendorIds().contains(otherVendorId));
+    }
+
+    @Test
+    public void removePersonId_idDoesNotExist_noChange() {
+        UUID existingClientId = UUID.randomUUID();
+        UUID existingVendorId = UUID.randomUUID();
+        UUID missingId = UUID.randomUUID();
+        Itinerary itinerary = new ItineraryBuilder()
+                .withClientIds(Set.of(existingClientId))
+                .withVendorIds(Set.of(existingVendorId))
+                .build();
+
+        itinerary.removePersonId(missingId);
+
+        assertEquals(Set.of(existingClientId), itinerary.getClientIds());
+        assertEquals(Set.of(existingVendorId), itinerary.getVendorIds());
+    }
 
     @Test
     public void isSameItinerary() {
@@ -44,11 +81,49 @@ public class ItineraryTest {
         assertFalse(TRIP_TO_FRANCE.isSameItinerary(editedtripToFrance));
     }
 
+    public void equals() {
+        // same values -> returns true
+        Itinerary tripToFranceCopy = new ItineraryBuilder(TRIP_TO_FRANCE).build();
+        assertTrue(TRIP_TO_FRANCE.equals(tripToFranceCopy));
+
+        // same object -> returns true
+        assertTrue(TRIP_TO_FRANCE.equals(TRIP_TO_FRANCE));
+
+        // null -> returns false
+        assertFalse(TRIP_TO_FRANCE.equals(null));
+
+        // different type -> returns false
+        assertFalse(TRIP_TO_FRANCE.equals(5));
+
+        // different name -> returns false
+        Itinerary editedItinerary = new ItineraryBuilder(TRIP_TO_FRANCE).withName(VALID_ITINERARY_NAME_BALI).build();
+        assertFalse(TRIP_TO_FRANCE.equals(editedItinerary));
+
+        // different destination -> returns false
+        editedItinerary = new ItineraryBuilder(TRIP_TO_FRANCE).withDestination(VALID_ITINERARY_DEST_BALI).build();
+        assertFalse(TRIP_TO_FRANCE.equals(editedItinerary));
+
+        // different date range -> returns false
+        editedItinerary = new ItineraryBuilder(TRIP_TO_FRANCE).withDateRange(VALID_ITINERARY_START_DATE_BALI,
+                VALID_ITINERARY_END_DATE_BALI).build();
+        assertFalse(TRIP_TO_FRANCE.equals(editedItinerary));
+
+        // different clientIds -> returns false
+        editedItinerary = new ItineraryBuilder(TRIP_TO_FRANCE).withClientIds(Set.of(UUID.randomUUID())).build();
+        assertFalse(TRIP_TO_FRANCE.equals(editedItinerary));
+
+        // different vendorIds -> returns false
+        editedItinerary = new ItineraryBuilder(TRIP_TO_FRANCE).withVendorIds(Set.of(UUID.randomUUID())).build();
+        assertFalse(TRIP_TO_FRANCE.equals(editedItinerary));
+    }
+
     @Test
     public void toStringMethod() {
         String expected = Itinerary.class.getCanonicalName() + "{itineraryName=" + TRIP_TO_FRANCE.getName()
                 + ", destination=" + TRIP_TO_FRANCE.getDestination()
-                + ", date range=" + TRIP_TO_FRANCE.getDateRange() + "}";
+                + ", date range=" + TRIP_TO_FRANCE.getDateRange()
+                + ", clientIds=" + TRIP_TO_FRANCE.getClientIds()
+                + ", vendorIds=" + TRIP_TO_FRANCE.getVendorIds() + "}";
         assertEquals(expected, TRIP_TO_FRANCE.toString());
     }
 }

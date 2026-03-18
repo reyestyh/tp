@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Itinerary> filteredItineraries;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredItineraries = new FilteredList<>(this.addressBook.getItineraryList());
     }
 
     public ModelManager() {
@@ -111,11 +114,35 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasItinerary(Itinerary itinerary) {
+        requireNonNull(itinerary);
+        return addressBook.hasItinerary(itinerary);
+    }
+
+    @Override
+    public void deleteItinerary(Itinerary target) {
+        addressBook.removeItinerary(target);
+    }
+
+    @Override
+    public void addItinerary(Itinerary itinerary) {
+        addressBook.addItinerary(itinerary);
+        updateFilteredItineraryList(PREDICATE_SHOW_ALL_ITINERARIES);
+    }
+
+    @Override
+    public void setItinerary(Itinerary target, Itinerary editedItinerary) {
+        requireAllNonNull(target, editedItinerary);
+
+        addressBook.setItinerary(target, editedItinerary);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code addressBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -128,7 +155,12 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    /* Temporary, to review again after adding Itinerary class
+    //=========== Filtered Itinerary List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Itinerary} backed by the internal list of
+     * {@code addressBook}
+     */
     @Override
     public ObservableList<Itinerary> getFilteredItineraryList() {
         return filteredItineraries;
@@ -139,7 +171,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredItineraries.setPredicate(predicate);
     }
-    */
 
     @Override
     public boolean equals(Object other) {
@@ -155,7 +186,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredItineraries.equals(otherModelManager.filteredItineraries);
     }
 
 }

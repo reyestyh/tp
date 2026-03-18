@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_START;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddiCommand;
@@ -43,7 +44,8 @@ public class AddiCommandParser implements Parser<AddiCommand> {
         DateRange dateRange = ParserUtil.parseItineraryDates(argMultimap.getValue(PREFIX_ITINERARY_START).get(),
                                                              argMultimap.getValue(PREFIX_ITINERARY_END).get());
 
-        Itinerary itinerary = new Itinerary(name, destination, dateRange);
+        // TODO: parse client and vendor ids.
+        Itinerary itinerary = new Itinerary(name, destination, dateRange, Set.of(), Set.of());
 
         return new AddiCommand(itinerary);
     }

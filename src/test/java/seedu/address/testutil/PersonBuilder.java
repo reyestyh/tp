@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -22,7 +23,9 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ROLE = "client";
+    public static final String DEFAULT_ID = "11111111-1111-1111-1111-111111111111";
 
+    private UUID id;
     private Role role;
     private Name name;
     private Phone phone;
@@ -34,6 +37,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        id = UUID.fromString(DEFAULT_ID);
         role = new Role(DEFAULT_ROLE);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
@@ -46,6 +50,7 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
+        id = personToCopy.getId();
         role = personToCopy.getRole();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
@@ -67,6 +72,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withRole(String role) {
         this.role = new Role(role);
+        return this;
+    }
+
+    /**
+     * Sets the {@code UUID} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(String id) {
+        this.id = UUID.fromString(id);
         return this;
     }
 
@@ -103,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(role, name, phone, email, address, tags);
+        return new Person(id, role, name, phone, email, address, tags);
     }
 
 }

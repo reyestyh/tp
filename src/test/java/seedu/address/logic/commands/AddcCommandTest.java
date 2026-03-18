@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -82,6 +83,7 @@ public class AddcCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -113,11 +115,6 @@ public class AddcCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -138,6 +135,11 @@ public class AddcCommandTest {
         }
 
         @Override
+        public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,6 +153,37 @@ public class AddcCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasItinerary(Itinerary itinerary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteItinerary(Itinerary target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addItinerary(Itinerary itinerary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setItinerary(Itinerary target, Itinerary editedItinerary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Itinerary> getFilteredItineraryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItineraryList(Predicate<Itinerary> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

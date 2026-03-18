@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,7 +25,9 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String INVALID_ID_MESSAGE_FORMAT = "Person's id field is invalid!";
 
+    private final String id;
     private final String role;
     private final String name;
     private final String phone;
@@ -36,10 +39,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("role") String role,
+    public JsonAdaptedPerson(@JsonProperty("id") String id, @JsonProperty("role") String role,
             @JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.id = id;
         this.role = role;
         this.name = name;
         this.phone = phone;
@@ -54,6 +58,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        id = source.getId().toString();
         role = source.getRole().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
@@ -74,6 +79,17 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+        final UUID modelId;
+        if (id == null) {
+            modelId = UUID.randomUUID();
+        } else {
+            try {
+                modelId = UUID.fromString(id);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(INVALID_ID_MESSAGE_FORMAT);
+            }
+        }
+
         final String roleToLoad = role == null ? Role.DEFAULT_ROLE : role;
         if (!Role.isValidRole(roleToLoad)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
@@ -113,7 +129,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelRole, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelId, modelRole, modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }
