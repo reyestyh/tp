@@ -93,7 +93,7 @@ Examples:
 
 ### Listing contacts and itineraries : `list`
 
-SShows a list of contacts or itineraries based on the specified flag.
+Shows a list of contacts or itineraries based on the specified flag.
 
 Format: `list FLAG`
 
