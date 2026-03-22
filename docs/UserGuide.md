@@ -69,7 +69,7 @@ TripScribe is a **desktop app for managing contacts, optimized for use via a  Li
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Opens a help window showing a summary of all available commands and a link to the full User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -91,11 +91,25 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing contacts and itineraries : `list`
 
-Shows a list of all persons in the address book.
+SShows a list of contacts or itineraries based on the specified flag.
 
-Format: `list`
+Format: `list FLAG`
+
+* `FLAG` must be one of: `/contact`, `/client`, `/vendor`, `/itinerary`
+  * `/contact` displays all contacts regardless of role.
+  * `/client` displays only contacts with the role `client`.
+  * `/vendor` displays only contacts with the role `vendor`.
+  * `/itinerary` displays all itineraries.
+* When viewing contacts (`/contact`, `/client`, `/vendor`), the itinerary panel is hidden.
+* When viewing itineraries (`/itinerary`), the contact panel is hidden.
+
+Examples:
+* `list /contact` lists all contacts.
+* `list /client` lists all clients.
+* `list /vendor` lists all vendors.
+* `list /itinerary` lists all itineraries.
 
 ### Editing a person : `edit`
 
