@@ -201,7 +201,7 @@ Furthermore, certain edits can cause the TripScribe to behave in unexpected ways
    * To fix this, delete the `preferences.json` file created by TripScribe before running the application again.
 <br><br>
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. 
-   * To fix this, close minimized Help Window and type the command again.
+   * To fix this, close the minimized Help Window and type the command again.
 
 --------------------------------------------------------------------------------------------------------------------
 
