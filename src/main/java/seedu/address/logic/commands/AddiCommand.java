@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_VENDOR;
 
 import seedu.address.commons.core.index.Index;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -59,7 +60,7 @@ public class AddiCommand extends Command {
      * Creates an AddiCommand to add the specified {@code Itinerary}
      */
     public AddiCommand(Itinerary itinerary, Set<Index> clientIndices, Set<Index> vendorIndices) {
-        requireNonNull(itinerary);
+        requireAllNonNull(itinerary, clientIndices, vendorIndices);
         toAdd = itinerary;
         this.clientIndices = clientIndices;
         this.vendorIndices = vendorIndices;
