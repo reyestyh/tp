@@ -86,7 +86,7 @@ TripScribe needs Java `17` or above to run. Here is how to check if you already 
 | Add a contact named `John Doe`                     | `addc r/client n/John Doe p/(+65) 98765432 e/johnd@example.com a/John street, block 123, #01-01` |
 | Add an itinerary named `Bali Getaway`              | `addi n/Bali Getaway dest/Bali from/2026-07-01 to/2026-07-05`                                    |
 | Delete the third contact shown in the current list | `delete /contact 3`                                                                              |
-| Delete all contacts and itineraries                | `clear`                                                                                          |
+| Clear all contacts and itineraries                 | `clear`                                                                                          |
 | Open the help window                               | `help`                                                                                           |
 | Exit TripScribe                                    | `exit`                                                                                           |
 
@@ -201,8 +201,8 @@ list /FLAG
     | Flag        | What you see                           |
     |-------------|----------------------------------------|
     | `contact`   | All contacts, both clients and vendors |
-    | `client`   | Only clients                           |
-    | `vendor`   | Only vendors                           |
+    | `client`    | Only clients                           |
+    | `vendor`    | Only vendors                           |
     | `itinerary` | All itineraries                        |
 
 * When you view contacts (`/contact`, `/client`, `/vendor`), TripScribe hides the itinerary panel.
@@ -359,11 +359,11 @@ Furthermore, certain edits can cause TripScribe to behave in unexpected ways (e.
 | Action                                                 | Format                                                                                               | Example                                                                                                                                              |
 |--------------------------------------------------------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**help**](#viewing-help--help)                        | `help`                                                                                               | -                                                                                                                                                    |
-| [**addc**](#adding-a-contact--addc)                    | `addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                      | `addc r/client n/James Ho p/(+65) 22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                   |
-| [**addi**](#adding-an-itinerary--addi)                 | `addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_ID]…​ [v/VENDOR_ID]…​` | `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/236075fd-4619-4b41-8d9f-9d98eadedd89 v/5b8511e5-12d0-49fa-b1da-d84fa7df756a` |
+| [**addc**](#adding-a-contact-addc)                     | `addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                      | `addc r/client n/James Ho p/(+65) 22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                   |
+| [**addi**](#adding-an-itinerary-addi)                  | `addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_ID]…​ [v/VENDOR_ID]…​` | `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/236075fd-4619-4b41-8d9f-9d98eadedd89 v/5b8511e5-12d0-49fa-b1da-d84fa7df756a` |
 | [**list**](#listing-contacts-and-itineraries--list)    | `list /FLAG`                                                                                         | `list /contact`                                                                                                                                      |
 | [**edit**](#editing-a-contact--edit)                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                               | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
-| [**find**](#finding-contacts-by-name--find)            | `find KEYWORD [MORE_KEYWORDS]`                                                                       | `find James Jake`                                                                                                                                    |
+| [**find**](#finding-contacts-by-name-find)             | `find KEYWORD [MORE_KEYWORDS]`                                                                       | `find James Jake`                                                                                                                                    |
 | [**delete**](#deleting-a-contact-or-itinerary--delete) | `delete /FLAG INDEX`                                                                                 | `delete /contact 3`                                                                                                                                  |
 | [**clear**](#clearing-all-entries--clear)              | `clear`                                                                                              | -                                                                                                                                                    |
-| [**exit**](#exiting-the-program--exit)                 | `exit`                                                                                               | -                                                                                                                                                    |
+| [**exit**](#exiting-tripscribe--exit)                  | `exit`                                                                                               | -                                                                                                                                                    |
