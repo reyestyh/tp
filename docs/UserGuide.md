@@ -91,13 +91,13 @@ Format: `addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 **Tip:**
 - `ROLE` must be either `client` or `vendor`
 - A contact can have any number of tags (including 0)
-- Phone numbers should follow the format `(+<Country Code>) <Phone Number>`, for example `(+65) 987654332`.
+- Phone numbers should follow the format `(+<Country Code>) <Phone Number>`, for example `(+65) 98765432`.
 - Contacts with the same name and phone number are considered duplicates. Duplicate contacts cannot be added.
 </box>
 
 Examples:
 * `addc r/client n/John Doe p/(+65) 98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addc r/vendor n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/(+44) 1234567 t/criminal`
+* `addc r/vendor n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/(+44) 1234567 t/hotel`
 
 A successful `addc` command will add the contact to the contact list.
 
@@ -105,7 +105,7 @@ A successful `addc` command will add the contact to the contact list.
 
 ### Adding an itinerary: `addi`
 
-Adds an itinerary to the address book.
+Adds an itinerary to TripScribe.
 
 Format: `addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_ID]…​ [v/VENDOR_ID]…​`
 
@@ -133,13 +133,13 @@ Examples:
 
 Shows a list of contacts or itineraries based on the specified flag.
 
-Format: `list FLAG`
+Format: `list /FLAG`
 
-* `FLAG` must be one of: `/contact`, `/client`, `/vendor`, `/itinerary`
-  * `/contact` displays all contacts regardless of role.
-  * `/client` displays only contacts with the role `client`.
-  * `/vendor` displays only contacts with the role `vendor`.
-  * `/itinerary` displays all itineraries.
+* `FLAG` must be one of: `contact`, `client`, `vendor`, `itinerary`
+  * `contact` displays all contacts regardless of role.
+  * `client` displays only contacts with the role `client`.
+  * `vendor` displays only contacts with the role `vendor`.
+  * `itinerary` displays all itineraries.
 * When viewing contacts (`/contact`, `/client`, `/vendor`), the itinerary panel is hidden.
 * When viewing itineraries (`/itinerary`), the contact panel is hidden.
 
@@ -151,7 +151,7 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in TripScribe.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -163,7 +163,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/(+65) 91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `(+65) 91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
@@ -228,12 +228,13 @@ TripScribe data are saved in the hard disk automatically after any command that 
 
 TripScribe data is saved automatically as a JSON file `[JAR file location]/data/tripscribe.json`. Advanced users can update data directly by editing the data file.
 
-</box type="warning" seamless>
+<box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, TripScribe will discard all data and start with an empty data file at the next run.  Hence, you are recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the TripScribe to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you know what you are doing.
 </box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -257,11 +258,11 @@ Furthermore, certain edits can cause the TripScribe to behave in unexpected ways
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Addc**   | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addc n/James Ho p/(+65) 22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Addc**   | `addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addc r/client n/James Ho p/(+65) 22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Addi**   | `addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_ID]…​ [v/VENDOR_ID]…​` <br> e.g., `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/236075fd-4619-4b41-8d9f-9d98eadedd89 v/5b8511e5-12d0-49fa-b1da-d84fa7df756a`
 **Clear**  | `clear`
 **Delete** | `delete /FLAG INDEX`<br> e.g., `delete /contact 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list FLAG` <br> e.g., `list \contact`
+**List**   | `list /FLAG` <br> e.g., `list /contact`
 **Help**   | `help`
