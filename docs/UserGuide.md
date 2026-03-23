@@ -125,7 +125,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existAding person in the address book.
+Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
