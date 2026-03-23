@@ -39,7 +39,7 @@ TripScribe lets you manage contacts and itineraries on your desktop using keyboa
 
 ## Quick Start
 
-### 1. Set Up Java for TripScribe
+#### 1. Set Up Java for TripScribe
 TripScribe needs Java `17` or above to run. Here is how to check if you already have it installed:
 * Open a command terminal as follows:
 
@@ -58,11 +58,11 @@ TripScribe needs Java `17` or above to run. Here is how to check if you already 
   * Installation guide for Windows users [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
   * Installation guide for Mac users [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-### 2. Download TripScribe
+#### 2. Download TripScribe
 * Download the latest `tripscribe.jar` from [here](https://github.com/AY2526S2-CS2103T-F12-1/tp/releases)
 * Move the file to a folder of your choice. For example, a folder called `TripScribe` on your desktop.
 
-### 3. Run TripScribe
+#### 3. Run TripScribe
 * Open a command terminal, as described in Step 1.
 * Navigate into the folder containing the `tripscribe.jar` file using the `cd` command:
   ```
@@ -75,7 +75,7 @@ TripScribe needs Java `17` or above to run. Here is how to check if you already 
  A pop-up window similar to the below should appear in a few seconds. On first start, the app will load sample data so you can explore its features right away.<br>
  ![Ui](images/Ui.png)
 
-### 4. Try Your First Commands
+#### 4. Try Your First Commands
 * Type a command in the **command box** and press Enter to execute it. 
 * Commands follow a consistent format throughout this guide. In brief, words in UPPER_CASE are values you supply, and items in [square brackets] are optional. For a full explanation, see [Reading Command Formats](#reading-command-formats). 
 * Try some example commands to get started:
