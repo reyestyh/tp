@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItineraryAtIndex;
@@ -85,5 +85,33 @@ public class ShowCommandTest {
                 .collect(Collectors.toList());
         IdMatchesPredicate idMatchesPredicate = new IdMatchesPredicate(ids);
         model.updateFilteredPersonList(idMatchesPredicate);
+    }
+
+    @Test
+    public void equals() {
+        ShowCommand showCommand = new ShowCommand(INDEX_FIRST);
+
+        // same object -> returns true
+        assertTrue(showCommand.equals(showCommand));
+
+        // same index -> returns true
+        assertTrue(showCommand.equals(new ShowCommand(Index.fromOneBased(1))));
+
+        // different types -> returns false
+        assertFalse(showCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(showCommand.equals(null));
+
+        // different index -> returns false
+        assertFalse(showCommand.equals(new ShowCommand(INDEX_SECOND)));
+    }
+
+    @Test
+    public void toStringMethod() {
+        ShowCommand showCommand = new ShowCommand(INDEX_FIRST);
+        String expected = ShowCommand.class.getCanonicalName()
+                + "{index=" + INDEX_FIRST + "}";
+        assertEquals(expected, showCommand.toString());
     }
 }
