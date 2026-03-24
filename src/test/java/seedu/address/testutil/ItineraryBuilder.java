@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.Itinerary;
@@ -22,8 +22,8 @@ public class ItineraryBuilder {
     private ItineraryName itineraryName;
     private Destination destination;
     private DateRange dateRange;
-    private Set<UUID> clientIds;
-    private Set<UUID> vendorIds;
+    private Set<Id> clientIds;
+    private Set<Id> vendorIds;
 
     /**
      * Creates a {@code ItineraryBuilder} with the default details.
@@ -74,7 +74,7 @@ public class ItineraryBuilder {
     /**
      * Sets the {@code ClientIds} of the {@code Itinerary} that we are building.
      */
-    public ItineraryBuilder withClientIds(Set<UUID> clientIds) {
+    public ItineraryBuilder withClientIds(Set<Id> clientIds) {
         this.clientIds = clientIds;
         return this;
     }
@@ -82,7 +82,7 @@ public class ItineraryBuilder {
     /**
      * Sets the {@code VendorIds} of the {@code Itinerary} that we are building.
      */
-    public ItineraryBuilder withVendorIds(Set<UUID> vendorIds) {
+    public ItineraryBuilder withVendorIds(Set<Id> vendorIds) {
         this.vendorIds = vendorIds;
         return this;
     }

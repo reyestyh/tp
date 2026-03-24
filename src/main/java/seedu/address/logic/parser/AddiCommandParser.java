@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddiCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.Itinerary;
@@ -47,8 +48,8 @@ public class AddiCommandParser implements Parser<AddiCommand> {
         Destination destination = ParserUtil.parseDestination(argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).get());
         DateRange dateRange = ParserUtil.parseItineraryDates(argMultimap.getValue(PREFIX_ITINERARY_START).get(),
                                                              argMultimap.getValue(PREFIX_ITINERARY_END).get());
-        Set<UUID> clientIds = ParserUtil.parseUuids(argMultimap.getAllValues(PREFIX_ITINERARY_CLIENT));
-        Set<UUID> vendorIds = ParserUtil.parseUuids(argMultimap.getAllValues(PREFIX_ITINERARY_VENDOR));
+        Set<Id> clientIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_ITINERARY_CLIENT));
+        Set<Id> vendorIds = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_ITINERARY_VENDOR));
 
 
         Itinerary itinerary = new Itinerary(name, destination, dateRange, clientIds, vendorIds);

@@ -6,7 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItineraries.FRANCE_TRIP;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -25,9 +24,11 @@ public class JsonAdaptedItineraryTest {
     private static final String VALID_DESTINATION = FRANCE_TRIP.getDestination().toString();
     private static final String VALID_START_DATE = FRANCE_TRIP.getDateRange().startDate.toString();
     private static final String VALID_END_DATE = FRANCE_TRIP.getDateRange().endDate.toString();
-    private static final List<String> VALID_CLIENT_IDS = FRANCE_TRIP.getClientIds().stream().map(UUID::toString)
+    private static final List<JsonAdaptedId> VALID_CLIENT_IDS = FRANCE_TRIP.getClientIds().stream()
+            .map(JsonAdaptedId::new)
             .collect(Collectors.toList());
-    private static final List<String> VALID_VENDOR_IDS = FRANCE_TRIP.getVendorIds().stream().map(UUID::toString)
+    private static final List<JsonAdaptedId> VALID_VENDOR_IDS = FRANCE_TRIP.getVendorIds().stream()
+            .map(JsonAdaptedId::new)
             .collect(Collectors.toList());
 
     @Test

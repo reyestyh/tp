@@ -11,19 +11,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_START
 import static seedu.address.testutil.TypicalItineraries.FRANCE_TRIP;
 
 import java.util.Set;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.id.Id;
 import seedu.address.testutil.ItineraryBuilder;
 
 public class ItineraryTest {
 
     @Test
     public void removePersonId_idExists_removesFromClientAndVendorSets() {
-        UUID personId = UUID.randomUUID();
-        UUID otherClientId = UUID.randomUUID();
-        UUID otherVendorId = UUID.randomUUID();
+        Id personId = new Id();
+        Id otherClientId = new Id();
+        Id otherVendorId = new Id();
         Itinerary itinerary = new ItineraryBuilder()
                 .withClientIds(Set.of(personId, otherClientId))
                 .withVendorIds(Set.of(personId, otherVendorId))
@@ -39,9 +39,9 @@ public class ItineraryTest {
 
     @Test
     public void removePersonId_idDoesNotExist_noChange() {
-        UUID existingClientId = UUID.randomUUID();
-        UUID existingVendorId = UUID.randomUUID();
-        UUID missingId = UUID.randomUUID();
+        Id existingClientId = new Id();
+        Id existingVendorId = new Id();
+        Id missingId = new Id();
         Itinerary itinerary = new ItineraryBuilder()
                 .withClientIds(Set.of(existingClientId))
                 .withVendorIds(Set.of(existingVendorId))
@@ -109,11 +109,11 @@ public class ItineraryTest {
         assertFalse(FRANCE_TRIP.equals(editedItinerary));
 
         // different clientIds -> returns false
-        editedItinerary = new ItineraryBuilder(FRANCE_TRIP).withClientIds(Set.of(UUID.randomUUID())).build();
+        editedItinerary = new ItineraryBuilder(FRANCE_TRIP).withClientIds(Set.of(new Id())).build();
         assertFalse(FRANCE_TRIP.equals(editedItinerary));
 
         // different vendorIds -> returns false
-        editedItinerary = new ItineraryBuilder(FRANCE_TRIP).withVendorIds(Set.of(UUID.randomUUID())).build();
+        editedItinerary = new ItineraryBuilder(FRANCE_TRIP).withVendorIds(Set.of(new Id())).build();
         assertFalse(FRANCE_TRIP.equals(editedItinerary));
     }
 

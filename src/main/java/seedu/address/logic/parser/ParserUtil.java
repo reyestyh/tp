@@ -10,6 +10,7 @@ import java.util.UUID;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.ItineraryName;
@@ -191,33 +192,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String uuid} into a {@code UUID}.
+     * Parses a {@code String id} into a {@code Id}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code uuid} is invalid.
+     * @throws ParseException if the given {@code id} is invalid.
      */
-    public static UUID parseUuid(String uuid) throws ParseException {
-        requireNonNull(uuid);
-        String trimmedUuid = uuid.trim();
-        UUID result;
+    public static Id parseId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedUuid = id.trim();
+        Id result;
         try {
-            result = UUID.fromString(trimmedUuid);
+            result = new Id(trimmedUuid);
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Invalid UUID in input: " + trimmedUuid);
+            throw new ParseException("Invalid id in input: " + trimmedUuid);
         }
         return result;
     }
 
     /**
-     * Parses {@code Collection<String> uuids} into a {@code Set<UUID>}.
+     * Parses {@code Collection<String> ids} into a {@code Set<Id>}.
      */
-    public static Set<UUID> parseUuids(Collection<String> uuids) throws ParseException {
-        requireNonNull(uuids);
-        final Set<UUID> uuidSet = new HashSet<>();
-        for (String uuid : uuids) {
-            uuidSet.add(parseUuid(uuid));
+    public static Set<Id> parseIds(Collection<String> ids) throws ParseException {
+        requireNonNull(ids);
+        final Set<Id> idSet = new HashSet<>();
+        for (String id : ids) {
+            idSet.add(parseId(id));
         }
-        return uuidSet;
+        return idSet;
     }
 
 

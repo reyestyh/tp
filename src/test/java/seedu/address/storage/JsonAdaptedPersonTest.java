@@ -1,8 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -14,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -57,14 +56,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_missingId_generatesFreshId() throws Exception {
+    public void toModelType_missingId_throwsIllegalValueException() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_ROLE, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS);
 
-        Person modelPerson = person.toModelType();
-
-        assertNotNull(modelPerson.getId());
-        assertNotEquals(BENSON.getId(), modelPerson.getId());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
@@ -80,7 +77,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidId_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_ID, VALID_ROLE, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS);
-        assertThrows(IllegalValueException.class, JsonAdaptedPerson.INVALID_ID_MESSAGE_FORMAT, person::toModelType);
+        assertThrows(IllegalValueException.class, Id.MESSAGE_CONSTRAINTS, person::toModelType);
     }
 
     @Test

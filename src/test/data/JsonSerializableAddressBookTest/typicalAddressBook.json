@@ -1,63 +1,74 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
+    "id" : "04ea07b9-b47f-40fa-9c99-ebd4ee3ba513",
+    "role" : "client",
     "name" : "Alice Pauline",
-    "phone" : "(+65) 94351253",
+    "phone" : "(+65)94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ]
   }, {
+    "id" : "a752ce04-087b-4f31-a1f1-d114e3c4b99e",
+    "role" : "client",
     "name" : "Benson Meier",
-    "phone" : "(+65) 98765432",
+    "phone" : "(+65)98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ]
   }, {
+    "id" : "e61e763e-5a48-4bd7-a068-7f44b99d08ca",
+    "role" : "client",
     "name" : "Carl Kurz",
-    "phone" : "(+65) 95352563",
+    "phone" : "(+65)95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ]
   }, {
+    "id" : "0e8935a4-eb8a-4e54-bcbc-c647a7859312",
+    "role" : "client",
     "name" : "Daniel Meier",
-    "phone" : "(+65) 87652533",
+    "phone" : "(+65)87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ]
   }, {
+    "id" : "e8339e6c-7190-4be0-a3cc-a8a615ccee3a",
+    "role" : "client",
     "name" : "Elle Meyer",
-    "phone" : "(+65) 9482224",
+    "phone" : "(+65)9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
+    "id" : "5f17502f-f405-4023-a627-359f809a18bf",
+    "role" : "client",
     "name" : "Fiona Kunz",
-    "phone" : "(+65) 9482427",
+    "phone" : "(+65)9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
+    "id" : "e6d2baa0-d98b-4cf5-a3d9-3123609b6583",
+    "role" : "client",
     "name" : "George Best",
-    "phone" : "(+65) 9482442",
+    "phone" : "(+65)9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
   } ],
-  "itineraries": [ {
-    "name": "5D4N Trip to France",
-    "destination": "France",
-    "start date": "2024-12-01",
-    "end date": "2024-12-05",
-    "client ids": [ ],
-    "vendor ids": [ ]
+  "itineraries" : [ {
+    "name" : "5D4N Trip to France",
+    "destination" : "France",
+    "startDate" : "2024-12-01",
+    "endDate" : "2024-12-05",
+    "clientIds" : [ ],
+    "vendorIds" : [ ]
   }, {
-    "name": "Island Time: Bali",
-    "destination": "Bali",
-    "start date": "2026-03-10",
-    "end date": "2026-03-15",
-    "client ids": [ ],
-    "vendor ids": [ ]
-  }
-
-  ]
+    "name" : "Island Time: Bali",
+    "destination" : "Bali",
+    "startDate" : "2026-03-10",
+    "endDate" : "2026-03-15",
+    "clientIds" : [ ],
+    "vendorIds" : [ ]
+  } ]
 }

@@ -30,11 +30,11 @@ import static seedu.address.testutil.TypicalItineraries.BALI_TRIP;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddiCommand;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.Itinerary;
@@ -53,13 +53,13 @@ public class AddiCommandParserTest {
                         + ITINERARY_START_DATE_DESC_BALI + ITINERARY_END_DATE_DESC_BALI,
                 new AddiCommand(BALI_TRIP));
 
-        // multiple uuids - accepted
-        Set<UUID> expectedClientIds = new HashSet<>();
-        expectedClientIds.add(UUID.fromString(VALID_UUID_1));
-        expectedClientIds.add(UUID.fromString(VALID_UUID_2));
+        // multiple ids - accepted
+        Set<Id> expectedClientIds = new HashSet<>();
+        expectedClientIds.add(new Id(VALID_UUID_1));
+        expectedClientIds.add(new Id(VALID_UUID_2));
 
-        Set<UUID> expectedVendorIds = new HashSet<>();
-        expectedVendorIds.add(UUID.fromString(VALID_UUID_3));
+        Set<Id> expectedVendorIds = new HashSet<>();
+        expectedVendorIds.add(new Id(VALID_UUID_3));
         Itinerary expectedItineraryMultipleUuids = new ItineraryBuilder().withClientIds(expectedClientIds)
                 .withVendorIds(expectedVendorIds).build();
 
@@ -81,9 +81,9 @@ public class AddiCommandParserTest {
                         + ITINERARY_START_DATE_DESC_FRANCE + ITINERARY_END_DATE_DESC_FRANCE,
                 new AddiCommand(validItinerary));
 
-        Set<UUID> expectedClientIds = new HashSet<>();
-        expectedClientIds.add(UUID.fromString(VALID_UUID_1));
-        expectedClientIds.add(UUID.fromString(VALID_UUID_2));
+        Set<Id> expectedClientIds = new HashSet<>();
+        expectedClientIds.add(new Id(VALID_UUID_1));
+        expectedClientIds.add(new Id(VALID_UUID_2));
 
         Itinerary clientOnlyItinerary = new ItineraryBuilder().withClientIds(expectedClientIds).build();
         // client ids only - accepted
@@ -92,8 +92,8 @@ public class AddiCommandParserTest {
                 new AddiCommand(clientOnlyItinerary));
 
         // vendor ids only - accepted
-        Set<UUID> expectedVendorIds = new HashSet<>();
-        expectedVendorIds.add(UUID.fromString(VALID_UUID_3));
+        Set<Id> expectedVendorIds = new HashSet<>();
+        expectedVendorIds.add(new Id(VALID_UUID_3));
         Itinerary vendorOnlyItinerary = new ItineraryBuilder().withVendorIds(expectedVendorIds).build();
 
         assertParseSuccess(parser, ITINERARY_NAME_DESC_FRANCE + ITINERARY_DEST_DESC_FRANCE

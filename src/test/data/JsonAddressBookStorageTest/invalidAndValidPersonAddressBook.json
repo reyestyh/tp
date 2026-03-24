@@ -1,10 +1,12 @@
 {
   "persons": [ {
+    "id": "f09220ed-c91d-43ad-9648-2591d7fc4a8a",
     "name": "Valid Person",
     "phone": "(+65) 9482424",
     "email": "hans@example.com",
     "address": "4th street"
   }, {
+    "id": "f09220ed-c91d-43ad-9648-2591d7fc4a8a",
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
