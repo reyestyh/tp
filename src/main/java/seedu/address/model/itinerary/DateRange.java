@@ -50,6 +50,20 @@ public class DateRange {
         }
     }
 
+    /**
+     * Returns the start date.
+     */
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    /**
+     * Returns the end date.
+     */
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
