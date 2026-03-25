@@ -96,6 +96,14 @@ public class Person {
         return id;
     }
 
+    public boolean isClient() {
+        return this.role.getValue() == Role.RoleType.CLIENT;
+    }
+
+    public boolean isVendor() {
+        return this.role.getValue() == Role.RoleType.VENDOR;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

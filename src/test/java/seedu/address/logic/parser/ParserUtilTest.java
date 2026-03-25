@@ -5,15 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
@@ -40,13 +42,15 @@ public class ParserUtilTest {
 
     private static final String INVALID_START_DATE_STR = "02-02-2020";
     private static final String INVALID_END_DATE_STR = "04-02-2020";
-    private static final String INVALID_UUID_STR = "abc";
+    private static final String INVALID_INDEX_STR = "abc";
 
     private static final String VALID_ITINERARY_NAME = "3D2N Bali";
     private static final String VALID_ITINERARY_DESTNATION = "France";
     private static final String VALID_START_DATE_STRING = "2020-02-02";
     private static final String VALID_END_DATE_STRING = "2020-02-04";
-    private static final String VALID_UUID_STRING = "11111111-1111-1111-1111-111111111111";
+    private static final String VALID_INDEX_STRING_1 = "1";
+    private static final String VALID_INDEX_STRING_2 = "2";
+    private static final String VALID_INDEX_STRING_3 = "3";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -249,20 +253,29 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseUuid_validValueWithoutWhitespace_returnsUuid() throws Exception {
-        UUID expectedUuid = UUID.fromString(VALID_UUID_STRING);
-        assertEquals(expectedUuid, ParserUtil.parseUuid(VALID_UUID_STRING));
+    public void parseIndices_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIndices(null));
     }
 
     @Test
-    public void parseUuid_validValueWithWhitespace_returnsUuid() throws Exception {
-        UUID expectedUuid = UUID.fromString(VALID_UUID_STRING);
-        assertEquals(expectedUuid, ParserUtil.parseUuid(WHITESPACE + VALID_UUID_STRING));
+    public void parseIndices_collectionWithInvalidIndex_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndices(Arrays.asList(VALID_INDEX_STRING_1,
+                                                                                       INVALID_INDEX_STR)));
     }
 
     @Test
-    public void parseUuid_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseUuid(INVALID_UUID_STR));
+    public void parseIndices_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
     }
+
+    @Test
+    public void parseIndices_collectionWithValidIndices_returnsIndexSet() throws Exception {
+        Set<Index> actualIndexSet = ParserUtil.parseIndices(Arrays.asList(VALID_INDEX_STRING_1, VALID_INDEX_STRING_2,
+                                                                        VALID_INDEX_STRING_3));
+        Set<Index> expectedIndexSet = new HashSet<>(Arrays.asList(INDEX_FIRST, INDEX_SECOND, INDEX_THIRD));
+
+        assertEquals(expectedIndexSet, actualIndexSet);
+    }
+
 
 }

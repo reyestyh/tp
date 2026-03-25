@@ -27,8 +27,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.itinerary.Itinerary;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.EditItineraryDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -79,9 +79,9 @@ public class CommandTestUtil {
     public static final String VALID_ITINERARY_DEST_BALI = "Bali";
     public static final String VALID_ITINERARY_START_DATE_BALI = "2026-03-10";
     public static final String VALID_ITINERARY_END_DATE_BALI = "2026-03-15";
-    public static final String VALID_UUID_1 = "11111111-1111-1111-1111-111111111111";
-    public static final String VALID_UUID_2 = "22222222-2222-2222-2222-222222222222";
-    public static final String VALID_UUID_3 = "33333333-3333-3333-3333-333333333333";
+    public static final String VALID_INDEX_1 = "1";
+    public static final String VALID_INDEX_2 = "2";
+    public static final String VALID_INDEX_3 = "3";
 
     public static final String ITINERARY_NAME_DESC_BALI = " " + PREFIX_ITINERARY_NAME + VALID_ITINERARY_NAME_BALI;
     public static final String ITINERARY_NAME_DESC_FRANCE = " " + PREFIX_ITINERARY_NAME + VALID_ITINERARY_NAME_FRANCE;
@@ -98,15 +98,16 @@ public class CommandTestUtil {
     public static final String ITINERARY_END_DATE_DESC_FRANCE = " " + PREFIX_ITINERARY_END
                                                                 + VALID_ITINERARY_END_DATE_FRANCE;
 
-    public static final String ITINERARY_CLIENT_IDS_DESC = " " + PREFIX_ITINERARY_CLIENT + VALID_UUID_1 + " "
-                                                           + PREFIX_ITINERARY_CLIENT + VALID_UUID_2;
-    public static final String ITINERARY_VENDOR_IDS_DESC = " " + PREFIX_ITINERARY_VENDOR + VALID_UUID_3;
+    public static final String ITINERARY_CLIENT_IDS_DESC = " " + PREFIX_ITINERARY_CLIENT + VALID_INDEX_1 + " "
+                                                           + PREFIX_ITINERARY_CLIENT + VALID_INDEX_2;
+    public static final String ITINERARY_VENDOR_IDS_DESC = " " + PREFIX_ITINERARY_VENDOR + VALID_INDEX_3;
 
     public static final String INVALID_ITINERARY_NAME_DESC = " " + PREFIX_ITINERARY_NAME + "_bali_";
     public static final String INVALID_ITINERARY_DEST_DESC = " " + PREFIX_ITINERARY_DESTINATION + " ";
     public static final String INVALID_ITINERARY_START_DATE_DESC = " " + PREFIX_ITINERARY_START + "december 11 2026";
     public static final String INVALID_ITINERARY_END_DATE_DESC = " " + PREFIX_ITINERARY_END + "2026-31-02";
-    public static final String INVALID_ID_DESC = " " + PREFIX_TAG + "abc";
+    public static final String INVALID_INDEX_CLIENT_DESC = " " + PREFIX_ITINERARY_CLIENT + "abc";
+    public static final String INVALID_INDEX_VENDOR_DESC = " " + PREFIX_ITINERARY_VENDOR + "___";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -197,7 +198,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

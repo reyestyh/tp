@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_CLIENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_DESTINATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_END;
@@ -8,12 +9,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_VENDOR;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.itinerary.Itinerary;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.Person;
 
 /**
  * Adds an itinerary to TripScribe.
@@ -40,16 +47,23 @@ public class AddiCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New itinerary added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "This itinerary already exists in TripScribe";
-    public static final String MESSAGE_PERSON_ID_MISSING = "Id does not exist in TripScribe";
+    public static final String MESSAGE_PERSON_INDEX_MISSING = "Index not found in current TripScribe window!";
+    public static final String MESSAGE_NOT_CLIENT = "%1s is not a client";
+    public static final String MESSAGE_NOT_VENDOR = "%1s is not a vendor";
+
 
     private final Itinerary toAdd;
+    private final Set<Index> clientIndices;
+    private final Set<Index> vendorIndices;
 
     /**
      * Creates an AddiCommand to add the specified {@code Itinerary}
      */
-    public AddiCommand(Itinerary itinerary) {
-        requireNonNull(itinerary);
+    public AddiCommand(Itinerary itinerary, Set<Index> clientIndices, Set<Index> vendorIndices) {
+        requireAllNonNull(itinerary, clientIndices, vendorIndices);
         toAdd = itinerary;
+        this.clientIndices = clientIndices;
+        this.vendorIndices = vendorIndices;
     }
 
     @Override
@@ -60,11 +74,36 @@ public class AddiCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ITINERARY);
         }
 
-        try {
-            model.addItinerary(toAdd);
-        } catch (PersonNotFoundException e) {
-            throw new CommandException(MESSAGE_PERSON_ID_MISSING);
+        List<Person> lastShownContactList = model.getFilteredPersonList();
+        Set<UUID> clientUuids = new HashSet<>();
+        Set<UUID> vendorUuids = new HashSet<>();
+
+        for (Index index : clientIndices) {
+            if (index.getZeroBased() >= lastShownContactList.size()) {
+                throw new CommandException(MESSAGE_PERSON_INDEX_MISSING);
+            }
+            Person person = lastShownContactList.get(index.getZeroBased());
+            if (!person.isClient()) {
+                throw new CommandException(String.format(MESSAGE_NOT_CLIENT, person.getName()));
+            }
+            clientUuids.add(person.getId());
         }
+
+        for (Index index : vendorIndices) {
+            if (index.getZeroBased() >= lastShownContactList.size()) {
+                throw new CommandException(MESSAGE_PERSON_INDEX_MISSING);
+            }
+            Person person = lastShownContactList.get(index.getZeroBased());
+            if (!person.isVendor()) {
+                throw new CommandException(String.format(MESSAGE_NOT_VENDOR, person.getName()));
+            }
+            vendorUuids.add(person.getId());
+        }
+
+        toAdd.setClients(clientUuids);
+        toAdd.setVendors(vendorUuids);
+
+        model.addItinerary(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -82,13 +121,17 @@ public class AddiCommand extends Command {
         AddiCommand otherAddiCommand = (AddiCommand) other;
         return toAdd.getName().equals(otherAddiCommand.toAdd.getName())
                 && toAdd.getDestination().equals(otherAddiCommand.toAdd.getDestination())
-                && toAdd.getDateRange().equals(otherAddiCommand.toAdd.getDateRange());
+                && toAdd.getDateRange().equals(otherAddiCommand.toAdd.getDateRange())
+                && this.clientIndices.equals(otherAddiCommand.clientIndices)
+                && this.vendorIndices.equals(otherAddiCommand.vendorIndices);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
+                .add("clientIndices", clientIndices)
+                .add("vendorIndices", vendorIndices)
                 .toString();
     }
 }
