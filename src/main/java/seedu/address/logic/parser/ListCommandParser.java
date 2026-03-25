@@ -9,6 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ListCommand object.
  */
 public class ListCommandParser implements Parser<ListCommand> {
+    public static final String ALL_FLAG = "/all";
     public static final String CONTACT_FLAG = "/contact";
     public static final String CLIENT_FLAG = "/client";
     public static final String VENDOR_FLAG = "/vendor";
@@ -29,6 +30,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         switch (trimmedFlag.toLowerCase()) { // Case-insensitive
+        case ALL_FLAG:
+            return new ListCommand(ListCommand.Flag.ALL);
         case CONTACT_FLAG:
             return new ListCommand(ListCommand.Flag.CONTACT);
         case CLIENT_FLAG:

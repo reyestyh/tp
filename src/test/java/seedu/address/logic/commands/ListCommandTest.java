@@ -57,6 +57,20 @@ public class ListCommandTest {
     }
 
     @Test
+    public void execute_allListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListCommand(ListCommand.Flag.ALL), model,
+                ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+    }
+
+    @Test
+    public void execute_allListIsFiltered_showsEverything() {
+        showPersonAtIndex(model, INDEX_FIRST);
+        showItineraryAtIndex(model, INDEX_FIRST);
+        assertCommandSuccess(new ListCommand(ListCommand.Flag.ALL), model,
+                ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+    }
+
+    @Test
     public void execute_contactListIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListCommand(ListCommand.Flag.CONTACT), model,
                 ListCommand.MESSAGE_SUCCESS_CONTACTS, expectedModel);
@@ -118,6 +132,12 @@ public class ListCommandTest {
         assertEquals(ListCommand.MESSAGE_SUCCESS_ITINERARIES, result.getFeedbackToUser());
         assertEquals(getTypicalItineraries().size(),
                 model.getFilteredItineraryList().size());
+    }
+
+    @Test
+    public void execute_allList_showsBothPanels() throws CommandException {
+        CommandResult result = new ListCommand(ListCommand.Flag.ALL).execute(model);
+        assertEquals(PanelType.BOTH, result.getPanelType());
     }
 
     @Test

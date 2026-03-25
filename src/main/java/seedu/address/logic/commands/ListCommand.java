@@ -22,6 +22,7 @@ public class ListCommand extends Command {
             + "Parameters: FLAG (must be one of: /contact, /itinerary, /client, /vendor)\n"
             + "Example: " + COMMAND_WORD + " /contact";
 
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all contacts and itineraries";
     public static final String MESSAGE_SUCCESS_CONTACTS = "Listed all contacts";
     public static final String MESSAGE_SUCCESS_CLIENTS = "Listed all clients";
     public static final String MESSAGE_SUCCESS_VENDORS = "Listed all vendors";
@@ -30,7 +31,7 @@ public class ListCommand extends Command {
     /**
      * Represents the possible flags that can be used to list entries.
      */
-    public enum Flag { CONTACT, ITINERARY, CLIENT, VENDOR }
+    public enum Flag { CONTACT, ITINERARY, CLIENT, VENDOR, ALL }
 
     private final Flag flag;
 
@@ -43,6 +44,10 @@ public class ListCommand extends Command {
         requireNonNull(model);
 
         switch (flag) {
+        case ALL:
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CONTACTS);
+            model.updateFilteredItineraryList(PREDICATE_SHOW_ALL_ITINERARIES);
+            return new CommandResult(MESSAGE_SUCCESS_ALL, PanelType.BOTH);
         case CONTACT:
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CONTACTS);
             return new CommandResult(MESSAGE_SUCCESS_CONTACTS, PanelType.CONTACT);
