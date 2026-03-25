@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.CONTACT_FLAG;
+import static seedu.address.logic.parser.CliSyntax.ITINERARY_FLAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_DESTINATION;
@@ -32,8 +34,6 @@ import seedu.address.model.tag.Tag;
 public class EditCommandParser implements Parser<EditCommand> {
 
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE;
-    public static final String CONTACT_FLAG = "/contact";
-    public static final String ITINERARY_FLAG = "/itinerary";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand

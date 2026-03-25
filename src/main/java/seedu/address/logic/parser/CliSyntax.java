@@ -18,4 +18,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ITINERARY_END = new Prefix("to/");
     public static final Prefix PREFIX_ITINERARY_CLIENT = new Prefix("c/");
     public static final Prefix PREFIX_ITINERARY_VENDOR = new Prefix("v/");
+
+    /* Flag definitions */
+    public static final String CONTACT_FLAG = "/contact";
+    public static final String ITINERARY_FLAG = "/itinerary";
 }

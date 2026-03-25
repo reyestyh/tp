@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.CONTACT_FLAG;
+import static seedu.address.logic.parser.CliSyntax.ITINERARY_FLAG;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -10,9 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteCommand object.
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
-
-    public static final String CONTACT_FLAG = "/contact";
-    public static final String ITINERARY_FLAG = "/itinerary";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -39,10 +38,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (flagStr.equals(CONTACT_FLAG)) {
             flag = DeleteCommand.DeleteType.CONTACT;
-        } else if (flagStr.equals(ITINERARY_FLAG)) {
-            flag = DeleteCommand.DeleteType.ITINERARY;
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            flag = DeleteCommand.DeleteType.ITINERARY;
         }
 
         try {
