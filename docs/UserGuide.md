@@ -241,6 +241,30 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 *  `edit 2 n/Betsy Crower t/`
   * Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Showing contacts by itinerary: `show`
+
+Show details of an itinerary and the contacts associated with it in TripScribe.  
+
+**Format:**
+```
+show INDEX
+```
+
+<box type="tip" seamless>
+
+**Things to note:**
+
+* Shows contacts and itinerary details of itinerary at specified `INDEX`.
+* `INDEX` is the index number shown in the itinerary list. It **must be a positive, non-zero number** 1, 2, 3, …​
+
+</box>
+
+**Examples:**
+*  `show 2` 
+  * Shows details of the 2nd itinerary, and the contacts associated with it.
+
+
+
 ### Finding Contacts by Name: `find`
 
 Find contacts by name. TripScribe shows all contacts whose names contain at least one of your keywords.
