@@ -18,10 +18,13 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons whose fields match the given keywords "
+            + "(case-insensitive) and displays them as a list with index numbers.\n"
+            + "General search format: " + COMMAND_WORD + " KEYWORD [MORE_KEYWORDS]...\n"
+            + "Multi-field search format: " + COMMAND_WORD + " [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] "
+            + "[e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS]\n"
+            + "Example: " + COMMAND_WORD + " alex 996\n"
+            + "Example: " + COMMAND_WORD + " n/alex yu p/996";
 
     private final Predicate<Person> predicate;
 
