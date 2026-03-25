@@ -71,14 +71,18 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor personDescriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand personCommand = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(personDescriptor));
+                + EditCommand.CONTACT_FLAG + " "
+                + INDEX_FIRST.getOneBased() + " "
+                + PersonUtil.getEditPersonDescriptorDetails(personDescriptor));
         assertEquals(new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT, personDescriptor, null), personCommand);
 
         Itinerary itinerary = new ItineraryBuilder().build();
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder(itinerary).build();
         EditCommand itineraryCommand = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + ItineraryUtil.getEditItineraryDescriptorDetails(itineraryDescriptor));
-        assertEquals(new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT, null, itineraryDescriptor), itineraryCommand);
+                + EditCommand.ITINERARY_FLAG + " "
+                + INDEX_FIRST.getOneBased() + " "
+                + ItineraryUtil.getEditItineraryDescriptorDetails(itineraryDescriptor));
+        assertEquals(new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY, null, itineraryDescriptor), itineraryCommand);
     }
 
     @Test

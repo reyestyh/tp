@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -124,10 +126,20 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editItineraryDescriptor.setDestination(ParserUtil.parseDestination(argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).get()));
             }
             if (argMultimap.getValue(PREFIX_ITINERARY_START).isPresent()) {
-                editItineraryDescriptor.setStartDate(LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_START).get(), DATE_FORMAT));
+                try {
+                    editItineraryDescriptor.setStartDate(
+                            LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_START).get(), DATE_FORMAT));
+                } catch (DateTimeParseException e) {
+                    throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+                }
             }
             if (argMultimap.getValue(PREFIX_ITINERARY_END).isPresent()) {
-                editItineraryDescriptor.setEndDate(LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_END).get(), DATE_FORMAT));
+                try {
+                    editItineraryDescriptor.setEndDate(
+                            LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_END).get(), DATE_FORMAT));
+                } catch (DateTimeParseException e) {
+                    throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+                }
             }
             if (!editItineraryDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

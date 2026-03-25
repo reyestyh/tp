@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_FRANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_DEST_BALI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_FRANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -138,25 +139,8 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
     @Test
-    public void execute_itineraryInvalidItineraryIndexFilteredList_failure() {
-        showItineraryAtIndex(model, INDEX_FIRST);
-        Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItineraryList().size());
-
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, EditCommand.EditType.ITINERARY,
-                null, new EditItineraryDescriptorBuilder().withName(VALID_ITINERARY_NAME_BALI).build());
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_ITINERARY_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_ItineraryAllFieldsSpecifiedUnfilteredList_success() {
+    public void execute_itineraryAllFieldsSpecifiedUnfilteredList_success() {
         Itinerary editedItinerary = new ItineraryBuilder().build();
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder(editedItinerary).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY, null, itineraryDescriptor);
@@ -170,7 +154,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_ItinerarySomeFieldsSpecifiedUnfilteredList_success() {
+    public void execute_itinerarySomeFieldsSpecifiedUnfilteredList_success() {
         Index indexLastItinerary = Index.fromOneBased(model.getFilteredItineraryList().size());
         Itinerary lastItinerary = model.getFilteredItineraryList().get(indexLastItinerary.getZeroBased());
 
@@ -191,7 +175,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_ItineraryNoFieldSpecifiedUnfilteredList_success() {
+    public void execute_itineraryNoFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY, null, new EditItineraryDescriptor());
         Itinerary editedItinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
 
@@ -203,13 +187,13 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_ItineraryFilteredList_success() {
+    public void execute_itineraryFilteredList_success() {
         showItineraryAtIndex(model, INDEX_FIRST);
 
-        Itinerary ItineraryInFilteredList = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        Itinerary editedItinerary = new ItineraryBuilder(ItineraryInFilteredList).withName(VALID_NAME_BOB).build();
+        Itinerary itineraryInFilteredList = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
+        Itinerary editedItinerary = new ItineraryBuilder(itineraryInFilteredList).withName(VALID_ITINERARY_NAME_FRANCE).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY,
-                null, new EditItineraryDescriptorBuilder().withName(VALID_ITINERARY_NAME_BALI).build());
+                null, new EditItineraryDescriptorBuilder().withName(VALID_ITINERARY_NAME_FRANCE).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITINERARY_SUCCESS, Messages.format(editedItinerary));
 
@@ -220,7 +204,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_ItineraryDuplicateItineraryUnfilteredList_failure() {
+    public void execute_itineraryDuplicateItineraryUnfilteredList_failure() {
         Itinerary firstItinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder(firstItinerary).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND, EditCommand.EditType.ITINERARY, null, itineraryDescriptor);
@@ -229,7 +213,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_ItineraryDuplicateItineraryFilteredList_failure() {
+    public void execute_itineraryDuplicateItineraryFilteredList_failure() {
         showItineraryAtIndex(model, INDEX_FIRST);
 
         // edit itinerary in filtered list into a duplicate in address book
@@ -241,7 +225,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_ItineraryInvalidItineraryIndexUnfilteredList_failure() {
+    public void execute_itineraryInvalidItineraryIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItineraryList().size() + 1);
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, EditCommand.EditType.ITINERARY, null, itineraryDescriptor);
@@ -254,7 +238,7 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_ItineraryInvalidItineraryIndexFilteredList_failure() {
+    public void execute_itineraryInvalidItineraryIndexFilteredList_failure() {
         showItineraryAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -269,11 +253,11 @@ public class EditCommandTest {
     @Test
     public void equals() {
         // edit person command
-        final EditCommand standardPersonCommand = new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY, DESC_AMY, null);
+        final EditCommand standardPersonCommand = new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT, DESC_AMY, null);
 
         // same person values -> returns true
         EditPersonDescriptor copyPersonDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand personCommandWithSameValues = new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY, copyPersonDescriptor, null);
+        EditCommand personCommandWithSameValues = new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT, copyPersonDescriptor, null);
         assertTrue(standardPersonCommand.equals(personCommandWithSameValues));
 
         // same object -> returns true
@@ -289,7 +273,7 @@ public class EditCommandTest {
         assertFalse(standardPersonCommand.equals(new EditCommand(INDEX_SECOND, EditCommand.EditType.CONTACT, DESC_AMY, null)));
 
         // different flag -> returns false
-        assertFalse(standardPersonCommand.equals(new EditCommand(INDEX_SECOND, EditCommand.EditType.ITINERARY, DESC_AMY, null)));
+        assertFalse(standardPersonCommand.equals(new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY, DESC_AMY, null)));
         
         // different personDescriptor -> returns false
         assertFalse(standardPersonCommand.equals(new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT, DESC_BOB, null)));
@@ -329,7 +313,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(index, EditCommand.EditType.CONTACT, editPersonDescriptor, null);
         String expected = EditCommand.class.getCanonicalName() 
                 + "{index=" + index
-                + ", flag =" + EditCommand.EditType.CONTACT
+                + ", flag=" + EditCommand.EditType.CONTACT
                 + ", editPersonDescriptor=" + editPersonDescriptor
                 + ", editItineraryDescriptor=" + null 
                 + "}";

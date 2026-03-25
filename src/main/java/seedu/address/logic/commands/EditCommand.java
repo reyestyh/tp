@@ -194,8 +194,8 @@ public class EditCommand extends Command {
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && flag.equals(otherEditCommand.flag)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor)
-                && editItineraryDescriptor.equals(otherEditCommand.editItineraryDescriptor);
+                && Objects.equals(editPersonDescriptor, otherEditCommand.editPersonDescriptor)
+                && Objects.equals(editItineraryDescriptor, otherEditCommand.editItineraryDescriptor);
     }
 
     @Override
