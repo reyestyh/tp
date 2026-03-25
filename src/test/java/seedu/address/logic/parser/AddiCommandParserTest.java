@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_CLIENT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_VENDOR_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_DEST_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_END_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_NAME_DESC;
@@ -21,19 +23,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_DEST_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_END_DATE_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_START_DATE_BALI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_3;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.address.testutil.TypicalItineraries.BALI_TRIP;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddiCommand;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
@@ -51,22 +53,21 @@ public class AddiCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
                         + ITINERARY_START_DATE_DESC_BALI + ITINERARY_END_DATE_DESC_BALI,
-                new AddiCommand(BALI_TRIP));
+                new AddiCommand(BALI_TRIP, new HashSet<>(), new HashSet<>()));
 
-        // multiple uuids - accepted
-        Set<UUID> expectedClientIds = new HashSet<>();
-        expectedClientIds.add(UUID.fromString(VALID_UUID_1));
-        expectedClientIds.add(UUID.fromString(VALID_UUID_2));
+        // multiple indices - accepted
+        Set<Index> expectedClientIndices = new HashSet<>();
+        expectedClientIndices.add(INDEX_FIRST);
+        expectedClientIndices.add(INDEX_SECOND);
 
-        Set<UUID> expectedVendorIds = new HashSet<>();
-        expectedVendorIds.add(UUID.fromString(VALID_UUID_3));
-        Itinerary expectedItineraryMultipleUuids = new ItineraryBuilder().withClientIds(expectedClientIds)
-                .withVendorIds(expectedVendorIds).build();
+        Set<Index> expectedVendorIndices = new HashSet<>();
+        expectedVendorIndices.add(INDEX_THIRD);
+        Itinerary expectedItinerary = new ItineraryBuilder().build();
 
         assertParseSuccess(parser, ITINERARY_NAME_DESC_FRANCE + ITINERARY_DEST_DESC_FRANCE
                         + ITINERARY_START_DATE_DESC_FRANCE + ITINERARY_END_DATE_DESC_FRANCE
                         + ITINERARY_CLIENT_IDS_DESC + ITINERARY_VENDOR_IDS_DESC,
-                new AddiCommand(expectedItineraryMultipleUuids));
+                new AddiCommand(expectedItinerary, expectedClientIndices, expectedVendorIndices));
 
 
     }
@@ -79,26 +80,26 @@ public class AddiCommandParserTest {
         // no client or vendor ids - accepted
         assertParseSuccess(parser, ITINERARY_NAME_DESC_FRANCE + ITINERARY_DEST_DESC_FRANCE
                         + ITINERARY_START_DATE_DESC_FRANCE + ITINERARY_END_DATE_DESC_FRANCE,
-                new AddiCommand(validItinerary));
+                new AddiCommand(validItinerary, new HashSet<>(), new HashSet<>()));
 
-        Set<UUID> expectedClientIds = new HashSet<>();
-        expectedClientIds.add(UUID.fromString(VALID_UUID_1));
-        expectedClientIds.add(UUID.fromString(VALID_UUID_2));
+        Set<Index> expectedClientIndices = new HashSet<>();
+        expectedClientIndices.add(INDEX_FIRST);
+        expectedClientIndices.add(INDEX_SECOND);
 
-        Itinerary clientOnlyItinerary = new ItineraryBuilder().withClientIds(expectedClientIds).build();
+        Itinerary clientOnlyItinerary = new ItineraryBuilder().build();
         // client ids only - accepted
         assertParseSuccess(parser, ITINERARY_NAME_DESC_FRANCE + ITINERARY_DEST_DESC_FRANCE
                         + ITINERARY_START_DATE_DESC_FRANCE + ITINERARY_END_DATE_DESC_FRANCE + ITINERARY_CLIENT_IDS_DESC,
-                new AddiCommand(clientOnlyItinerary));
+                new AddiCommand(clientOnlyItinerary, expectedClientIndices, new HashSet<>()));
 
         // vendor ids only - accepted
-        Set<UUID> expectedVendorIds = new HashSet<>();
-        expectedVendorIds.add(UUID.fromString(VALID_UUID_3));
-        Itinerary vendorOnlyItinerary = new ItineraryBuilder().withVendorIds(expectedVendorIds).build();
+        Set<Index> expectedVendorIndices = new HashSet<>();
+        expectedVendorIndices.add(INDEX_THIRD);
+        Itinerary vendorOnlyItinerary = new ItineraryBuilder().build();
 
         assertParseSuccess(parser, ITINERARY_NAME_DESC_FRANCE + ITINERARY_DEST_DESC_FRANCE
                         + ITINERARY_START_DATE_DESC_FRANCE + ITINERARY_END_DATE_DESC_FRANCE + ITINERARY_VENDOR_IDS_DESC,
-                new AddiCommand(vendorOnlyItinerary));
+                new AddiCommand(vendorOnlyItinerary, new HashSet<>(), expectedVendorIndices));
 
     }
 
@@ -155,9 +156,13 @@ public class AddiCommandParserTest {
                         + ITINERARY_START_DATE_DESC_BALI + INVALID_ITINERARY_END_DATE_DESC,
                 DateRange.MESSAGE_CONSTRAINTS);
 
-        // invalid id TODO
-        // assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-        // + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+        // invalid index
+        assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
+                + ITINERARY_START_DATE_DESC_BALI + ITINERARY_END_DATE_DESC_BALI
+                + INVALID_INDEX_CLIENT_DESC, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
+                + ITINERARY_START_DATE_DESC_BALI + ITINERARY_END_DATE_DESC_BALI
+                + INVALID_INDEX_VENDOR_DESC, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_ITINERARY_NAME_DESC + INVALID_ITINERARY_DEST_DESC

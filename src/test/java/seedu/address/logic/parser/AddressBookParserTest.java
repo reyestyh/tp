@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,7 +123,7 @@ public class AddressBookParserTest {
         Itinerary itinerary = new ItineraryBuilder().build();
         AddiCommand command = (AddiCommand) parser.parseCommand("addi n/5D4N Trip to France dest/France "
                                                                 + "from/2024-12-01 to/2024-12-05");
-        assertEquals(new AddiCommand(itinerary), command);
+        assertEquals(new AddiCommand(itinerary, new HashSet<>(), new HashSet<>()), command);
     }
 
     @Test

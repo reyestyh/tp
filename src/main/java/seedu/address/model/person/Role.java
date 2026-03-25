@@ -42,6 +42,10 @@ public class Role {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public RoleType getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value.name().toLowerCase();

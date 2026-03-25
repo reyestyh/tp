@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -191,33 +190,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String uuid} into a {@code UUID}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code uuid} is invalid.
+     * Parses {@code Collection<String> indices} into a {@code Set<Indexes>}.
      */
-    public static UUID parseUuid(String uuid) throws ParseException {
-        requireNonNull(uuid);
-        String trimmedUuid = uuid.trim();
-        UUID result;
-        try {
-            result = UUID.fromString(trimmedUuid);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException("Invalid UUID in input: " + trimmedUuid);
+    public static Set<Index> parseIndices(Collection<String> uuidIndices) throws ParseException {
+        requireNonNull(uuidIndices);
+        final Set<Index> indices = new HashSet<>();
+        for (String idx : uuidIndices) {
+            indices.add(parseIndex(idx));
         }
-        return result;
-    }
-
-    /**
-     * Parses {@code Collection<String> uuids} into a {@code Set<UUID>}.
-     */
-    public static Set<UUID> parseUuids(Collection<String> uuids) throws ParseException {
-        requireNonNull(uuids);
-        final Set<UUID> uuidSet = new HashSet<>();
-        for (String uuid : uuids) {
-            uuidSet.add(parseUuid(uuid));
-        }
-        return uuidSet;
+        return indices;
     }
 
 
