@@ -53,14 +53,22 @@ public class PersonMatchesFieldsPredicateTest {
                 .withTags("friends")
                 .build();
 
-        PersonMatchesFieldsPredicate predicate = new PersonMatchesFieldsPredicate(
+        PersonMatchesFieldsPredicate oneKeywordEachField = new PersonMatchesFieldsPredicate(
                 Collections.singletonList("Alice"),
                 Collections.singletonList("12345"),
                 Collections.singletonList("example.com"),
                 Collections.singletonList("Street"),
                 Collections.singletonList("friend"));
 
-        assertTrue(predicate.test(person));
+        PersonMatchesFieldsPredicate multiKeywordEachField = new PersonMatchesFieldsPredicate(
+                List.of("Alice", "Bob", "Jason"),
+                List.of("12345", "6789"),
+                List.of("example.com", "ttt"),
+                List.of("Street", "Clementi"),
+                List.of("friend", "classmate"));
+
+        assertTrue(oneKeywordEachField.test(person));
+        assertTrue(multiKeywordEachField.test(person));
     }
 
     @Test

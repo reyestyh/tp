@@ -50,6 +50,7 @@ public class PersonContainsKeywordsPredicateTest {
         assertTrue(new PersonContainsKeywordsPredicate(Collections.singletonList("example.com")).test(person));
         assertTrue(new PersonContainsKeywordsPredicate(Collections.singletonList("Street")).test(person));
         assertTrue(new PersonContainsKeywordsPredicate(Collections.singletonList("friend")).test(person));
+        assertTrue(new PersonContainsKeywordsPredicate(List.of("Alice", "Ben", "Jason")).test(person));
     }
 
     @Test
