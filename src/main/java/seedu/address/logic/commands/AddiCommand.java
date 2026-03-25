@@ -121,7 +121,9 @@ public class AddiCommand extends Command {
         AddiCommand otherAddiCommand = (AddiCommand) other;
         return toAdd.getName().equals(otherAddiCommand.toAdd.getName())
                 && toAdd.getDestination().equals(otherAddiCommand.toAdd.getDestination())
-                && toAdd.getDateRange().equals(otherAddiCommand.toAdd.getDateRange());
+                && toAdd.getDateRange().equals(otherAddiCommand.toAdd.getDateRange())
+                && this.clientIndices.equals(otherAddiCommand.clientIndices)
+                && this.vendorIndices.equals(otherAddiCommand.vendorIndices);
     }
 
     @Override
