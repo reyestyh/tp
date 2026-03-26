@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.CONTACT_FLAG;
+import static seedu.address.logic.parser.CliSyntax.ITINERARY_FLAG;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -10,10 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ListCommandParser implements Parser<ListCommand> {
     public static final String ALL_FLAG = "/all";
-    public static final String CONTACT_FLAG = "/contact";
     public static final String CLIENT_FLAG = "/client";
     public static final String VENDOR_FLAG = "/vendor";
-    public static final String ITINERARY_FLAG = "/itinerary";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
