@@ -42,8 +42,8 @@ public class AddiCommand extends Command {
             + PREFIX_ITINERARY_DESTINATION + "France "
             + PREFIX_ITINERARY_START + "2026-10-12 "
             + PREFIX_ITINERARY_END + "2026-10-17 "
-            + PREFIX_ITINERARY_CLIENT + "11111111-1111-1111-1111-111111111111 "
-            + PREFIX_ITINERARY_VENDOR + "22222222-2222-2222-2222-222222222222 ";
+            + PREFIX_ITINERARY_CLIENT + "1 "
+            + PREFIX_ITINERARY_VENDOR + "2 ";
 
     public static final String MESSAGE_SUCCESS = "New itinerary added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "This itinerary already exists in TripScribe";
