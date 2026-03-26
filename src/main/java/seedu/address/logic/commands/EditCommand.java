@@ -86,7 +86,7 @@ public class EditCommand extends Command {
     public enum EditType { CONTACT, ITINERARY }
 
     private final Index index;
-    private final EditCommand.EditType flag;
+    private final EditType flag;
     private final EditPersonDescriptor editPersonDescriptor;
     private final EditItineraryDescriptor editItineraryDescriptor;
 
@@ -108,7 +108,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (flag.equals(EditCommand.EditType.CONTACT)) {
+        if (flag.equals(EditType.CONTACT)) {
             List<Person> lastShownList = model.getFilteredPersonList();
 
             if (index.getZeroBased() >= lastShownList.size()) {
@@ -125,7 +125,7 @@ public class EditCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CONTACTS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
-        } else if (flag.equals(EditCommand.EditType.ITINERARY)) {
+        } else if (flag.equals(EditType.ITINERARY)) {
             List<Itinerary> lastShownList = model.getFilteredItineraryList();
 
             if (index.getZeroBased() >= lastShownList.size()) {

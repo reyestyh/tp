@@ -60,33 +60,34 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand personCommand = (DeleteCommand) parser.parseCommand(
+        DeleteCommand deletePersonCommand = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + DeleteCommand.CONTACT_FLAG + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteCommand(DeleteCommand.DeleteType.CONTACT, INDEX_FIRST), personCommand);
+        assertEquals(new DeleteCommand(DeleteCommand.DeleteType.CONTACT, INDEX_FIRST), deletePersonCommand);
 
-        DeleteCommand itineraryCommand = (DeleteCommand) parser.parseCommand(
+        DeleteCommand deleteItineraryCommand = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + DeleteCommand.ITINERARY_FLAG + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteCommand(DeleteCommand.DeleteType.ITINERARY, INDEX_FIRST), itineraryCommand);
+        assertEquals(new DeleteCommand(DeleteCommand.DeleteType.ITINERARY, INDEX_FIRST), deleteItineraryCommand);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor personDescriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand personCommand = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditCommand editPersonCommand = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + EditCommand.CONTACT_FLAG + " "
                 + INDEX_FIRST.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(personDescriptor));
-        assertEquals(new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT, personDescriptor, null), personCommand);
+        assertEquals(new EditCommand(INDEX_FIRST, EditCommand.EditType.CONTACT,
+                personDescriptor, null), editPersonCommand);
 
         Itinerary itinerary = new ItineraryBuilder().build();
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder(itinerary).build();
-        EditCommand itineraryCommand = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditCommand editItineraryCommand = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + EditCommand.ITINERARY_FLAG + " "
                 + INDEX_FIRST.getOneBased() + " "
                 + ItineraryUtil.getEditItineraryDescriptorDetails(itineraryDescriptor));
         assertEquals(new EditCommand(INDEX_FIRST, EditCommand.EditType.ITINERARY,
-                null, itineraryDescriptor), itineraryCommand);
+                null, itineraryDescriptor), editItineraryCommand);
     }
 
     @Test
