@@ -12,13 +12,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_VENDOR;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 
@@ -35,8 +35,8 @@ public class AddiCommand extends Command {
             + PREFIX_ITINERARY_DESTINATION + "DESTINATION "
             + PREFIX_ITINERARY_START + "START DATE "
             + PREFIX_ITINERARY_END + "END DATE "
-            + PREFIX_ITINERARY_CLIENT + "CLIENT UUIDS "
-            + PREFIX_ITINERARY_VENDOR + "VENDOR UUIDS \n"
+            + PREFIX_ITINERARY_CLIENT + "CLIENT IDS "
+            + PREFIX_ITINERARY_VENDOR + "VENDOR IDS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITINERARY_NAME + "5D4N France Getaway "
             + PREFIX_ITINERARY_DESTINATION + "France "
@@ -75,8 +75,8 @@ public class AddiCommand extends Command {
         }
 
         List<Person> lastShownContactList = model.getFilteredPersonList();
-        Set<UUID> clientUuids = new HashSet<>();
-        Set<UUID> vendorUuids = new HashSet<>();
+        Set<Id> clientIds = new HashSet<>();
+        Set<Id> vendorIds = new HashSet<>();
 
         for (Index index : clientIndices) {
             if (index.getZeroBased() >= lastShownContactList.size()) {
@@ -86,7 +86,7 @@ public class AddiCommand extends Command {
             if (!person.isClient()) {
                 throw new CommandException(String.format(MESSAGE_NOT_CLIENT, person.getName()));
             }
-            clientUuids.add(person.getId());
+            clientIds.add(person.getId());
         }
 
         for (Index index : vendorIndices) {
@@ -97,11 +97,11 @@ public class AddiCommand extends Command {
             if (!person.isVendor()) {
                 throw new CommandException(String.format(MESSAGE_NOT_VENDOR, person.getName()));
             }
-            vendorUuids.add(person.getId());
+            vendorIds.add(person.getId());
         }
 
-        toAdd.setClients(clientUuids);
-        toAdd.setVendors(vendorUuids);
+        toAdd.setClients(clientIds);
+        toAdd.setVendors(vendorIds);
 
         model.addItinerary(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

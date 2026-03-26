@@ -1,18 +1,18 @@
 package seedu.address.model.person;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
 
 /**
  * Tests that a {@code Person}'s {@code id} matches any of the ids given.
  */
 public class IdMatchesPredicate implements Predicate<Person> {
-    private final List<UUID> ids;
+    private final List<Id> ids;
 
-    public IdMatchesPredicate(List<UUID> ids) {
+    public IdMatchesPredicate(List<Id> ids) {
         this.ids = ids;
     }
 

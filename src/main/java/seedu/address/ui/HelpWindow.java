@@ -28,7 +28,7 @@ public class HelpWindow extends UiPart<Stage> {
                     + "  Format : addc n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...\n"
                     + "  Example: addc n/John Doe p/(+65) 98765432 e/john@email.com a/123 Street t/Client\n\n"
                     + "addi - Add an itinerary\n"
-                    + "  Format : addi n/NAME d/DESTINATION sd/START_DATE ed/END_DATE [cid/UUID] [vid/UUID]\n"
+                    + "  Format : addi n/NAME d/DESTINATION sd/START_DATE ed/END_DATE [cid/ID] [vid/ID]\n"
                     + "  Example: addi n/5D4N France Getaway d/France sd/2026-06-10 ed/2026-06-14\n\n"
                     + "list - List entries by category\n"
                     + "  Format : list FLAG\n"

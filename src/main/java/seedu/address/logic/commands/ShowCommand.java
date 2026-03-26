@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.itinerary.ItineraryNameMatchesPredicate;
 import seedu.address.model.person.IdMatchesPredicate;
@@ -55,7 +55,7 @@ public class ShowCommand extends Command {
                 List.of(itineraryToShow.getName()));
         model.updateFilteredItineraryList(itineraryNameMatchesPredicate);
 
-        List<UUID> ids = Stream.concat(
+        List<Id> ids = Stream.concat(
                 itineraryToShow.getClientIds().stream(),
                 itineraryToShow.getVendorIds().stream())
                 .collect(Collectors.toList());

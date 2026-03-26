@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
+import seedu.address.model.id.Id;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ROLE = "client";
     public static final String DEFAULT_ID = "11111111-1111-1111-1111-111111111111";
 
-    private UUID id;
+    private Id id;
     private Role role;
     private Name name;
     private Phone phone;
@@ -37,7 +37,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        id = UUID.fromString(DEFAULT_ID);
+        id = new Id(DEFAULT_ID);
         role = new Role(DEFAULT_ROLE);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
@@ -76,10 +76,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code UUID} of the {@code Person} that we are building.
+     * Sets the {@code Id} of the {@code Person} that we are building.
      */
     public PersonBuilder withId(String id) {
-        this.id = UUID.fromString(id);
+        this.id = new Id(id);
         return this;
     }
 

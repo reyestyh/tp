@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.itinerary.UniqueItineraryList;
 import seedu.address.model.person.Person;
@@ -26,8 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueItineraryList itineraries;
 
-    private final Set<UUID> clientIds = new HashSet<>();
-    private final Set<UUID> vendorIds = new HashSet<>();
+    private final Set<Id> clientIds = new HashSet<>();
+    private final Set<Id> vendorIds = new HashSet<>();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -126,7 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
-        UUID id = key.getId();
+        Id id = key.getId();
         persons.remove(key);
         itineraries.removePerson(id);
         removePersonId(key);
@@ -194,13 +194,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     private boolean hasPersonsWithIds(Itinerary itinerary) {
-        for (UUID clientId : itinerary.getClientIds()) {
+        for (Id clientId : itinerary.getClientIds()) {
             if (!clientIds.contains(clientId)) {
                 return false;
             }
         }
 
-        for (UUID vendorId : itinerary.getVendorIds()) {
+        for (Id vendorId : itinerary.getVendorIds()) {
             if (!vendorIds.contains(vendorId)) {
                 return false;
             }

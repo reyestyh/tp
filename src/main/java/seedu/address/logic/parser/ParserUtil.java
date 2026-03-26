@@ -192,10 +192,10 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> indices} into a {@code Set<Indexes>}.
      */
-    public static Set<Index> parseIndices(Collection<String> uuidIndices) throws ParseException {
-        requireNonNull(uuidIndices);
+    public static Set<Index> parseIndices(Collection<String> idIndices) throws ParseException {
+        requireNonNull(idIndices);
         final Set<Index> indices = new HashSet<>();
-        for (String idx : uuidIndices) {
+        for (String idx : idIndices) {
             indices.add(parseIndex(idx));
         }
         return indices;

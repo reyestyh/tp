@@ -7,18 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.id.Id;
 import seedu.address.testutil.PersonBuilder;
 
 public class IdMatchesPredicateTest {
 
     @Test
     public void equals() {
-        List<UUID> firstPredicateIdList = Collections.singletonList(UUID.randomUUID());
-        List<UUID> secondPredicateIdList = Collections.singletonList(UUID.randomUUID());
+        List<Id> firstPredicateIdList = Collections.singletonList(new Id());
+        List<Id> secondPredicateIdList = Collections.singletonList(new Id());
 
         IdMatchesPredicate firstPredicate = new IdMatchesPredicate(firstPredicateIdList);
         IdMatchesPredicate secondPredicate = new IdMatchesPredicate(secondPredicateIdList);
@@ -48,7 +48,7 @@ public class IdMatchesPredicateTest {
         assertTrue(predicate.test(person));
 
         // Multiple ids
-        predicate = new IdMatchesPredicate(Arrays.asList(person.getId(), UUID.randomUUID(), UUID.randomUUID()));
+        predicate = new IdMatchesPredicate(Arrays.asList(person.getId(), new Id(), new Id()));
         assertTrue(predicate.test(person));
     }
 
@@ -60,13 +60,13 @@ public class IdMatchesPredicateTest {
         assertFalse(predicate.test(person));
 
         // Non-matching id
-        predicate = new IdMatchesPredicate(Collections.singletonList(UUID.randomUUID()));
+        predicate = new IdMatchesPredicate(Collections.singletonList(new Id()));
         assertFalse(predicate.test(person));
     }
 
     @Test
     public void toStringMethod() {
-        List<UUID> ids = List.of(UUID.randomUUID(), UUID.randomUUID());
+        List<Id> ids = List.of(new Id(), new Id());
         IdMatchesPredicate predicate = new IdMatchesPredicate(ids);
 
         String expected = IdMatchesPredicate.class.getCanonicalName() + "{ids=" + ids + "}";

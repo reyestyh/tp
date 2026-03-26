@@ -5,10 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.exceptions.DuplicateItineraryException;
 import seedu.address.model.itinerary.exceptions.ItineraryNotFoundException;
 
@@ -101,9 +101,9 @@ public class UniqueItineraryList implements Iterable<Itinerary> {
 
     /**
      * Removes a person from all its related itineraries.
-     * @param id The UUID of the removed person.
+     * @param id The id of the removed person.
      */
-    public void removePerson(UUID id) {
+    public void removePerson(Id id) {
         internalList.forEach(itinerary -> itinerary.removePersonId(id));
     }
 

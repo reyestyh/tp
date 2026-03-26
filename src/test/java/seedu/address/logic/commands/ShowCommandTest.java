@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,6 +22,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.itinerary.ItineraryNameMatchesPredicate;
 import seedu.address.model.person.IdMatchesPredicate;
@@ -81,7 +81,7 @@ public class ShowCommandTest {
                 List.of(itinerary.getName()));
         model.updateFilteredItineraryList(itineraryNameMatchesPredicate);
 
-        List<UUID> ids = Stream.concat(
+        List<Id> ids = Stream.concat(
                         itinerary.getClientIds().stream(),
                         itinerary.getVendorIds().stream())
                 .collect(Collectors.toList());

@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.Id;
 
 /**
  * Represents an Itinerary in the address book.
@@ -22,8 +22,8 @@ public class Itinerary {
     // Data fields
     private final Destination destination;
     private final DateRange dateRange;
-    private final Set<UUID> clientIds;
-    private final Set<UUID> vendorIds;
+    private final Set<Id> clientIds;
+    private final Set<Id> vendorIds;
 
     /**
      * Every field must be present and not null.
@@ -42,7 +42,7 @@ public class Itinerary {
      * Alternative constructor for reading from storage file
      */
     public Itinerary(ItineraryName itineraryName, Destination destination,
-                     DateRange dateRange, Set<UUID> clientIds, Set<UUID> vendorIds) {
+                     DateRange dateRange, Set<Id> clientIds, Set<Id> vendorIds) {
         requireAllNonNull(itineraryName, destination, dateRange, clientIds, vendorIds);
         this.itineraryName = itineraryName;
         this.destination = destination;
@@ -51,12 +51,12 @@ public class Itinerary {
         this.vendorIds = new HashSet<>(vendorIds);
     }
 
-    public void setClients(Set<UUID> clientIds) {
+    public void setClients(Set<Id> clientIds) {
         requireAllNonNull(clientIds);
         this.clientIds.addAll(clientIds);
     }
 
-    public void setVendors(Set<UUID> vendorIds) {
+    public void setVendors(Set<Id> vendorIds) {
         requireAllNonNull(vendorIds);
         this.vendorIds.addAll(vendorIds);
     }
@@ -73,11 +73,11 @@ public class Itinerary {
         return dateRange;
     }
 
-    public Set<UUID> getClientIds() {
+    public Set<Id> getClientIds() {
         return Collections.unmodifiableSet(clientIds);
     }
 
-    public Set<UUID> getVendorIds() {
+    public Set<Id> getVendorIds() {
         return Collections.unmodifiableSet(vendorIds);
     }
 
@@ -96,9 +96,9 @@ public class Itinerary {
     /**
      * Removes a person from the itinerary.
      *
-     * @param id UUID of the removed person.
+     * @param id id of the removed person.
      */
-    public void removePersonId(UUID id) {
+    public void removePersonId(Id id) {
         clientIds.remove(id);
         vendorIds.remove(id);
     }
@@ -106,9 +106,9 @@ public class Itinerary {
     /**
      * Checks whether the Itinerary contain specific person.
      *
-     * @param id The UUID of specific person.
+     * @param id The id of specific person.
      */
-    public boolean containsPerson(UUID id) {
+    public boolean containsPerson(Id id) {
         return clientIds.contains(id) || vendorIds.contains(id);
     }
 
