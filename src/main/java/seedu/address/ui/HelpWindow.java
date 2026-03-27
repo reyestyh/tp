@@ -21,10 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s2-cs2103t-f12-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE =
-            "COMMAND SUMMARY\n"
-                    + "----------------------------------\n"
-                    + "addc - Add a contact\n"
+    public static final String HELP_MESSAGE = "addc - Add a contact\n"
                     + "  Format : addc r/ROLE n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...\n"
                     + "  Example: addc r/vendor n/John Doe p/(+65) 98765432 e/john@email.com a/123 Street t/Client\n\n"
                     + "addi - Add an itinerary\n"

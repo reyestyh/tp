@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
 <fx:root resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,13 +21,25 @@
                 <URL value="@HelpWindow.css" />
                 <URL value="@DarkTheme.css" />
             </stylesheets>
-            <AnchorPane fx:id="mainLayout" styleClass="background">
-                <ScrollPane fx:id="helpScrollPane">
-                    <Label fx:id="helpMessage" styleClass="label" wrapText="true"/>
-                </ScrollPane>
-                <HBox alignment="CENTER_RIGHT" fx:id="bottomBar" styleClass="pane-with-border">
-                    <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL"/>
-                </HBox>
+            <AnchorPane fx:id="mainLayout" styleClass="app-root">
+                <VBox AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" spacing="10">
+                    <VBox styleClass="panel-container" VBox.vgrow="ALWAYS">
+                        <Label text="Command Summary" styleClass="panel-header-label"/>
+                        <ScrollPane fx:id="helpScrollPane" fitToWidth="true">
+                            <content>
+                                <VBox spacing="12" styleClass="help-content">
+                                    <Label fx:id="helpMessage" wrapText="true" styleClass="help-text"/>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+
+                        <HBox alignment="CENTER_RIGHT" fx:id="bottomBar" styleClass="help-footer">
+                            <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy User Guide URL"/>
+                        </HBox>
+
+                    </VBox>
+
+                </VBox>
             </AnchorPane>
         </Scene>
     </scene>
