@@ -10,35 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITINERARIES;
-
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.id.Id;
-import seedu.address.model.itinerary.DateRange;
-import seedu.address.model.itinerary.Destination;
-import seedu.address.model.itinerary.Itinerary;
-import seedu.address.model.itinerary.ItineraryName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person or itinerary as implemented by subclasses.
@@ -85,10 +61,6 @@ public abstract class EditCommand extends Command {
         requireNonNull(index);
 
         this.index = index;
-    }
-
-    protected Index getIndex() {
-        return index;
     }
 
     @Override
