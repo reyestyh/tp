@@ -24,7 +24,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditItineraryCommand;
+import seedu.address.logic.commands.EditItineraryCommand.EditItineraryDescriptor;
 import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.tag.Tag;
@@ -61,90 +63,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         String otherArgs = splitArgs[1];
 
         if (flagStr.equals(CONTACT_FLAG)) {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(otherArgs, PREFIX_NAME, PREFIX_PHONE,
-                            PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-
-            Index index;
-
-            try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-            }
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-
-            EditPersonCommand.EditPersonDescriptor editPersonDescriptor =
-                    new EditPersonCommand.EditPersonDescriptor();
-
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-                editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-            }
-            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-            }
-            if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-                editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-            }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-            if (!editPersonDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditPersonCommand(index, editPersonDescriptor);
+            return parseEditPersonCommand(otherArgs);
         } else { // itinerary flag
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(otherArgs, PREFIX_ITINERARY_NAME, PREFIX_ITINERARY_DESTINATION,
-                            PREFIX_ITINERARY_START, PREFIX_ITINERARY_END);
-
-            Index index;
-
-            try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-            }
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ITINERARY_NAME, PREFIX_ITINERARY_DESTINATION,
-                    PREFIX_ITINERARY_START, PREFIX_ITINERARY_END);
-
-            EditItineraryCommand.EditItineraryDescriptor editItineraryDescriptor =
-                    new EditItineraryCommand.EditItineraryDescriptor();
-
-            if (argMultimap.getValue(PREFIX_ITINERARY_NAME).isPresent()) {
-                editItineraryDescriptor.setItineraryName(
-                        ParserUtil.parseItineraryName(argMultimap.getValue(PREFIX_ITINERARY_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).isPresent()) {
-                editItineraryDescriptor.setDestination(
-                        ParserUtil.parseDestination(argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).get()));
-            }
-            if (argMultimap.getValue(PREFIX_ITINERARY_START).isPresent()) {
-                try {
-                    editItineraryDescriptor.setStartDate(
-                            LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_START).get(), DATE_FORMAT));
-                } catch (DateTimeParseException e) {
-                    throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
-                }
-            }
-            if (argMultimap.getValue(PREFIX_ITINERARY_END).isPresent()) {
-                try {
-                    editItineraryDescriptor.setEndDate(
-                            LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_END).get(), DATE_FORMAT));
-                } catch (DateTimeParseException e) {
-                    throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
-                }
-            }
-            if (!editItineraryDescriptor.isAnyFieldEdited()) {
-                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-            }
-
-            return new EditItineraryCommand(index, editItineraryDescriptor);
+            return parseEditItineraryCommand(otherArgs);
         }
     }
 
@@ -163,4 +84,97 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Person} details into a {@code EditPersonCommand}.
+     */
+    private EditPersonCommand parseEditPersonCommand(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+
+        EditPersonDescriptor editPersonDescriptor =
+                new EditPersonCommand.EditPersonDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+        return new EditPersonCommand(index, editPersonDescriptor);
+    }
+
+    /**
+     * Parses {@code Itinerary} details into a {@code EditItineraryCommand}.
+     */
+    private EditItineraryCommand parseEditItineraryCommand(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_ITINERARY_NAME, PREFIX_ITINERARY_DESTINATION,
+                        PREFIX_ITINERARY_START, PREFIX_ITINERARY_END);
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ITINERARY_NAME, PREFIX_ITINERARY_DESTINATION,
+                PREFIX_ITINERARY_START, PREFIX_ITINERARY_END);
+
+        EditItineraryDescriptor editItineraryDescriptor =
+                new EditItineraryCommand.EditItineraryDescriptor();
+
+        if (argMultimap.getValue(PREFIX_ITINERARY_NAME).isPresent()) {
+            editItineraryDescriptor.setItineraryName(
+                    ParserUtil.parseItineraryName(argMultimap.getValue(PREFIX_ITINERARY_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).isPresent()) {
+            editItineraryDescriptor.setDestination(
+                    ParserUtil.parseDestination(argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ITINERARY_START).isPresent()) {
+            try {
+                editItineraryDescriptor.setStartDate(
+                        LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_START).get(), DATE_FORMAT));
+            } catch (DateTimeParseException e) {
+                throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+            }
+        }
+        if (argMultimap.getValue(PREFIX_ITINERARY_END).isPresent()) {
+            try {
+                editItineraryDescriptor.setEndDate(
+                        LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_END).get(), DATE_FORMAT));
+            } catch (DateTimeParseException e) {
+                throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+            }
+        }
+        if (!editItineraryDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditItineraryCommand(index, editItineraryDescriptor);
+    }
 }
