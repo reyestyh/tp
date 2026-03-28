@@ -270,18 +270,18 @@ public class EditCommandTest {
                 .withStartDate(startDateAfterEndDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_START_DATE);
+        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_DATE);
     }
 
     @Test
     public void execute_itineraryEditEndBeforeStart_failure() {
         Itinerary itineraryToEdit = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        LocalDate endDateAfterStartDate = itineraryToEdit.getDateRange().getStartDate().minusDays(1);
+        LocalDate endDateBeforeStartDate = itineraryToEdit.getDateRange().getStartDate().minusDays(1);
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
-                .withEndDate(endDateAfterStartDate).build();
+                .withEndDate(endDateBeforeStartDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_END_DATE);
+        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_DATE);
     }
 
     @Test
