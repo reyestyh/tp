@@ -8,10 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_FRANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_DEST_BALI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_END_DATE_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_NAME_FRANCE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_START_DATE_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -266,8 +264,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_itineraryEditStartBeforeEnd_failure() {
-        Itinerary itinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        LocalDate startDateAfterEndDate = itinerary.getDateRange().getEndDate().plusDays(1);
+        Itinerary itineraryToEdit = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
+        LocalDate startDateAfterEndDate = itineraryToEdit.getDateRange().getEndDate().plusDays(1);
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
                 .withStartDate(startDateAfterEndDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
@@ -277,60 +275,57 @@ public class EditCommandTest {
 
     @Test
     public void execute_itineraryEditEndBeforeStart_failure() {
-        Itinerary itinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        LocalDate endDateAfterStartDate = itinerary.getDateRange().getStartDate().minusDays(1);
+        Itinerary itineraryToEdit = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
+        LocalDate endDateAfterStartDate = itineraryToEdit.getDateRange().getStartDate().minusDays(1);
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
                 .withEndDate(endDateAfterStartDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
         assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_END_DATE);
-    }
-
-    @Test
-    public void execute_itineraryEditBothDatesStartBeforeEnd_failure() {
-        Itinerary itinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        LocalDate startDateAfterEndDate = itinerary.getDateRange().getEndDate();
-        LocalDate endDateAfterStartDate = itinerary.getDateRange().getStartDate();
-        EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
-                .withStartDate(startDateAfterEndDate)
-                .withEndDate(endDateAfterStartDate).build();
-        EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
-
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_START_DATE);
     }
 
     @Test
     public void execute_itineraryEditStartEqualEnd_success() {
         Itinerary itinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        LocalDate startDateEqualEndDate = itinerary.getDateRange().getEndDate();
+        LocalDate endDate = itinerary.getDateRange().getEndDate();
+
+        Itinerary editedItinerary = new ItineraryBuilder(itinerary)
+                .withDateRange(endDate.toString(), endDate.toString())
+                .build();
+
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
-                .withStartDate(startDateEqualEndDate).build();
+                .withStartDate(endDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_START_DATE);
+        String expectedMessage = String.format(EditItineraryCommand.MESSAGE_EDIT_ITINERARY_SUCCESS,
+                Messages.format(editedItinerary));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setItinerary(itinerary, editedItinerary);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_itineraryEditEndEqualStart_success() {
         Itinerary itinerary = model.getFilteredItineraryList().get(INDEX_FIRST.getZeroBased());
-        LocalDate endDateEqualStartDate = itinerary.getDateRange().getStartDate();
+        LocalDate startDate = itinerary.getDateRange().getEndDate();
+
+        Itinerary editedItinerary = new ItineraryBuilder(itinerary)
+                .withDateRange(startDate.toString(), startDate.toString())
+                .build();
+
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
-                .withEndDate(endDateEqualStartDate).build();
+                .withStartDate(startDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_END_DATE);
-    }
+        String expectedMessage = String.format(EditItineraryCommand.MESSAGE_EDIT_ITINERARY_SUCCESS,
+                Messages.format(editedItinerary));
 
-    @Test
-    public void execute_itineraryEditBothDatesSameDay_success() {
-        LocalDate startDateEqualEndDate = LocalDate.parse(VALID_ITINERARY_START_DATE_BALI);
-        LocalDate endDateEqualStartDate = LocalDate.parse(VALID_ITINERARY_END_DATE_BALI);
-        EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder()
-                .withStartDate(startDateEqualEndDate)
-                .withEndDate(endDateEqualStartDate).build();
-        EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setItinerary(itinerary, editedItinerary);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_START_DATE);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
