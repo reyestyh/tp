@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -50,7 +49,7 @@ public class AddressBookParserTest {
     public void parseCommand_addc() throws Exception {
         Person person = new PersonBuilder().build();
         AddcCommand command = (AddcCommand) parser.parseCommand(AddcCommand.COMMAND_WORD + " "
-                + PREFIX_ROLE + person.getRole().value + " " + PersonUtil.getPersonDetails(person));
+                + PersonUtil.getPersonDetails(person));
         assertEquals(new AddcCommand(person), command);
     }
 
