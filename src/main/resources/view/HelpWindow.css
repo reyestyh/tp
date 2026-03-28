@@ -37,6 +37,7 @@
     -fx-font-family = "Segoe UI Semibold";
     -fx-text-fill: navbar-bg;
     -fx-background-radius: 20;
+    -fx-border-color: transparent;
 }
 
 #copyButton:hover {

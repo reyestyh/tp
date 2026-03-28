@@ -20,7 +20,7 @@
         <Scene>
             <stylesheets>
                 <URL value="@HelpWindow.css"/>
-                <URL value="@DarkTheme.css"/>
+                <URL value="@Theme.css"/>
             </stylesheets>
             <AnchorPane fx:id="mainLayout" styleClass="app-root">
                 <VBox AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
