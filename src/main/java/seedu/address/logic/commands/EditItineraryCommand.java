@@ -24,6 +24,8 @@ import seedu.address.model.itinerary.ItineraryName;
 public class EditItineraryCommand extends EditCommand {
     public static final String MESSAGE_EDIT_ITINERARY_SUCCESS = "Edited Itinerary: %1$s";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "This itinerary already exists in the address book.";
+    public static final String MESSAGE_INVALID_START_DATE = "Start date cannot be after the end date.";
+    public static final String MESSAGE_INVALID_END_DATE = "End date cannot be before the start date.";
 
     private final EditItineraryDescriptor editItineraryDescriptor;
 
@@ -63,7 +65,8 @@ public class EditItineraryCommand extends EditCommand {
      * edited with {@code editItineraryDescriptor}.
      */
     private static Itinerary createEditedItinerary(Itinerary itineraryToEdit,
-                                                   EditItineraryDescriptor editItineraryDescriptor) {
+                                                   EditItineraryDescriptor editItineraryDescriptor)
+            throws CommandException {
         assert itineraryToEdit != null;
 
         ItineraryName updatedItineraryName = editItineraryDescriptor.getItineraryName()
@@ -74,6 +77,13 @@ public class EditItineraryCommand extends EditCommand {
                 .orElse(itineraryToEdit.getDateRange().getStartDate());
         LocalDate updatedEndDate = editItineraryDescriptor.getEndDate()
                 .orElse(itineraryToEdit.getDateRange().getEndDate());
+
+        if (updatedStartDate.isAfter(updatedEndDate)) {
+            throw new CommandException(MESSAGE_INVALID_START_DATE);
+        } else if (updatedEndDate.isBefore(updatedStartDate)) {
+            throw new CommandException(MESSAGE_INVALID_END_DATE);
+        }
+
         DateRange updatedDateRange = new DateRange(updatedStartDate.toString(), updatedEndDate.toString());
 
         return new Itinerary(updatedItineraryName, updatedDestination, updatedDateRange,
