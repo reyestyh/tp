@@ -60,6 +60,12 @@ public class EditPersonCommand extends EditCommand {
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        if (!personToEdit.getRole().equals(editedPerson.getRole())) {
+            // role has changed
+            model.updatePersonRole(editedPerson.getId(), editedPerson.getRole());
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
@@ -72,7 +78,7 @@ public class EditPersonCommand extends EditCommand {
         assert personToEdit != null;
 
         Id id = personToEdit.getId();
-        Role updatedRole = personToEdit.getRole();
+        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -87,6 +93,7 @@ public class EditPersonCommand extends EditCommand {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+        private Role role;
         private Name name;
         private Phone phone;
         private Email email;
@@ -100,6 +107,7 @@ public class EditPersonCommand extends EditCommand {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setRole(toCopy.role);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -111,7 +119,15 @@ public class EditPersonCommand extends EditCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(role, name, phone, email, address, tags);
+        }
+
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
         }
 
         public void setName(Name name) {
@@ -175,7 +191,8 @@ public class EditPersonCommand extends EditCommand {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
+            return Objects.equals(role, otherEditPersonDescriptor.role)
+                    && Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -185,6 +202,7 @@ public class EditPersonCommand extends EditCommand {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("role", role)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)

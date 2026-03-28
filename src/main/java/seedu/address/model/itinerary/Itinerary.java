@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.id.Id;
+import seedu.address.model.person.Role;
 
 /**
  * Represents an Itinerary in the address book.
@@ -101,6 +102,19 @@ public class Itinerary {
     public void removePersonId(Id id) {
         clientIds.remove(id);
         vendorIds.remove(id);
+    }
+
+    /**
+     * Updates a person's role in the itinerary.
+     */
+    public void updatePersonRole(Id id, Role newRole) {
+        if (newRole.getValue() == Role.RoleType.CLIENT) { // was vendor, changed to client
+            vendorIds.remove(id);
+            clientIds.add(id);
+        } else { // was client, changed to vendor
+            clientIds.remove(id);
+            vendorIds.add(id);
+        }
     }
 
     /**

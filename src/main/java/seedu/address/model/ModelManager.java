@@ -11,8 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.id.Id;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -112,6 +114,15 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void updatePersonRole(Id personId, Role newRole) {
+        for (Itinerary itinerary : addressBook.getItineraryList()) {
+            if (itinerary.containsPerson(personId)) {
+                itinerary.updatePersonRole(personId, newRole);
+            }
+        }
     }
 
     @Override
