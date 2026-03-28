@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY_VENDOR;
 
 import seedu.address.logic.commands.AddiCommand;
-import seedu.address.logic.commands.EditCommand.EditItineraryDescriptor;
+import seedu.address.logic.commands.EditItineraryCommand.EditItineraryDescriptor;
 import seedu.address.model.itinerary.Itinerary;
 
 /**

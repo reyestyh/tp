@@ -59,8 +59,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditItineraryDescriptor;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditItineraryCommand;
+import seedu.address.logic.commands.EditItineraryCommand.EditItineraryDescriptor;
+import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.ItineraryName;
@@ -154,7 +156,7 @@ public class EditCommandParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        EditCommand expectedCommand = new EditPersonCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -166,7 +168,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        EditCommand expectedCommand = new EditPersonCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -177,31 +179,31 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD;
         String userInput = CONTACT_FLAG + " " + targetIndex.getOneBased() + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        EditCommand expectedCommand = new EditPersonCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = CONTACT_FLAG + " " + targetIndex.getOneBased() + PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        expectedCommand = new EditPersonCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = CONTACT_FLAG + " " + targetIndex.getOneBased() + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        expectedCommand = new EditPersonCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = CONTACT_FLAG + " " + targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        expectedCommand = new EditPersonCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = CONTACT_FLAG + " " + targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        expectedCommand = new EditPersonCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -244,7 +246,7 @@ public class EditCommandParserTest {
         String userInput = CONTACT_FLAG + " " + targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.CONTACT, descriptor, null);
+        EditCommand expectedCommand = new EditPersonCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -321,7 +323,7 @@ public class EditCommandParserTest {
                 .withStartDate(LocalDate.parse(VALID_ITINERARY_START_DATE_FRANCE))
                 .withEndDate(LocalDate.parse(VALID_ITINERARY_END_DATE_FRANCE))
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.ITINERARY, null, descriptor);
+        EditCommand expectedCommand = new EditItineraryCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -336,7 +338,7 @@ public class EditCommandParserTest {
                 .withName(VALID_ITINERARY_NAME_FRANCE)
                 .withDestination(VALID_ITINERARY_DEST_FRANCE)
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.ITINERARY, null, descriptor);
+        EditCommand expectedCommand = new EditItineraryCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -348,28 +350,28 @@ public class EditCommandParserTest {
         String userInput = ITINERARY_FLAG + " " + targetIndex.getOneBased() + ITINERARY_NAME_DESC_FRANCE;
         EditItineraryDescriptor descriptor = new EditItineraryDescriptorBuilder()
                 .withName(VALID_ITINERARY_NAME_FRANCE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.ITINERARY, null, descriptor);
+        EditCommand expectedCommand = new EditItineraryCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // destination
         userInput = ITINERARY_FLAG + " " + targetIndex.getOneBased() + ITINERARY_DEST_DESC_FRANCE;
         descriptor = new EditItineraryDescriptorBuilder()
                 .withDestination(VALID_ITINERARY_DEST_FRANCE).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.ITINERARY, null, descriptor);
+        expectedCommand = new EditItineraryCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // start date
         userInput = ITINERARY_FLAG + " " + targetIndex.getOneBased() + ITINERARY_START_DATE_DESC_FRANCE;
         descriptor = new EditItineraryDescriptorBuilder()
                 .withStartDate(LocalDate.parse(VALID_ITINERARY_START_DATE_FRANCE)).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.ITINERARY, null, descriptor);
+        expectedCommand = new EditItineraryCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // end date
         userInput = ITINERARY_FLAG + " " + targetIndex.getOneBased() + ITINERARY_END_DATE_DESC_FRANCE;
         descriptor = new EditItineraryDescriptorBuilder()
                 .withEndDate(LocalDate.parse(VALID_ITINERARY_END_DATE_FRANCE)).build();
-        expectedCommand = new EditCommand(targetIndex, EditCommand.EditType.ITINERARY, null, descriptor);
+        expectedCommand = new EditItineraryCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
     }

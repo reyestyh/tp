@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 
-import seedu.address.logic.commands.EditCommand.EditItineraryDescriptor;
+import seedu.address.logic.commands.EditItineraryCommand.EditItineraryDescriptor;
 import seedu.address.model.itinerary.Destination;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.itinerary.ItineraryName;
