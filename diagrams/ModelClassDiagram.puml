@@ -20,6 +20,12 @@ Class Name
 Class Phone
 Class Tag
 
+Class Itinerary
+Class UniqueItineraryList
+Class ItineraryName
+Class Destination
+Class DateRange
+
 Class I #FFFFFF
 }
 
@@ -43,12 +49,27 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+AddressBook *--> "1" UniqueItineraryList
+UniqueItineraryList --> "~* all" Itinerary
+Itinerary *--> ItineraryName
+Itinerary *--> Destination
+Itinerary *--> DateRange
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+
+Itinerary -[hidden]up--> I
+UniqueItineraryList -[hidden]right-> I
+
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
+ItineraryName -[hidden]right-> Destination
+Destination -[hidden]right-> DateRange
+
+
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Itinerary
 @enduml
