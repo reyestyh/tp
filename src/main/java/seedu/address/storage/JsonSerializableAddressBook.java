@@ -2,16 +2,15 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.logging.Logger;
-
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.itinerary.Itinerary;
@@ -24,10 +23,10 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
-
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "Itineraries list contains duplicate itinerary(ies).";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedItinerary> itineraries = new ArrayList<>();
@@ -71,7 +70,6 @@ class JsonSerializableAddressBook {
             assert person != null;
             if (addressBook.hasPerson(person)) {
                 logger.info(MESSAGE_DUPLICATE_PERSON + ". Skipping current person entry.");
-//                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
                 continue;
             }
             addressBook.addPerson(person);
@@ -88,7 +86,6 @@ class JsonSerializableAddressBook {
             assert itinerary != null;
             if (addressBook.hasItinerary(itinerary)) {
                 logger.info(MESSAGE_DUPLICATE_ITINERARY + ". Skipping current itinerary entry.");
-//                throw new IllegalValueException(MESSAGE_DUPLICATE_ITINERARY);
                 continue;
             }
 
