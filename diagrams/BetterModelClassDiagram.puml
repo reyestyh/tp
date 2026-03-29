@@ -16,6 +16,8 @@ Person -up-> "*" Tag
 
 Person *--> Name
 Person *--> Phone
+Person *--> Role
 Person *--> Email
 Person *--> Address
+Person *--> Id
 @enduml
