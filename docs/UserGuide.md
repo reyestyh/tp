@@ -316,8 +316,8 @@ find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS
 * `find e/example.com` returns contacts with `example.com` in their saved email.
 * `find n/alex david` returns contacts whose names contain `alex` or `david`
 * `find n/alex p/996` returns contacts whose names contain `alex` and whose phone numbers contain `996`.
-  * `find n/alex david p/992 281` returns contacts whose names contain `alex` or `david` and phone numbers contain `992` or `281` <br>
-    ![result for 'find n/alex david p/992 281'](images/findAlexDavidResult.png)
+* `find n/alex david p/992 281` returns contacts whose names contain `alex` or `david` and phone numbers contain `992` or `281` <br>
+  ![result for 'find n/alex david p/992 281'](images/findAlexDavidResult.png)
 
 ### Deleting a Contact or Itinerary : `delete`
 
