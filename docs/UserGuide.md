@@ -179,11 +179,14 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
   - Example: `from/2026-03-20 to/2026-03-19` is not allowed.
 - `CLIENT_INDEX` and `VENDOR_INDEX` are the indexes of the contacts in the current TripScribe window.
 - An itinerary can have any number of clients and vendors (including zero).
+- If you want to add multiple clients or vendors into the itinerary, indicate the type for each index.
+  - Example: `c/2 c/3 c/4 v/1 v/2 v/3` to add the second, third and fourth client in the client list and the first, second and third vendor in the vendor list.  
 </box>
 
 **Examples:**
 * `addi n/Island Time: Bali dest/Bali from/2026-12-01 to/2026-12-05`
 * `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/4`
+* `addi n/3D2N Trip of China dest/China from/2026-5-02 to/2026-5-07 c/2 c/3 c/5 v/4 v/5`
 
 | ![add itinerary command typed in TripScribe](images/AddItineraryBefore.png)<br>Input | ![Add itinerary executed in TripScribe](images/AddItineraryAfter.png)<br>Expected Output |
 |:------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:|
@@ -277,39 +280,44 @@ show INDEX
 
 
 
-### Finding Contacts by Name: `find`
+### Finding Contacts by Keywords: `find`
 
-Find contacts by a specified keyword. TripScribe shows all contacts whose data contain at least one of your keywords.
+Finds contacts whose fields match the given keywords. TripScribe supports both general search and multi-field search.
 
 **Formats:**
 ```
-find KEYWORD [MORE_KEYWORDS]
+find KEYWORD [MORE_KEYWORDS]… ​
 ```
 ```
-find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… ​
+find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS]… ​
 ```
 
 <box type="tip" seamless>
 
 **Things to note:**
-* __Use one of the formats only. You cannot mix both.__
-  * Example: `find Hans p\9876` does not work
+* __Use one of the formats only. Do not mix general search and multi-field search.__
+  * Example: `find Hans p\9876` does not work.
 * The search is case-insensitive.
   * Example: `hans` will match `Hans`
 * The order of the keywords does not matter.
   * Example: `Hans Bo` will match `Bo Hans`
-* Only full words will be matched.
-  * Example: `Han` will not match `Hans`
-* Contacts matching at least one keyword will be returned (i.e. `OR` search).
-  * Example: `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Partial matches are allowed.
+  * Example: `Han` will match `Hans`
+* In general search, a contact is returned if any keyword appears in any searchable field.
+* In multi-field search:
+  * keywords within the same field are matched using `OR`
+  * keywords across different fields are matched using `AND`
 
 </box>
 
 **Examples:**
-* `find John` returns `john` and `John Doe`
+* `find John` returns contacts whose name, phone, email, address, or tags contain `John`.
+* `find alex david` returns contacts containing `alex` or `david` in any searchable field.
 * `find e/example.com` returns contacts with `example.com` in their saved email.
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/alex david` returns contacts whose names contain `alex` or `david`
+* `find n/alex p/996` returns contacts whose names contain `alex` and whose phone numbers contain `996`.
+  * `find n/alex david p/992 281` returns contacts whose names contain `alex` or `david` and phone numbers contain `992` or `281` <br>
+    ![result for 'find n/alex david p/992 281'](images/findAlexDavidResult.png)
 
 ### Deleting a Contact or Itinerary : `delete`
 
