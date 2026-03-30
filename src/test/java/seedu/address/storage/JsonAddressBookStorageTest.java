@@ -71,17 +71,6 @@ public class JsonAddressBookStorageTest {
         assertEquals(Optional.of(expectedAddressBook), readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
 
-    // TODO fix after regex for ItineraryName and Destination is fixed
-    // @Test
-    // public void readAddressBook_invalidItineraryAddressBook_emptyResult() throws Exception {
-    //     assertFalse(readAddressBook("invalidItineraryAddressBook").isPresent());
-    // }
-
-    // @Test
-    // public void readAddressBook_invalidAndValidItineraryAddressBook_hasOnlyValiditineraries() throws Exception {
-    //     AddressBook expectedAddressBook = new AddressBook();
-    //     assertEquals(Optional.of(expectedAddressBook), readAddressBook("invalidAndValidPersonAddressBook.json"));
-    // }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {

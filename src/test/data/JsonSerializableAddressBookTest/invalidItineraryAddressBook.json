@@ -1,20 +1,6 @@
 {
   "persons" : [ ],
   "itineraries" : [ {
-    "name" : "Inv@lid",
-    "destination" : "Bali",
-    "startDate" : "2026-03-10",
-    "endDate" : "2026-03-15",
-    "clientIds" : [ ],
-    "vendorIds" : [ ]
-  }, {
-    "name" : "Island Time: Bali",
-    "destination" : "Bal{",
-    "startDate" : "2026-03-10",
-    "endDate" : "2026-03-15",
-    "clientIds" : [ ],
-    "vendorIds" : [ ]
-  }, {
     "name" : "Island Time: Bali",
     "destination" : "Bali",
     "startDate" : "2026-03-16",
