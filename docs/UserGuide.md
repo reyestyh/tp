@@ -6,7 +6,7 @@
 
 # TripScribe User Guide
 
-TripScribe is a desktop app built for **operations executives at tour agencies** who manage client contacts, vendor bookings and itineraries on a daily basis. If you can type fast, TripScribe lets you **manage contacts and itineraries** much faster than other mouse-based apps, through a simple command-based interface with an informative and clean interface.
+TripScribe is a desktop app built for **operations executives at tour agencies** who manage client contacts, vendor bookings and itineraries on a daily basis. If you can type fast, TripScribe lets you **manage contacts and itineraries** much faster than other mouse-based apps, through a simple command-based interface with an informative and clean view.
 
 **New to TripScribe?** Start with [Quick Start](#quick-start) to install the app and try your first commands.
 
@@ -25,10 +25,10 @@ TripScribe is a desktop app built for **operations executives at tour agencies**
     - [Adding a Contact : `addc`](#adding-a-contact-addc)
     - [Adding an Itinerary : `addi`](#adding-an-itinerary-addi)
     - [Listing Contacts and Itineraries : `list`](#listing-contacts-and-itineraries-list)
-    - [Editing a Contact : `edit`](#editing-a-contact-edit)
+    - [Editing Contacts and Itineraries : `edit`](#editing-contacts-and-itineraries--edit)
     - [Showing details of an itinerary: `show`](#showing-contacts-by-itinerary-show)
-    - [Finding Contacts by Name : `find`](#finding-contacts-by-name-find)
-    - [Deleting a Contact or Itinerary : `delete`](#deleting-a-contact-or-itinerary-delete)
+    - [Finding Contacts by Name : `find`](#finding-contacts-by-keywords-find)
+    - [Deleting a Contact or Itinerary : `delete`](#deleting-a-contact-or-itinerary--delete)
     - [Clearing All Entries : `clear`](#clearing-all-entries-clear)
     - [Exiting TripScribe : `exit`](#exiting-tripscribe-exit)
     - [Command Summary](#command-summary)
@@ -146,7 +146,7 @@ addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - A contact can have any number of tags (including zero)
 - Phone numbers should follow the format `(+<Country Code>) <Phone Number>`
   - Example: `(+65) 98765432`.
-- TripScribe treats two contacts as duplicates if they share the same name **and** phone number. Duplicate contacts cannot be added.
+- TripScribe treats two contacts as duplicates if they share the **same name and phone number**. Duplicate contacts cannot be added.
 
 </box>
 
@@ -169,7 +169,7 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
 
 **Things to note:**
 - `ITINERARY_NAME` and `DESTINATION` cannot be blank.
-- TripScribe treats two itineraries as duplicates if they share the same name (case-insensitive). Duplicate itineraries cannot be added.
+- TripScribe treats two itineraries as duplicates if they **share the same name** (case-insensitive). Duplicate itineraries cannot be added.
   - Example: Itineraries with the names `ISLAND TIME: Bali` and `Island Time: Bali` are considered duplicates.
 - `START_DATE` and `END_DATE` must be in the format `yyyy-mm-dd`.
   - Example: `20th March 2026` should be written as `2026-03-20`.
@@ -177,8 +177,10 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
   - Example: `from/2026-03-20 to/2026-03-19` is not allowed.
 - `CLIENT_INDEX` and `VENDOR_INDEX` are the indexes of the contacts in the current TripScribe window.
 - An itinerary can have any number of clients and vendors (including zero).
-- If you want to add multiple clients or vendors into the itinerary, indicate the type for each index.
-  - Example: `c/2 c/3 c/4 v/1 v/5 v/6` to add the second, third and fourth client in the client list and the first, second and third vendor in the vendor list.  
+- If a contact is a client, you cannot add them as a vendor, and vice versa.
+  - Example: `c/2` will fail if the contact at index 2 is a vendor.  `v/3` will fail if the contact at index 3 is a client
+- If you want to add multiple clients or vendors into the itinerary, ensure that you indicate the correct prefix for each index.
+  - Example: `c/2 c/3 c/4 v/1 v/5 v/6` will add the second, third and fourth contacts in the contact list and the first, fifth and sixth contacts in the vendor list (if they are of the correct role).  
 </box>
 
 **Examples:**
@@ -222,7 +224,7 @@ list /FLAG
 * `list /itinerary`
 * `list /all`
 
-### Editing a Contact : `edit`
+### Editing Contacts and Itineraries : `edit`
 
 Edit an existing contact or itinerary in TripScribe.
 
@@ -247,7 +249,7 @@ When editing contacts, editing tags replaces all existing tags of the contact, i
 
 * Edits the contact or itinerary at the specified `INDEX`.
 * `INDEX` is the index number shown in the displayed person or itinerary list. It **must be a positive, non-zero number** 1, 2, 3, …​
-* Include at least one field to change.
+* You must include at least one field to change.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * When editing itineraries, you must ensure that the end date is after the start date. 
 
@@ -280,7 +282,7 @@ show INDEX
 </box>
 
 **Examples:**
-*  `show 2` 
+* `show 2`
   * Shows details of the 2nd itinerary, and the contacts associated with it.
 
 
@@ -325,13 +327,16 @@ Example: `find Hans p/9876` is invalid.
 </box>
 
 **Examples:**
+
+General Search:
 * `find John` returns contacts whose name, phone, email, address, or tags contain `John`.
 * `find alex david` returns contacts containing `alex` or `david` in any searchable field.
+
+Multi-Field Search:
 * `find e/example.com` returns contacts with `example.com` in their saved email.
-* `find n/alex david` returns contacts whose names contain `alex` or `david`
+* `find n/alex david` returns contacts whose names contain `alex` or `david`.
 * `find n/alex p/996` returns contacts whose names contain `alex` and whose phone numbers contain `996`.
-* `find n/alex david p/992 281` returns contacts whose names contain `alex` or `david` and phone numbers contain `992` or `281` <br>
-  ![result for 'find n/alex david p/992 281'](images/findAlexDavidResult.png)
+* `find n/alex david p/992 281` returns contacts whose names contain `alex` or `david` and phone numbers contain `992` or `281`. <br>
 
 ### Deleting a Contact or Itinerary : `delete`
 
@@ -344,9 +349,10 @@ delete /FLAG INDEX
 <box type="tip" seamless>
 
 **Things to note:**
-* Deletes the contact or itinerary at the specified `INDEX`.
+* This will delete the contact or itinerary at the specified `INDEX`.
 * `FLAG` specifies the entry type you are deleting. It must be one of: `contact` , `itinerary`.
 * `INDEX` is the index number shown in the displayed person or itinerary list. It **must be a positive, non-zero number** 1, 2, 3, …​
+* When deleting a contact, the contact will be also be removed from any itineraries it is part of.
 
 </box>
 
@@ -382,18 +388,18 @@ exit
 
 ### Command Summary
 
-| Action                                                | Format                                                                                                                                                               | Example                                                                                                            |
-|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| [**help**](#viewing-help-help)                        | `help`                                                                                                                                                               | -                                                                                                                  |
-| [**addc**](#adding-a-contact-addc)                    | `addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                                                                                      | `addc r/client n/James Ho p/(+65) 22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| [**addi**](#adding-an-itinerary-addi)                 | `addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_INDEX]…​ [v/VENDOR_INDEX]…​`                                                           | `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/4`                                     |
-| [**list**](#listing-contacts-and-itineraries-list)    | `list /FLAG`                                                                                                                                                         | `list /contact`                                                                                                    |
-| [**edit**](#editing-a-contact-edit)                   | `edit /contact [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` </br>  `edit /itinerary INDEX [n/NAME] [dest/DESTINATION] [from/START_DATE] [to/END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
-| [**show**](#editing-a-contact-edit)                   | `show INDEX`                                                                                                                                                         | `show 2`                                                                                                           |
-| [**find**](#finding-contacts-by-name-find)            | `find KEYWORD [MORE_KEYWORDS]`  </br> `find [PREFIX/KEYWORD]`                                                                                                        | `find James Jake` </br> `find a/Apple Street`                                                                      |
-| [**delete**](#deleting-a-contact-or-itinerary-delete) | `delete /FLAG INDEX`                                                                                                                                                 | `delete /contact 3`                                                                                                |
-| [**clear**](#clearing-all-entries-clear)              | `clear`                                                                                                                                                              | -                                                                                                                  |
-| [**exit**](#exiting-tripscribe-exit)                  | `exit`                                                                                                                                                               | -                                                                                                                  |
+| Action                                                 | Format                                                                                                                                                               | Example                                                                                                            |
+|--------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| [**help**](#viewing-help--help)                        | `help`                                                                                                                                                               | -                                                                                                                  |
+| [**addc**](#adding-a-contact-addc)                     | `addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                                                                                      | `addc r/client n/James Ho p/(+65) 22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| [**addi**](#adding-an-itinerary-addi)                  | `addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_INDEX]…​ [v/VENDOR_INDEX]…​`                                                           | `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/4`                                     |
+| [**list**](#listing-contacts-and-itineraries--list)    | `list /FLAG`                                                                                                                                                         | `list /contact`                                                                                                    |
+| [**edit**](#editing-contacts-and-itineraries--edit)    | `edit /contact [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` </br>  `edit /itinerary INDEX [n/NAME] [dest/DESTINATION] [from/START_DATE] [to/END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
+| [**show**](#showing-contacts-by-itinerary-show)        | `show INDEX`                                                                                                                                                         | `show 2`                                                                                                           |
+| [**find**](#finding-contacts-by-keywords-find)         | `find KEYWORD [MORE_KEYWORDS]`  </br> `find [PREFIX/KEYWORD]`                                                                                                        | `find James Jake` </br> `find n/Jane a/Apple Street`                                                               |
+| [**delete**](#deleting-a-contact-or-itinerary--delete) | `delete /FLAG INDEX`                                                                                                                                                 | `delete /contact 3`                                                                                                |
+| [**clear**](#clearing-all-entries--clear)              | `clear`                                                                                                                                                              | -                                                                                                                  |
+| [**exit**](#exiting-tripscribe--exit)                  | `exit`                                                                                                                                                               | -                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -410,8 +416,8 @@ TripScribe stores your data automatically as a JSON file found in `[JAR file loc
 <box type="warning" seamless>
 
 **Caution:**
-If you save the file in an invalid format, TripScribe will discard all data and start with an empty data file at the next run. Hence, you are recommended to create a backup of the file before editing it.<br>
-Furthermore, certain edits can cause TripScribe to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you know what you are doing.
+If you save the file in an invalid format, TripScribe will discard all invalid data and start only with valid data at the next run. Hence, you are recommended to create a backup of the file before editing it.<br>
+Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you know what you are doing.
 
 </box>
 
