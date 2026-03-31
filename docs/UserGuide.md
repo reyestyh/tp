@@ -178,7 +178,7 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
 - `CLIENT_INDEX` and `VENDOR_INDEX` are the indexes of the contacts in the current TripScribe window.
 - An itinerary can have any number of clients and vendors (including zero).
 - If a contact is a client, you cannot add them as a vendor, and vice versa.
-  - Example: `c/2` will fail if the contact at index 2 is a vendor.  `v/3` will fail if the contact at index 3 is not a vendor
+  - Example: `c/2` will fail if the contact at index 2 is a vendor.  `v/3` will fail if the contact at index 3 is a client
 - If you want to add multiple clients or vendors into the itinerary, ensure that you indicate the correct prefix for each index.
   - Example: `c/2 c/3 c/4 v/1 v/5 v/6` will add the second, third and fourth contacts in the contact list and the first, fifth and sixth contacts in the vendor list (if they are of the correct role).  
 </box>
