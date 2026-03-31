@@ -117,16 +117,16 @@
         "listing-contacts-and-itineraries-list": "Listing Contacts and Itineraries : list",
         "editing-a-contact-edit": "Editing a Contact : edit",
         "showing-contacts-by-itinerary-show": "Showing contacts by itinerary: show",
-        "finding-contacts-by-name-find": "Finding Contacts by Name: find",
+        "finding-contacts-by-keywords-find": "Finding Contacts by Keywords: find",
         "deleting-a-contact-or-itinerary-delete": "Deleting a Contact or Itinerary : delete",
         "clearing-all-entries-clear": "Clearing All Entries : clear",
         "exiting-tripscribe-exit": "Exiting TripScribe : exit",
+        "command-summary": "Command Summary",
         "data-management": "Data Management",
         "saving-data": "Saving Data",
         "editing-the-data-file": "Editing the Data File",
         "faq": "FAQ",
-        "known-issues": "Known Issues",
-        "command-summary": "Command Summary"
+        "known-issues": "Known Issues"
       },
       "headingKeywords": {}
     },
