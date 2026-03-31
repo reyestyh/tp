@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -84,7 +85,7 @@ public class FindCommandTest {
         PersonMatchesFieldsPredicate predicate = new PersonMatchesFieldsPredicate(
                 Collections.emptyList(),
                 Collections.emptyList(),
-                Collections.singletonList("example.com"),
+                List.of("example.com", "xxx"),
                 Collections.emptyList(),
                 Collections.singletonList("friends"));
         FindCommand command = new FindCommand(predicate);

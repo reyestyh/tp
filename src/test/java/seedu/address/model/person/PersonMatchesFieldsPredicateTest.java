@@ -61,7 +61,7 @@ public class PersonMatchesFieldsPredicateTest {
                 Collections.singletonList("friend"));
 
         PersonMatchesFieldsPredicate multiKeywordEachField = new PersonMatchesFieldsPredicate(
-                List.of("Alice", "Bob", "Jason"),
+                List.of("Alice", "David", "Jason"),
                 List.of("12345", "6789"),
                 List.of("example.com", "ttt"),
                 List.of("Street", "Clementi"),
