@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final double PADDING = 30;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -52,11 +53,22 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        name.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
+        phone.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
+        address.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
+        email.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
+        tags.prefWrapLengthProperty().bind(cardPane.widthProperty().subtract(PADDING));
+
         Label role = new Label(person.getRole().toString());
         role.getStyleClass().add("role-label");
         tags.getChildren().add(role);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.setWrapText(true);
+                    tags.getChildren().add(tagLabel);
+                });
     }
 }

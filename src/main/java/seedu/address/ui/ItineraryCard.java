@@ -12,6 +12,7 @@ import seedu.address.model.itinerary.Itinerary;
 public class ItineraryCard extends UiPart<Region> {
 
     private static final String FXML = "ItineraryListCard.fxml";
+    private static final double PADDING = 30;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -44,5 +45,8 @@ public class ItineraryCard extends UiPart<Region> {
         name.setText(itinerary.getName().fullName);
         destination.setText(itinerary.getDestination().toString());
         dateRange.setText(itinerary.getDateRange().toString());
+
+        name.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
+        destination.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
     }
 }
