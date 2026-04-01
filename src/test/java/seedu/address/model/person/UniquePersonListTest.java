@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.itinerary.UniqueItineraryList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -171,5 +172,31 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void equals() {
+        uniquePersonList.add(ALICE);
+
+        // same values -> returns true
+        UniquePersonList uniquePersonListCopy = new UniquePersonList();
+        uniquePersonListCopy.add(ALICE);
+        assertTrue(uniquePersonList.equals(uniquePersonListCopy));
+
+        // same object -> returns true
+        assertTrue(uniquePersonList.equals(uniquePersonList));
+
+        // null -> returns false
+        assertFalse(uniquePersonList.equals(null));
+
+        // empty UniquePersonList and empty UniqueItineraryList -> returns false
+        assertFalse(new UniquePersonList().equals(new UniqueItineraryList()));
+
+        assertFalse(uniquePersonList.equals(new UniqueItineraryList()));
+
+        // different values -> returns false
+        UniquePersonList uniquePersonListDifferent = new UniquePersonList();
+        uniquePersonListDifferent.add(BOB);
+        assertFalse(uniquePersonList.equals(uniquePersonListDifferent));
     }
 }
