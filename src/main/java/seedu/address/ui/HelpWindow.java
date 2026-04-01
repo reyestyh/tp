@@ -3,15 +3,12 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -67,13 +64,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label helpMessage;
+    private TextArea helpMessage;
 
     @FXML
     private AnchorPane mainLayout;
-
-    @FXML
-    private ScrollPane helpScrollPane;
 
     @FXML
     private HBox bottomBar;
@@ -89,24 +83,7 @@ public class HelpWindow extends UiPart<Stage> {
         root.setWidth(750.0);
         root.setHeight(500.0);
 
-        helpScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        helpScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        helpScrollPane.setFitToWidth(true);
-        helpScrollPane.setVvalue(0.0);
-        AnchorPane.setTopAnchor(helpScrollPane, 0.0);
-        AnchorPane.setLeftAnchor(helpScrollPane, 0.0);
-        AnchorPane.setRightAnchor(helpScrollPane, 0.0);
-        AnchorPane.setBottomAnchor(helpScrollPane, 40.0);
-
         helpMessage.setText(HELP_MESSAGE);
-        helpMessage.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        helpMessage.setPadding(new Insets(10, 15, 10, 15));
-
-        bottomBar.setPrefHeight(40.0);
-        bottomBar.setPadding(new Insets(5, 10, 5, 10));
-        AnchorPane.setBottomAnchor(bottomBar, 0.0);
-        AnchorPane.setLeftAnchor(bottomBar, 0.0);
-        AnchorPane.setRightAnchor(bottomBar, 0.0);
     }
 
     /**

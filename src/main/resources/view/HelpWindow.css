@@ -4,8 +4,19 @@
 
 .help-text {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-text-fill: #5A7A9F;
+}
+
+.help-text .content {
+    -fx-background-color: #E8F0FA;
+}
+
+.help-text:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .help-footer {
@@ -31,13 +42,4 @@
 #copyButton:pressed {
     -fx-background-color: #0C1B3A;
     -fx-text-fill: white;
-}
-
-#helpScrollPane {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-#helpScrollPane .viewport {
-    -fx-background-color: transparent;
 }

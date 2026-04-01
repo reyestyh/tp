@@ -4,7 +4,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -27,13 +27,8 @@
                       AnchorPane.rightAnchor="10" spacing="10">
                     <VBox styleClass="panel-container" VBox.vgrow="ALWAYS">
                         <Label text="Command Summary" styleClass="panel-header-label"/>
-                        <ScrollPane fx:id="helpScrollPane" fitToWidth="true">
-                            <content>
-                                <VBox spacing="12" styleClass="help-content">
-                                    <Label fx:id="helpMessage" wrapText="true" styleClass="help-text"/>
-                                </VBox>
-                            </content>
-                        </ScrollPane>
+                        <TextArea fx:id="helpMessage" editable="false" wrapText="true"
+                                  styleClass="help-text" VBox.vgrow="ALWAYS"/>
 
                         <HBox alignment="CENTER_RIGHT" fx:id="bottomBar" styleClass="help-footer">
                             <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl"
