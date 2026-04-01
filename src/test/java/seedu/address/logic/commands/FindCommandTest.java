@@ -85,7 +85,7 @@ public class FindCommandTest {
         PersonMatchesFieldsPredicate predicate = new PersonMatchesFieldsPredicate(
                 Collections.emptyList(),
                 Collections.emptyList(),
-                List.of("example.com"),
+                List.of("example.com", "xxx"),
                 Collections.emptyList(),
                 Collections.singletonList("friends"));
         FindCommand command = new FindCommand(predicate);
