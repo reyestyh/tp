@@ -81,6 +81,7 @@ public class ItineraryTest {
         assertFalse(FRANCE_TRIP.isSameItinerary(editedtripToFrance));
     }
 
+    @Test
     public void equals() {
         // same values -> returns true
         Itinerary tripToFranceCopy = new ItineraryBuilder(FRANCE_TRIP).build();
