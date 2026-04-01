@@ -44,7 +44,7 @@
 
 .menu-bar {
     -fx-background-color: navbar-bg;
-    -fx-padding: 0 12 4 12;
+    -fx-padding: 12 12 4 2;
 }
 
 .menu-bar .label {
@@ -68,6 +68,7 @@
 
 .menu .left-container {
     -fx-background-color: panel-bg;
+    -fx-padding: 15px;
 }
 
 .context-menu {
@@ -138,6 +139,7 @@
 #tags {
     -fx-hgap: 4;
     -fx-vgap: 3;
+    -fx-padding: 0 0 4 0;
 }
 
 #tags .label {

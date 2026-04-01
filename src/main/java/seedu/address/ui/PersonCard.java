@@ -39,8 +39,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label uuid;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -54,7 +52,6 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        uuid.setText(person.getId().toString());
         Label role = new Label(person.getRole().toString());
         role.getStyleClass().add("role-label");
         tags.getChildren().add(role);

@@ -10,10 +10,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="TripScribe" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="TripScribe"
+         minWidth="450" minHeight="600"
+         width="720" height="660"
+         onCloseRequest="#handleExit">
     <icons>
         <Image url="@/images/address_book_32.png"/>
     </icons>
@@ -26,7 +30,7 @@
 
             <VBox styleClass="app-root">
 
-                <VBox styleClass="top-bar">
+                <HBox styleClass="top-bar">
                     <Label text="TripScribe" styleClass="logo-label"/>
                     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                         <Menu mnemonicParsing="false" text="File">
@@ -36,7 +40,7 @@
                             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
                         </Menu>
                     </MenuBar>
-                </VBox>
+                </HBox>
 
                 <VBox styleClass="command-section" VBox.vgrow="NEVER">
                     <StackPane fx:id="commandBoxPlaceholder">
@@ -48,10 +52,10 @@
 
                 <VBox styleClass="result-section" VBox.vgrow="NEVER">
                     <StackPane fx:id="resultDisplayPlaceholder"
-                               minHeight="70" prefHeight="70" maxHeight="70"/>
+                               minHeight="70" prefHeight="70"/>
                 </VBox>
 
-                <VBox VBox.vgrow="ALWAYS" styleClass="panels-area">
+                <VBox VBox.vgrow="ALWAYS" styleClass="panels-area" minHeight="300">
 
                     <VBox fx:id="personList" styleClass="panel-container" VBox.vgrow="ALWAYS" minHeight="0">
                         <Label text="Contacts" styleClass="panel-header-label"/>
