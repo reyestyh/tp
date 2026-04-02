@@ -233,10 +233,10 @@ list /FLAG
 
 **Examples:**
 * `list /contact`
-* `list /client`
 * `list /itinerary`
 * `list /all`
-* <div style="page-break-after: always;"></div>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing Contacts and Itineraries : `edit`
 
