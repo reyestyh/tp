@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all entries of the specified flag.\n"
-            + "Parameters: FLAG (must be one of: /contact, /itinerary, /client, /vendor)\n"
+            + "Parameters: FLAG (must be one of: /contact, /itinerary, /client, /vendor, /all)\n"
             + "Example: " + COMMAND_WORD + " /contact";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all contacts and itineraries";
