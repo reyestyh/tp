@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Destination {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Destinations should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Destinations should not be empty";
 
     public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}].*";
 

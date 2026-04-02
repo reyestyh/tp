@@ -51,6 +51,15 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
+    public void toModelType_invalidItineraryFile_returnsEmptyAddressBook() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_ITINERARY_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook expectedAddressBook = new AddressBook();
+        assertEquals(expectedAddressBook, addressBookFromFile);
+    }
+
+    @Test
     public void toModelType_duplicateItineraries_containsOnlyOneCopy() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ITINERARY_FILE,
                 JsonSerializableAddressBook.class).get();

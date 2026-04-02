@@ -12,7 +12,7 @@ import java.util.Locale;
 public class ItineraryName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should not be empty";
 
     public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}].*";
 
