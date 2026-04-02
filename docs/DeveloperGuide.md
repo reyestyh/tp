@@ -536,7 +536,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Higher than average implementation effort from our team due to larger scope.
 2. Enhancement of existing features (i.e. `add` becomes `addc` & `addi`), and addition of new features to improve product (i.e. `show`).
-3. 
+
 ### **Appendix: Planned Enhancements**
 
 Team size: 4
