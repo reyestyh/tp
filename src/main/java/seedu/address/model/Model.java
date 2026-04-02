@@ -26,6 +26,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Itinerary> PREDICATE_SHOW_ALL_ITINERARIES = itinerary -> true;
 
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Itinerary> PREDICATE_SHOW_NO_ITINERARIES = itinerary -> false;
+
+    /** {@code Predicate} that always evaluate to false */
+    Predicate<Person> PREDICATE_SHOW_NO_CONTACTS = person -> false;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -135,4 +141,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
     */
     void updateFilteredItineraryList(Predicate<Itinerary> predicate);
+
 }

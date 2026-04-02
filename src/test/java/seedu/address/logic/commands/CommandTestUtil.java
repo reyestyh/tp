@@ -220,4 +220,24 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredItineraryList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetPersonIndex} and
+     * itinerary at the given {@code targetItineraryIndex} in the {@code model}'s address book.
+     */
+    public static void showPersonAndItineraryAtIndexes(Model model, Index targetPersonIndex,
+                                                       Index targetItineraryIndex) {
+        assertTrue(targetPersonIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetItineraryIndex.getZeroBased() < model.getFilteredItineraryList().size());
+
+        Person person = model.getFilteredPersonList().get(targetPersonIndex.getZeroBased());
+        Itinerary itinerary = model.getFilteredItineraryList().get(targetItineraryIndex.getZeroBased());
+        final String[] splitPersonName = person.getName().fullName.split("\\s+");
+        final String[] splitItineraryName = itinerary.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList(splitPersonName[0])));
+        model.updateFilteredItineraryList(i -> i.getName().equals(itinerary.getName()));
+
+
+        assertEquals(1, model.getFilteredItineraryList().size());
+    }
+
 }

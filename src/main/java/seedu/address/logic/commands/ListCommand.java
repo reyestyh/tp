@@ -5,6 +5,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITINERARIES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_CONTACTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_ITINERARIES;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -50,15 +52,19 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS_ALL, PanelType.BOTH);
         case CONTACT:
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CONTACTS);
+            model.updateFilteredItineraryList(PREDICATE_SHOW_NO_ITINERARIES);
             return new CommandResult(MESSAGE_SUCCESS_CONTACTS, PanelType.CONTACT);
         case CLIENT:
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CLIENTS);
+            model.updateFilteredItineraryList(PREDICATE_SHOW_NO_ITINERARIES);
             return new CommandResult(MESSAGE_SUCCESS_CLIENTS, PanelType.CONTACT);
         case VENDOR:
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_VENDORS);
+            model.updateFilteredItineraryList(PREDICATE_SHOW_NO_ITINERARIES);
             return new CommandResult(MESSAGE_SUCCESS_VENDORS, PanelType.CONTACT);
         case ITINERARY:
             model.updateFilteredItineraryList(PREDICATE_SHOW_ALL_ITINERARIES);
+            model.updateFilteredPersonList(PREDICATE_SHOW_NO_CONTACTS);
             return new CommandResult(MESSAGE_SUCCESS_ITINERARIES, PanelType.ITINERARY);
         default:
             throw new CommandException("Unknown flag: " + flag);

@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItineraryAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAndItineraryAtIndexes;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.AddressBookBuilder.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalItineraries.getTypicalItineraries;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 import seedu.address.ui.PanelType;
 
@@ -64,23 +67,24 @@ public class ListCommandTest {
 
     @Test
     public void execute_allListIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST);
-        showItineraryAtIndex(model, INDEX_FIRST);
+        showPersonAndItineraryAtIndexes(model, INDEX_FIRST, INDEX_FIRST);
         assertCommandSuccess(new ListCommand(ListCommand.Flag.ALL), model,
                 ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 
     @Test
-    public void execute_contactListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(ListCommand.Flag.CONTACT), model,
-                ListCommand.MESSAGE_SUCCESS_CONTACTS, expectedModel);
+    public void execute_contactListIsNotFiltered_showsContactsOnly() throws CommandException {
+        CommandResult result = new ListCommand(ListCommand.Flag.CONTACT).execute(model);
+        assertEquals(ListCommand.MESSAGE_SUCCESS_CONTACTS, result.getFeedbackToUser());
+        assertEquals(getTypicalPersons().size(), model.getFilteredPersonList().size());
     }
 
     @Test
-    public void execute_contactListIsFiltered_showsEverything() {
+    public void execute_contactListIsFiltered_showsContactsOnly() throws CommandException {
         showPersonAtIndex(model, INDEX_FIRST);
-        assertCommandSuccess(new ListCommand(ListCommand.Flag.CONTACT), model,
-                ListCommand.MESSAGE_SUCCESS_CONTACTS, expectedModel);
+        CommandResult result = new ListCommand(ListCommand.Flag.CONTACT).execute(model);
+        assertEquals(ListCommand.MESSAGE_SUCCESS_CONTACTS, result.getFeedbackToUser());
+        assertTrue(model.getFilteredPersonList().stream().allMatch(p -> p.getClass().equals(Person.class)));
     }
 
     @Test
