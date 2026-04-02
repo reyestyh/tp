@@ -525,3 +525,18 @@ testers are expected to do more *exploratory* testing.
       Expected: Itinerary should not be in TripScribe when app is launched. <br>
       "Illegal value found in field of an itinerary entry, skipping." is logged into terminal.
 
+## **Appendix: Effort**
+
+### Difficulty and Challenges
+
+1. AB3 handles only 1 type of entity. TripScribe handles 2, Person and Itinerary, making it more complex.
+2. Required greater understanding of how AB3 stores contacts and conversion to JSON in order to apply it to our Itinerary implementation.
+
+### Effort and Achievements 
+
+1. Higher than average implementation effort from our team due to larger scope.
+2. Enhancement of existing features (i.e. `add` becomes `addc` & `addi`), and addition of new features to improve product (i.e. `show`).
+3. 
+### **Appendix: Planned Enhancements**
+
+Team size: 4
