@@ -198,7 +198,7 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
 
 **Examples:**
 * `addi n/Island Time: Bali dest/Bali from/2026-12-01 to/2026-12-05`
-* `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/4`
+* `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/3`
 * `addi n/3D2N Trip of China dest/China from/2026-05-02 to/2026-05-07 c/2 c/3 c/5 v/1 v/4`
 
 | ![add itinerary command typed in TripScribe](images/AddItineraryBefore.png)<br>Input | ![Add itinerary executed in TripScribe](images/AddItineraryAfter.png)<br>Expected Output |
