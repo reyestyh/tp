@@ -64,12 +64,12 @@ class JsonSerializableAddressBook {
             try {
                 person = jsonAdaptedPerson.toModelType();
             } catch (IllegalValueException e) {
-                logger.info("Illegal value found in field of a contact entry, skipping.");
+                logger.warning("Illegal value found in field of a contact entry, skipping.");
                 continue;
             }
             assert person != null;
             if (addressBook.hasPerson(person)) {
-                logger.info(MESSAGE_DUPLICATE_PERSON + ". Skipping current person entry.");
+                logger.warning(MESSAGE_DUPLICATE_PERSON + ". Skipping current person entry.");
                 continue;
             }
             addressBook.addPerson(person);
@@ -80,12 +80,12 @@ class JsonSerializableAddressBook {
             try {
                 itinerary = jsonAdaptedItinerary.toModelType();
             } catch (IllegalValueException e) {
-                logger.info("Illegal value found in field of an itinerary entry, skipping.");
+                logger.warning("Illegal value found in field of an itinerary entry, skipping.");
                 continue;
             }
             assert itinerary != null;
             if (addressBook.hasItinerary(itinerary)) {
-                logger.info(MESSAGE_DUPLICATE_ITINERARY + ". Skipping current itinerary entry.");
+                logger.warning(MESSAGE_DUPLICATE_ITINERARY + ". Skipping current itinerary entry.");
                 continue;
             }
 
