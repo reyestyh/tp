@@ -14,9 +14,10 @@ TripScribe is a desktop app built for **operations executives at tour agencies**
 
 <!-- * Table of Contents -->
 <page-nav-print />
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 1. [Quick Start](#quick-start)
