@@ -219,7 +219,6 @@ The sequence diagram below shows the interactions within the logic component.
     * Cons: Complex implementation required to get respective `Person`s from `Model` for each itinerary. Every `Model` update requires updating each `ItineraryListPanel` for each itinerary.
 
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
