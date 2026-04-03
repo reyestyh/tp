@@ -157,103 +157,128 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Find feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The find command allows users to search for contacts using either a **general search** format or a **multi-field search** format.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The general search format matches keywords against all searchable fields of a contact, while the multi-field search format matches keywords only against the user-specified fields.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The `find` command is facilitated by `FindCommandParser`, which parses the user input and constructs one of the following predicates:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+- `PersonContainsKeywordsPredicate`— Performs a general search across all searchable fields.
+- `PersonMatchesFieldsPredicate` — Performs a multi-field search on specific fields.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+These predicates are then passed into `FindCommand`, which updates the filtered contact list in the model.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+The searchable fields supported by the `find` command are:
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+- name
+- phone
+- email
+- address
+- tags
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+Given below is an example usage scenario and how the `find` command behaves at each step.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 1. The user executes `find alex david`.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 2. `FindCommandParser` checks that the input does not contain any supported field prefixes (`n/`, `p/`, `e/`, `a/`, `t/`).
+
+Step 3. Since no prefixes are found, the parser treats the input as a general search. It splits the input into individual keywords and constructs a `PersonContainsKeywordsPredicate`.
+
+Step 4. `FindCommand` is created with this predicate and executed.
+
+Step 5. During execution, `Model#updateFilteredPersonList(...)` is called with the predicate. A contact is included in the filtered list if **any** keyword appears in **any** searchable field.
+
+For example, `find alex david` will return contacts whose name, phone, email, address, or tags contain `alex` or `david`.
+
+Consider another usage scenario.
+
+Step 1. The user executes `find n/alex yu p/996`.
+
+Step 2. `FindCommandParser` detects the presence of supported prefixes and treats the input as a multi-field search.
+
+Step 3. The parser extracts the keywords associated with each prefix:
+- `n/` → `alex, yu`
+- `p/` → `996`
+
+Step 4. A `PersonMatchesFieldsPredicate` is created using these field-specific keyword lists.
+
+Step 5. `FindCommand` is created with this predicate and executed.
+
+Step 6. During execution, `Model#updateFilteredPersonList(...)` is called with the predicate. A contact is included in the filtered list only if it satisfies all specified fields:
+- within the same field, keywords are matched using `OR`
+- across different fields, fields are matched using `AND`
+
+For example, `find n/alex yu p/996` will return contacts whose names contain `alex` or `yu`, and whose phone numbers contain `996`.
+
+The following sequence diagram shows how an find operation goes through the `Logic` component:
+
+<puml src="diagrams/FindSequenceDiagram-Logic.puml" alt="FindSequenceDiagram-Logic" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** The lifeline for `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Similarly, how a find operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
+<puml src="diagrams/FindSequenceDiagram-Model.puml" alt="FindSequenceDiagram-Model" />
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Note**: The two formats cannot be mixed.
+For example, `find alex p/996` is rejected as invalid input format.
+
+</box> <box type="info" seamless>
+
+**Note**: Matching is case-insensitive and based on substring matching.
+For example, alex will match Alex, and lex will also match Alex.
 
 </box>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+#### Design considerations
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+**Aspect: How `find` supports two search formats**
 
-<box type="info" seamless>
+* **Alternative 1 (current choice):** Support both a general search format and a multi-field search format.
+    * Pros: More flexible for users. General search is fast for broad lookup, while multi-field search gives users more control.
+    * Cons: Parser logic is more complex, since it must distinguish between the two formats and reject mixed usage.
+  
+* **Alternative 2:** Support only general search.
+    * Pros: Simpler parser and predicate logic.
+    * Cons: Users cannot restrict the search to specific fields, may return too much matching contacts.
+  
+* **Alternative 3:** Support only multi-field search.
+    * Pros: Clearer and more structured command format.
+    * Cons: Less convenient for users who want to perform a quick broad search.
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Aspect: How matching is performed**
 
-</box>
+* **Alternative 1 (current choice):** Use substring matching with case-insensitive comparison.
+    * Pros: More user-friendly, since users do not need to type exact full-field values.
+    * Cons: May return broader results than expected.
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+* **Alternative 2:** Match only full words or exact field values.
+    * Pros: More precise results.
+    * Less flexible and less convenient for users.
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+**Aspect: How multi-field search combines conditions**
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+* **Alternative 1 (current choice):** Use `OR` within the same field and `AND` across different fields.
+    * Pros: Natural balance between flexibility and precision. Users can provide multiple possible matches for one field while still constraining other fields.
+    * Cons: Slightly harder to explain in the User Guide and Developer Guide.
 
-<box type="info" seamless>
+* **Alternative 2:** Use `OR` for all fields and all keywords.
+    * Pros: Simpler mental model.
+    * Cons: Results may be too broad for structured searches.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 3:** Use `AND` for all fields and all keywords.
+    * Pros: Very strict filtering.
+    * Cons: Often too restrictive for practical use.
 
 --------------------------------------------------------------------------------------------------------------------
 
