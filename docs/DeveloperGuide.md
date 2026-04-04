@@ -254,6 +254,58 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Adding itineraries
+#### Implementation
+The `addi` command allows users to add itineraries to the address book. An itinerary can have any number of clients and vendors which are `Person` objects. 
+This section aims to detail how the association between `Person` and `Itinerary` objects is handled in TripScribe.
+
+Every `Itinerary` object stores two lists of `Id`. One for `Id`s of clients and another for `Id`s of vendors involved in the itinerary. The following object diagram provides an illustration:
+<puml src="diagrams/AddiObjectDiagram.puml" />
+<br><br>
+
+Recall that `AddressBook` in `Model` component stores a `UniquePersonList` and a `UniqueItineraryList`. <br>
+When adding an `Itinerary` object into the `AddressBook` object, `AddressBook` will be responsible for ensuring the consistency of address book data.
+That is, `AddressBook` will check if the `Id`s referenced by the itinerary belong to `Person` objects that already exist in the `UniquePersonList`. If not, the `AddressBook` will reject the itinerary and throw a `PersonNotFoundException`. In other words,
+`AddressBook` will ensure that an itinerary can only be added if all the `Person` objects it references already exist in the address book. The following sequence diagram illustrates the interactions when adding an itinerary:
+
+<div class="row">
+  <div class="col-md-6">
+
+<h6 align="center">Success</h4>
+
+<puml src="diagrams/AddiSequenceDiagramSuccess.puml" />
+
+  </div>
+  <div class="col-md-6">
+
+<h6 align="center">Failure</h4>
+
+<puml src="diagrams/AddiSequenceDiagramFail.puml" />
+
+  </div>
+</div>
+
+Since every `Person` has a unique `Id`, we have an unambiguous way to associate an itinerary with its clients and vendors without needing direct references to the objects. This decoupled design significantly simplifies the process of saving and reading TripScribe data. 
+
+
+When saving data, the `Storage` component can simply serialize the fields of the `Person` and `Itinerary` objects exactly as they are.
+Their associations are already captured through the stored `Id` strings.
+
+
+When reading the JSON file to construct the corresponding objects, we have the following two-step process:
+1. Read and construct all `Person` objects, adding them to the `AddressBook`.
+2. Read and construct all `Itinerary` objects, adding them to the `AddressBook`. When adding an `Itinerary`, the `AddressBook` will already contain all the necessary `Person` objects, allowing it to enforce data consistency as described above.
+
+#### Design considerations
+**Aspect: Managing the association between contacts and itineraries**
+* **Alternative 1 (current choice):** `Itinerary` stores the `Id`s of `Person`s.
+    * Pros: Reading and saving data to JSON file is simple to implement with minimal data duplication.
+    * Pros: Reduces coupling between `Itinerary` and `Person` classes.
+    * Cons: Introduce slight overheads. When retrieving the clients and vendors of an itinerary, we need to resolve the `Id`s back to the `Person` objects.
+* **Alternative 2:** `Itinerary` stores direct references to `Person`s.
+    * Pros: The `addi` command would be simpler to implement.
+    * Cons: Reading and saving data becomes more complex.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
