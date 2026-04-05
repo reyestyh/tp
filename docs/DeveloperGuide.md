@@ -162,7 +162,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-Itineraries are a class which have the following mandatory fields `ItineraryName`, `Destination`, `DateRange`. They also hold 2 `Id` lists, `clientIds` and `vendorIds`.
+`Itinerary` is a class which has the following mandatory fields `ItineraryName`, `Destination`, `DateRange`. They also hold 2 `Id` lists, `clientIds` and `vendorIds`.
 
 `ItineraryName` and `Destination` must be non-empty `String`s.
 
