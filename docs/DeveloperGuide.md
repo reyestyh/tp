@@ -481,20 +481,20 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with incorrect fields in data file
    1. Prerequisites: Data file is in data folder
-   2. Test case: One field in a `Person` is in the wrong format. <br>
-       Example: <insert example>
+   2. Test case 1: One field in a `Person` is in the wrong format. <br>
+      Example: `"role" : ""`
       Expected: The person will not appear in the contacts panel when TripScribe is launched. <br>The data file is updated such that itineraries previously associated with the contact will no longer store the contact's `Id` under its client or vendor lists<br>
       "Illegal value found in field of a contact entry, skipping." is logged into terminal.
-   3. Test case: One field in an `Itinerary` is in the wrong format. <br>
-      Example: <insert example>
+   3. Test case 2: One field in an `Itinerary` is in the wrong format. <br>
+      Example: `"startDate : "09-12-2026"`
       Expected: The itinerary  will not appear in the itinerary panel when TripScribe is launched. <br>
       "Illegal value found in field of an itinerary entry, skipping." is logged into terminal.
-  4. Test case: Multiple fields in a `Person` is in the wrong format. <br> 
-      Example: <insert example>
-      Expected: Similar to step 2.
-  5. Test case: Multiple fields in an `Itinerary` is in the wrong format. <br>
-      Example: <insert example>
-      Expected: Similar to step 3.
+  4. Test case 3: Multiple fields in a `Person` is in the wrong format. <br> 
+      Example: `"role" : ""` ,`"phone" : "98765432"`
+      Expected: Similar to test case 1.
+  5. Test case 4: Multiple fields in an `Itinerary` is in the wrong format. <br>
+      Example: `""startDate" : "09-12-2026"` , `"endDate" : "15 December 2026"`
+      Expected: Similar to test case 2.
 
 ## **Appendix: Effort**
 
