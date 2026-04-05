@@ -443,22 +443,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
    1. Prerequisites: List all persons using the `list /all` command. Ensure there are multiple persons in the list. 
-   2. Test case: `delete \contact 1`<br>
+   2. Test case: `delete /contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
    
    Other incorrect delete commands to try:
     1. Test case: `delete` (missing flag and index)<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-    2. Test case: `delete \contact` (missing index)<br>
+    2. Test case: `delete /contact` (missing index)<br>
        Expected: Similar to previous.
-    3. Test case: `delete \contact 0` (invalid index)<br>
+    3. Test case: `delete /contact 0` (invalid index)<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-    4. Test case: `delete \contact x` where x is larger than the list size (invalid index)<br>
+    4. Test case: `delete /contact x` where x is larger than the list size (invalid index)<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 2. Deleting a person associated with an itinerary
    1. Prerequisites: Ensure a person is associated with an itinerary (e.g. person 1 linked to itinerary 2). Ensure the person is displayed in the person list (e.g. Using the `list /all` command).
-   2. Test case: `delete \contact x` (where x is the person's index in the displayed list)<br>
+   2. Test case: `delete /contact x` (where x is the person's index in the displayed list)<br>
       Expected: Contact is deleted.
    
    Follow-up: 
@@ -468,12 +468,12 @@ testers are expected to do more *exploratory* testing.
 
 3. Deleting a person when only some persons are being shown
     1. Prerequisites: Use a filtering command (e.g. `list /vendor`, `list /client`) to display a subset of the full contact list. Ensure there is at least one person in the list.
-     2. Test case: `delete \contact 1`<br>
+     2. Test case: `delete /contact 1`<br>
        Expected: First contact is deleted from the filtered list, not the full list.
 
 4. Deleting a person when no persons are being shown
     1. Prerequisites: Hide all persons and list all itineraries using the `list /itinerary` command.
-    2. Test case: `delete \contact 1`<br>
+    2. Test case: `delete /contact 1`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Deleting an itinerary
