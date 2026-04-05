@@ -46,7 +46,7 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_ITINERARY_END + "END_DATE]\n"
             + "Examples:\n"
             + "  " + COMMAND_WORD + " " + CONTACT_FLAG + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_PHONE + "(+65) 91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
             + "  " + COMMAND_WORD + " " + ITINERARY_FLAG + " 2 "
             + PREFIX_ITINERARY_DESTINATION + "Japan "

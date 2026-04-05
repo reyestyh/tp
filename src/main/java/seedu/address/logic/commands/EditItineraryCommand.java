@@ -26,7 +26,7 @@ public class EditItineraryCommand extends EditCommand {
     public static final String MESSAGE_EDIT_ITINERARY_SUCCESS = "Edited Itinerary: %1$s";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "Duplicate itinerary: TripScribe considers "
             + "itineraries with the same name (case-insensitive) as duplicates.";
-    public static final String MESSAGE_INVALID_DATE = "Start date cannot be after the end date.";
+    public static final String MESSAGE_INVALID_DATE = "Invalid dates: Start date cannot be after the end date.";
 
     private final EditItineraryDescriptor editItineraryDescriptor;
 
