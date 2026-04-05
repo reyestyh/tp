@@ -456,6 +456,21 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install TripScribe on the other computer and replace the empty data file it creates with your file that contains the data of your previous TripScribe application folder.
 
+
+**Q**: How do I resize the application window?<br>
+**A**: You can resize the window in the same manner as other desktop applications, and the modified window size will be updated in the `preferences.json` file. The next time you start TripScribe, it will start with the same window size you had when you last exited TripScribe.
+
+
+**Q**: Can itineraries have the same date as the start date and end date?<br>
+**A**: Yes. You can add 1-day itineraries to TripScribe.
+
+
+**Q**: Can TripScribe handle multiple data files?<br>
+**A**: No, TriScribe can only use 1 data file while the application is running. One way you can use multiple data file would be to name the data files differently, and update the in the `addressBookFilePath` field in the `preferences.json` file before each time you start up the application.
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
