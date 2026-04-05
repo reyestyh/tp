@@ -1,0 +1,32 @@
+@startuml
+object "<u>:Itinerary</u>" as itinerary
+
+object "<u>:Id</u>" as id1 {
+    value = "04ea07b9-b47f-\n40fa-9c99-\nebd4ee3ba513"
+}
+object "<u>:Id</u>" as id2 {
+    value = "a752ce04-087b-\n4f31-a1f1-\nd114e3c4b99e"
+}
+object "<u>:Id</u>" as id3 {
+    value = "e61e763e-5a48-\n4bd7-a068-\n7f44b99d08ca"
+}
+
+object "<u>client1:Person</u>" as p1 {
+    name = "Alice"
+}
+object "<u>client2:Person</u>" as p2 {
+    name = "Bob"
+}
+object "<u>vendor1:Person</u>" as p3 {
+    name = "Charlie"
+}
+
+itinerary -down-> id2 : < id of a client of
+itinerary -down-> id1 : < id of a client of
+itinerary -down-> id3 : < id of a vendor of
+
+p2 -up-> id2
+p1 -up-> id1
+p3 -up-> id3
+
+@enduml

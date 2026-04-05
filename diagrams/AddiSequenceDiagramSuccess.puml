@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":Itinerary" as Itinerary MODEL_COLOR
+participant ":UniqueItineraryList" as UniqueItineraryList MODEL_COLOR
+
+[-> AddressBook : addItinerary(i)
+activate AddressBook
+
+AddressBook -> AddressBook : hasPersonsWithIds(i)
+activate AddressBook
+
+AddressBook -> Itinerary : getClientIds()
+activate Itinerary
+Itinerary --> AddressBook : clientIds
+deactivate Itinerary
+
+AddressBook -> Itinerary : getVendorIds()
+activate Itinerary
+Itinerary --> AddressBook : vendorIds
+deactivate Itinerary
+
+AddressBook --> AddressBook : true
+deactivate AddressBook
+
+AddressBook -> UniqueItineraryList : add(i)
+activate UniqueItineraryList
+UniqueItineraryList --> AddressBook
+deactivate UniqueItineraryList
+
+[<-- AddressBook
+deactivate AddressBook
+
+@enduml
