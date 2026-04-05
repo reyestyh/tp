@@ -149,12 +149,12 @@ public class AddiCommandParserTest {
         // invalid start date
         assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
                         + INVALID_ITINERARY_START_DATE_DESC + ITINERARY_END_DATE_DESC_BALI,
-                DateRange.MESSAGE_CONSTRAINTS);
+                DateRange.MESSAGE_INVALID_DATE_FORMAT);
 
         // invalid end date
         assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
                         + ITINERARY_START_DATE_DESC_BALI + INVALID_ITINERARY_END_DATE_DESC,
-                DateRange.MESSAGE_CONSTRAINTS);
+                DateRange.MESSAGE_INVALID_DATE);
 
         // invalid index
         assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI

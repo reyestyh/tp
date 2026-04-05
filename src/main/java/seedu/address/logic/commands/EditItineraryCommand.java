@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITINERARIES;
+import static seedu.address.model.itinerary.DateRange.MESSAGE_INVALID_DATE_RANGE;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,7 +27,6 @@ public class EditItineraryCommand extends EditCommand {
     public static final String MESSAGE_EDIT_ITINERARY_SUCCESS = "Edited Itinerary: %1$s";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "Duplicate itinerary: TripScribe considers "
             + "itineraries with the same name (case-insensitive) as duplicates.";
-    public static final String MESSAGE_INVALID_DATE = "Invalid dates: Start date cannot be after the end date.";
 
     private final EditItineraryDescriptor editItineraryDescriptor;
 
@@ -81,7 +81,7 @@ public class EditItineraryCommand extends EditCommand {
                 .orElse(itineraryToEdit.getDateRange().getEndDate());
 
         if (updatedStartDate.isAfter(updatedEndDate)) {
-            throw new CommandException(MESSAGE_INVALID_DATE);
+            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
         }
 
         DateRange updatedDateRange = new DateRange(updatedStartDate.toString(), updatedEndDate.toString());

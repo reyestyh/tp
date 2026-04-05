@@ -13,9 +13,14 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class DateRange {
-
-    public static final String MESSAGE_CONSTRAINTS = "Invalid date range: Please use the format YYYY-MM-DD,  "
-            + "and ensure the end date is not before the start date.";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid date: Please use the YYYY-MM-DD format "
+            + "and ensure the start date is before the end date.";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format: Please use the YYYY-MM-DD format. \n"
+            + "Example: 2026-10-12";
+    public static final String MESSAGE_INVALID_DATE = "Invalid date: The date does not exist. \n"
+            + "Example: 2026-02-30 or 2026-13-01 are invalid";
+    public static final String MESSAGE_INVALID_DATE_RANGE =
+            "Invalid date range: Start date must be before the end date.";
 
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE;
 
@@ -30,9 +35,42 @@ public class DateRange {
      */
     public DateRange(String startDate, String endDate) {
         requireNonNull(startDate, endDate);
-        checkArgument(isValidDateRange(startDate, endDate), MESSAGE_CONSTRAINTS);
+
+        checkArgument(isValidDateFormat(startDate), MESSAGE_INVALID_DATE_FORMAT);
+        checkArgument(isValidDateFormat(endDate), MESSAGE_INVALID_DATE_FORMAT);
+
+        LocalDate start;
+        LocalDate end;
+
+        try {
+            start = LocalDate.parse(startDate, DATE_FORMAT);
+            end = LocalDate.parse(endDate, DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_DATE);
+        }
+
+        checkArgument((end.isAfter(start) || end.isEqual(start)), MESSAGE_INVALID_DATE_RANGE);
+
         this.startDate = LocalDate.parse(startDate, DATE_FORMAT);
         this.endDate = LocalDate.parse(endDate, DATE_FORMAT);
+    }
+
+    /**
+     * Returns true if a given string matches the YYYY-MM-DD format.
+     */
+    private static boolean isValidDateFormat(String date) {
+        if (date.length() != 10) {
+            return false;
+        }
+        if (date.charAt(4) != '-' || date.charAt(7) != '-') {
+            return false;
+        }
+        for (int i = 0; i < date.length(); i += 1) {
+            if (i != 4 && i != 7 && !Character.isDigit(date.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

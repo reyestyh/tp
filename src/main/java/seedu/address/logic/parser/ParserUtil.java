@@ -189,10 +189,11 @@ public class ParserUtil {
         requireNonNull(endDateStr);
         String startDateStrTrimmed = startDateStr.trim();
         String endDateStrTrimmed = endDateStr.trim();
-        if (!DateRange.isValidDateRange(startDateStrTrimmed, endDateStrTrimmed)) {
-            throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+        try {
+            return new DateRange(startDateStrTrimmed, endDateStrTrimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-        return new DateRange(startDateStrTrimmed, endDateStrTrimmed);
     }
 
     /**

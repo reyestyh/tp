@@ -16,16 +16,20 @@ public class DateRangeTest {
     @Test
     public void constructor_invalidDateRange_throwsIllegalArgumentException() {
         // end date before start date
-        assertThrows(IllegalArgumentException.class, () -> new DateRange("2026-01-01", "2025-12-31"));
+        assertThrows(IllegalArgumentException.class,
+                DateRange.MESSAGE_INVALID_DATE_RANGE, () -> new DateRange("2026-01-01", "2025-12-31"));
 
         // invalid end date
-        assertThrows(IllegalArgumentException.class, () -> new DateRange("2026-01-01", "2026-01-32"));
+        assertThrows(IllegalArgumentException.class,
+                DateRange.MESSAGE_INVALID_DATE, () -> new DateRange("2026-01-01", "2026-01-32"));
 
         // invalid start date
-        assertThrows(IllegalArgumentException.class, () -> new DateRange("2026-02-32", "2026-03-01"));
+        assertThrows(IllegalArgumentException.class,
+                DateRange.MESSAGE_INVALID_DATE, () -> new DateRange("2026-02-32", "2026-03-01"));
 
         // invalid format
-        assertThrows(IllegalArgumentException.class, () -> new DateRange("01 Jan 2026", "01/02/2026"));
+        assertThrows(IllegalArgumentException.class,
+                DateRange.MESSAGE_INVALID_DATE_FORMAT, () -> new DateRange("01 Jan 2026", "01/02/2026"));
     }
 
     @Test
@@ -37,10 +41,17 @@ public class DateRangeTest {
         assertFalse(DateRange.isValidDateRange("2026-01-01", "2025-12-31")); // end date before start date
         assertFalse(DateRange.isValidDateRange("2026-01-01", "2026-01-32")); // invalid end date
         assertFalse(DateRange.isValidDateRange("2026-02-32", "2026-03-01")); // invalid start date
-        assertFalse(DateRange.isValidDateRange("01 Jan 2026", "01/02/2026")); // invalid format
 
         // valid date ranges
         assertTrue(DateRange.isValidDateRange("2026-01-01", "2026-01-05"));
+    }
+
+    @Test
+    public void isValidDateFormat() {
+        assertFalse(DateRange.isValidDateRange("01 Jan 2026", "2026-01-02")); // alphanumeric date
+        assertFalse(DateRange.isValidDateRange("2026/01/01", "2026-01-02")); // wrong separator
+        assertFalse(DateRange.isValidDateRange("2026-01-010", "2026-01-02")); // extra character
+        assertFalse(DateRange.isValidDateRange("2026-01-1", "2026-01-02")); // missing character
     }
 
     @Test
