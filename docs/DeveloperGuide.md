@@ -163,13 +163,10 @@ This section describes some noteworthy details on how certain features are imple
 
 `Itinerary` is a class which has the following mandatory fields `ItineraryName`, `Destination`, `DateRange`. They also hold 2 `Id` lists, `clientIds` and `vendorIds`.
 
-`ItineraryName` and `Destination` must be non-empty `String`s.
-
-For `DateRange`, the start date must be before or on the same day as the end date.
-
-Each `Id` in the list corresponds to a unique `Person` and cannot be repeated.
-
-An `Id` belonging to a person of the client `Role` cannot be in the client list, an `Id` belonging to a person of the vendor `Role` cannot be in the vendor list
+* Both `ItineraryName` and `Destination` must be a non-empty `String`.
+* `DateRange` contains a start date and end date, where the start date must be before or on the same day as the end date.
+* Each `Id` in the list corresponds to a unique `Person` and cannot be repeated.
+* An `Id` belonging to a person of the *client* `Role` cannot be in the client list, an `Id` belonging to a person of the *vendor* `Role` cannot be in the vendor list
 
 The class diagram for `Itinerary` is shown below:
 
@@ -186,36 +183,6 @@ The class diagram for `Itinerary` is shown below:
 * **Alternative 2:** Only allow alphanumeric characters
     * Pros: No unusual symbols allowed (i.e. `{`, `~`, etc.).
     * Cons: Itinerary names and destinations that use symbols like `:` and `,` are not allowed.
-
-### Show command
-
-#### Implementation
-
-The `show` command shows the itinerary at the index specified by the user, and the contacts associated with it. Similar to how the `delete` command works [above](#logic-component), the show command is implemented in a similar way.
-
-On execution, the command creates and passes 2 predicates to update the filtered lists in `Model`:
-* `itineraryNameMatchesPredicate` — Return `true` if the itinerary is the same as the itinerary specified by the user.
-* `idMatchesPredicate` — Return `true` if the `Id` of the `Person` is found in either the `clientList` or `vendorList` of the itinerary specified.
-
-The sequence diagram below shows the interactions within the logic component.
-
-<puml src="diagrams/ShowSequenceDiagram-Logic.puml" alt="ShowSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-**Note:** The lifeline for `ShowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</box>
-
-#### Design considerations:
-
-**Aspect: Showing association between contacts and itineraries :**
-
-* **Alternative 1 (current choice):** The contacts and itineraries are shown in their respective lists.
-    * Pros: Easier to implement. 
-    * Cons: Users need to scroll through contact list in GUI to see all associated contacts.
-
-* **Alternative 2:** Show contacts as a part of `ItineraryListPanel`
-    * Pros: Only 1 panel shown on GUI, resulting in cleaner user experience.
-    * Cons: Complex implementation required to get respective `Person`s from `Model` for each itinerary. Every `Model` update requires updating each `ItineraryListPanel` for each itinerary.
 
 ### Adding itineraries
 #### Implementation
@@ -268,6 +235,36 @@ When reading the JSON file to construct the corresponding objects, we have the f
 * **Alternative 2:** `Itinerary` stores direct references to `Person`s.
     * Pros: The `addi` command would be simpler to implement.
     * Cons: Reading and saving data becomes more complex.
+
+### Show command
+
+#### Implementation
+
+The `show` command shows the itinerary at the index specified by the user, and the contacts associated with it. Similar to how the `delete` command works [above](#logic-component), the show command is implemented in a similar way.
+
+On execution, the command creates and passes 2 predicates to update the filtered lists in `Model`:
+* `itineraryNameMatchesPredicate` — Return `true` if the itinerary is the same as the itinerary specified by the user.
+* `idMatchesPredicate` — Return `true` if the `Id` of the `Person` is found in either the `clientList` or `vendorList` of the itinerary specified.
+
+The sequence diagram below shows the interactions within the logic component.
+
+<puml src="diagrams/ShowSequenceDiagram-Logic.puml" alt="ShowSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+**Note:** The lifeline for `ShowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
+
+#### Design considerations:
+
+**Aspect: Showing association between contacts and itineraries :**
+
+* **Alternative 1 (current choice):** The contacts and itineraries are shown in their respective lists.
+    * Pros: Easier to implement.
+    * Cons: Users need to scroll through contact list in GUI to see all associated contacts.
+
+* **Alternative 2:** Show contacts as a part of `ItineraryListPanel`
+    * Pros: Only 1 panel shown on GUI, resulting in cleaner user experience.
+    * Cons: Complex implementation required to get respective `Person`s from `Model` for each itinerary. Every `Model` update requires updating each `ItineraryListPanel` for each itinerary.
 
 
 --------------------------------------------------------------------------------------------------------------------
