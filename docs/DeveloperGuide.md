@@ -190,7 +190,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The `edit` command modifies contact and itinerary details. The implementation uses an abstract `EditCommand` class with specialized subclasses to handle the editing of `Person` and `Itinerary` objects respectively.
 
-#### Architecture
+#### Implementation
 
 `EditCommand` is abstract, with `EditPersonCommand` and `EditItineraryCommand` providing concrete implementations to edit a `Person` or `Itinerary` respectively.
 Each subclass contains a descriptor class, `EditPersonDescriptor` and `EditItineraryDescriptor` respectively, which are used to merge the unchanged fields with new edited fields.
