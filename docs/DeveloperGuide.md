@@ -190,7 +190,7 @@ The class diagram for Itinerary is shown below:
 
 ### Show command
 
-### Implementation
+#### Implementation
 
 The `show` command shows the itinerary at the index specified by the user, and the contacts associated with it. Similar to how the `delete` command works [above](#logic-component), the show command is implemented in a similar way.
 
