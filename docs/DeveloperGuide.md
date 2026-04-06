@@ -38,10 +38,10 @@
     - [Launch and Shutdown](#launch-and-shutdown)
     - [Deleting a Person](#deleting-a-person)
     - [Deleting an Itinerary](#deleting-an-itinerary)
+    - [Saving Data](#saving-data)
 - [Appendix: Effort](#appendix-effort)
-    - [Launch and Shutdown](#launch-and-shutdown)
-    - [Deleting a Person](#deleting-a-person)
-    - [Deleting an Itinerary](#deleting-an-itinerary)
+    - [Difficulty and Challenges](#difficulty-and-challenges)
+    - [Effort and Achievements](#effort-and-achievements)
 - [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 --------------------------------------------------------------------------------------------------------------------
 
@@ -151,7 +151,7 @@ How the parsing works:
 ### Model Component
 **API** : [`Model.java`](https://github.com/AY2526S2-CS2103T-F12-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
