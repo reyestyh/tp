@@ -471,7 +471,7 @@ For example, alex will match Alex, and lex will also match Alex.
 
 * **Alternative 2:** Match only full words or exact field values.
   * Pros: More precise results.
-  * Less flexible and less convenient for users.
+  * Cons: Less flexible and less convenient for users.
 
 **Aspect: How multi-field search combines conditions**
 
