@@ -29,16 +29,15 @@ class EditPersonDescriptor {
     - address: Address
     - tags: Set<Tag>
     + isAnyFieldEdited(): boolean
-    + setRole(role: Role)
-    + setName(name: Name)
-    + setPhone(phone: Phone)
-    + setEmail(email: Email)
-    + setAddress(address: Address)
-    + getRole(): Optional<Role>
-    + getName(): Optional<Name>
-    + getPhone(): Optional<Phone>
-    + getEmail(): Optional<Email>
-    + getAddress(): Optional<Address>
+    + setXYZ(xyz: XYZ)
+    + getXYZ(): Optional<XYZ>
 }
+
+note right of EditPersonDescriptor
+`XYZ` is a placeholder for each
+EditPersonDescriptor attribute
+(i.e. role, name, phone, email,
+address, tags).
+end note
 
 @enduml

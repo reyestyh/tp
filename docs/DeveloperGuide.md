@@ -247,7 +247,7 @@ Editing an itinerary follows the same pattern as [Editing a person](#editing-a-p
 
 * Alternative 2: Single `EditCommand` class to handle both `Person` and `Itinerary` editing.
   * Pros: Fewer classes.
-  * Cons: Less type-safety. long `EditCommand` class.
+  * Cons: Less type-safety. Long `EditCommand` class.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

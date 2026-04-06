@@ -20,10 +20,6 @@ EditCommand <|-- EditPersonCommand
 EditCommand <|-- EditItineraryCommand
 EditPersonCommand --> EditPersonDescriptor
 EditItineraryCommand --> EditItineraryDescriptor
-EditCommand --> Model
-EditCommand --> CommandResult
-Model --> Person
-Model --> Itinerary
 
 note bottom of EditPersonDescriptor
 Contained within EditPersonCommand
