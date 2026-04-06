@@ -507,12 +507,16 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 ### Editing Contacts
 
 ### Editing Itineraries
+**Issue**: Cannot edit itinerary in TripScribe.
+- Scenario 1: Intended edit results in start date being **after** end date (i.e. `from/2026-01-05 to/2026-01-01`).
+    - Fix: Make sure the start date you enter is before or on the same day as the end date.
 
 ### Find command
 **Issue**: Find command cannot be entered into command box, does not work.
 - Scenario 1: No keywords entered for command.
-  - Fix: Enter at least one keyword to search
-- Scenario 2: Mixing of general search and multi-field search formats (i.e. `find Ryan p/(+65)`)
+  - Fix: You should enter at least one keyword to search.
+- Scenario 2: Mixing of general search and multi-field search formats (i.e. `find Ryan p/(+65)`)<br>
+  To resolve this, you should follow one of the following fixes:<br>
   - Fix 1: Use general search format only. `find ryan (+65)`
   - Fix 2: Use multi-field search format only `find n/Ryan p/(+65)`
 
