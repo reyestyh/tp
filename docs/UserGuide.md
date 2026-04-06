@@ -36,7 +36,8 @@ TripScribe is a desktop app built for **operations executives at tour agencies**
     - [Command Summary](#command-summary)
 3. [Data Management](#data-management)
 4. [FAQ](#faq)
-5. [Known Issues](#known-issues)
+5. [Troubleshooting](#troubleshooting)
+6. [Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -490,7 +491,6 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
-
 
 ## Troubleshooting
 
