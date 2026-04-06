@@ -117,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S2-CS2103T-F12-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -157,99 +157,32 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Itinerary
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+`Itinerary` is a class which has the following mandatory fields `ItineraryName`, `Destination`, `DateRange`. They also hold 2 `Id` lists, `clientIds` and `vendorIds`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* Both `ItineraryName` and `Destination` must be a non-empty `String`.
+* `DateRange` contains a start date and end date, where the start date must be before or on the same day as the end date.
+* Each `Id` in the list corresponds to a unique `Person` and cannot be repeated.
+* An `Id` belonging to a person of the *client* `Role` cannot be in the client list, an `Id` belonging to a person of the *vendor* `Role` cannot be in the vendor list.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The class diagram for `Itinerary` is shown below:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/ItineraryClassDiagram.puml" alt="ItineraryClassDiagram" />
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Valid ItineraryName and Destination values**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Allow any non-empty value.
+    * Pros: Easy to implement. Allows for inputs in the form of `Japan Tour: Tokyo, Osaka, Kyoto` as users likely will use certain symbols like `:` and `,`
+    * Cons: Uncommon symbols are accepted, which results in more erroneous inputs.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
+* **Alternative 2:** Only allow alphanumeric characters
+    * Pros: No unusual symbols allowed (i.e. `{`, `~`, etc.).
+    * Cons: Itinerary names and destinations that use symbols like `:` and `,` are not allowed.
 
 ### Adding itineraries
 #### Implementation
@@ -302,6 +235,36 @@ When reading the JSON file to construct the corresponding objects, we have the f
 * **Alternative 2:** `Itinerary` stores direct references to `Person`s.
     * Pros: The `addi` command would be simpler to implement.
     * Cons: Reading and saving data becomes more complex.
+
+### Show command
+
+#### Implementation
+
+The `show` command shows the itinerary at the index specified by the user, and the contacts associated with it. Similar to how the `delete` command works [above](#logic-component), the show command is implemented in a similar way.
+
+On execution, the command creates and passes 2 predicates to update the filtered lists in `Model`:
+* `itineraryNameMatchesPredicate` — Return `true` if the itinerary is the same as the itinerary specified by the user.
+* `idMatchesPredicate` — Return `true` if the `Id` of the `Person` is found in either the `clientList` or `vendorList` of the itinerary specified.
+
+The sequence diagram below shows the interactions within the logic component.
+
+<puml src="diagrams/ShowSequenceDiagram-Logic.puml" alt="ShowSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+**Note:** The lifeline for `ShowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
+
+#### Design considerations:
+
+**Aspect: Showing association between contacts and itineraries :**
+
+* **Alternative 1 (current choice):** The contacts and itineraries are shown in their respective lists.
+    * Pros: Easier to implement.
+    * Cons: Users need to scroll through contact list in GUI to see all associated contacts.
+
+* **Alternative 2:** Show contacts as a part of `ItineraryListPanel`
+    * Pros: Only 1 panel shown on GUI, resulting in cleaner user experience.
+    * Cons: Complex implementation required to get respective `Person`s from `Model` for each itinerary. Every `Model` update requires updating each `ItineraryListPanel` for each itinerary.
 
 
 ### Find command
@@ -625,15 +588,26 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
+
    1. Download the jar file and copy into an empty folder
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+
+   2. Run the jar file as per [quick start](UserGuide.md/#3-run-tripscribe). <br>
+      Expected: GUI is shown with sample contacts
 
 2. Saving window preferences
+
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Exiting TripScribe using `exit`
+   1. Type `exit` into the command bar of TripScribe <br>
+      Expected: TripScribe application window is closed
+   
+4. Exiting TripScribe using the exit button
+   1. Click `File` in TripScribe and click the `Exit` button <br>
+      Expected: TripScribe application window is closed
 
 ### Deleting a person
 
@@ -650,7 +624,41 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Dealing with missing data file
 
-2. _{ more test cases …​ }_
+   1. Prerequisites: Data file is not in the `data` folder
+   2. Test case: TripScribe.json is missing from `data` folder on launch. <br> 
+   Expected: TripScribe should still launch and function like normal, but with default set of data in view.
+
+2. Dealing with incorrect fields in data file
+   1. Prerequisites: Data file is in data folder
+   2. Test case 1: One field in a `Person` is in the wrong format. <br>
+      Example: `"role" : ""`
+      Expected: The person will not appear in the contacts panel when TripScribe is launched. <br>The data file is updated such that itineraries previously associated with the contact will no longer store the contact's `Id` under its client or vendor lists<br>
+      "Illegal value found in field of a contact entry, skipping." is logged into terminal.
+   3. Test case 2: One field in an `Itinerary` is in the wrong format. <br>
+      Example: `"startDate : "09-12-2026"`
+      Expected: The itinerary  will not appear in the itinerary panel when TripScribe is launched. <br>
+      "Illegal value found in field of an itinerary entry, skipping." is logged into terminal.
+  4. Test case 3: Multiple fields in a `Person` is in the wrong format. <br> 
+      Example: `"role" : ""` ,`"phone" : "98765432"`
+      Expected: Similar to test case 1.
+  5. Test case 4: Multiple fields in an `Itinerary` is in the wrong format. <br>
+      Example: `""startDate" : "09-12-2026"` , `"endDate" : "15 December 2026"`
+      Expected: Similar to test case 2.
+
+## **Appendix: Effort**
+
+### Difficulty and Challenges
+
+1. AB3 handles only 1 type of entity. TripScribe handles 2, Person and Itinerary, making it more complex.
+2. Required greater understanding of how AB3 stores contacts and conversion to JSON in order to apply it to our Itinerary implementation.
+
+### Effort and Achievements 
+
+1. Higher than average implementation effort from our team due to larger scope.
+2. Enhancement of existing features (i.e. `add` becomes `addc` & `addi`), and addition of new features to improve product (i.e. `show`).
+
+### **Appendix: Planned Enhancements**
+
+Team size: 4
