@@ -392,32 +392,23 @@ Use case ends.
 ---
 **UC02: Add an itinerary**
 
-**MSS**
-
-1. User requests to add an itinerary and provides the itinerary details.
-2. TripScribe creates the itinerary and displays a success message and the updated itinerary list.
-
-Use case ends.
+Similar to UC01, except that TripScribe also validates itinerary-specific fields such as dates and referenced contacts.
 
 **Extensions**
 
-* 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+* 1a. Similar to UC01 extension 1a.
+
+* 1b. TripScribe detects invalid itinerary details (e.g., invalid date format, end date earlier than start date).
+    * 1b1. TripScribe displays a validation error message.
 
       Use case ends.
 
-* 1b. TripScribe detects invalid values in the entered itinerary details (e.g., end date earlier than start date, invalid date format).
-    * 1b1. TripScribe shows a validation error message and displays the correct command usage (and/or which field is invalid).
+* 1c. TripScribe cannot find a referenced client or vendor.
+    * 1c1. TripScribe displays an error message indicating that the referenced contact does not exist.
 
       Use case ends.
-* 1c. TripScribe cannot find the referenced client or vendor(e.g., provided client id/vendor id does not exist).
-    * 1c1. TripScribe displays an error message indicating the contact is not found and does not create the itinerary.
-    
-      Use case ends.
-* 1d. TripScribe detects a duplicate itinerary.
-    * 1d1. TripScribe shows a duplicate message and does not create the itinerary.
-      
-      Use case ends.
+
+* 1d. Similar to UC01 extension 1c.
 
 ---
 **UC03: List**
@@ -449,8 +440,10 @@ Use case ends.
 **UC04: Delete**
 
 **MSS**
-1. User requests to delete a contact or itinerary by specifying the entry identifier.
-2. TripScribe deletes the entry and displays a success message and the updated list.
+1. User requests to delete a contact or itinerary by specifying the entry type and index.
+2. TripScribe deletes the specified contact or itinerary.
+3. If the deleted entry is a contact, TripScribe removes that contact from any associated itineraries.
+4. TripScribe displays a success message and the updated list.
 
 Use case ends.
 
@@ -460,13 +453,15 @@ Use case ends.
     * 1a1. TripScribe displays a format error message with the correct command usage.
     
       Use case ends.
-* 1b. TripScribe detects an invalid identifier (e.g., not a number / out of range / not found).
-    * 1b1. TripScribe shows an error message indicating the target does not exist and does not delete anything.
-  
+
+* 1b. TripScribe detects an invalid index (e.g., not a positive integer or out of range).
+    * 1b1. TripScribe shows an error message indicating that the specified entry does not exist.
+
       Use case ends.
-* 1c. TripScribe detects that the specified entry is referenced by itineraries.
-    * 1c1. TripScribe shows an error message describing the dependency and aborts deletion.
-    
+
+* 1c. TripScribe detects an invalid flag.
+    * 1c1. TripScribe displays an error message indicating the valid flags.
+
       Use case ends.
 
 
