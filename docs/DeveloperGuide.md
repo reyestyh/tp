@@ -356,7 +356,7 @@ Similar to UC01, except that TripScribe also validates itinerary-specific fields
 
       Use case ends.
 
-* 1d. TripScribe detects a duplicate itinerary.
+* 1d. Similar to UC01 extension 1c
     * 1d1. TripScribe displays a duplicate-entry error message and does not create the itinerary.
 
       Use case ends.
