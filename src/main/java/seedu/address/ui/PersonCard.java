@@ -54,12 +54,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        name.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
-        phone.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
-        address.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
-        email.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
-        tags.prefWrapLengthProperty().bind(cardPane.widthProperty().subtract(PADDING));
-
         Label role = new Label(person.getRole().toString());
         role.getStyleClass().add("role-label");
         tags.getChildren().add(role);
