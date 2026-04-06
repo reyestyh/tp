@@ -494,6 +494,22 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 
 ## Troubleshooting
 
+### Adding Contacts
+
+### Adding Itineraries
+
+### Editing Contacts
+
+### Editing Itineraries
+
+### Find command
+**Issue**: Find command cannot be entered into command box, does not work.
+- Scenario 1: No keywords entered for command
+  - Fix: Enter at least one keyword to search
+- Scenario 2: Mixing of general search and multi-field search formats (i.e. `find Ryan p/(+65)`)
+  - Fix 1: Use general search format only. `find ryan (+65)`
+  - Fix 2: Use multi-field search format only `find n/Ryan p/(+65)`
+
 
 
 <div style="page-break-after: always;"></div>
