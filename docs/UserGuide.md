@@ -508,7 +508,7 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 
 ### Editing Itineraries
 **Issue**: Cannot edit itinerary in TripScribe.
-- Scenario 1: Intended edit results in start date being **after** end date (i.e. `from/2026-01-05 to/2026-01-01`).
+- Scenario 1: The intended edit results in start date being **after** end date (i.e. `from/2026-01-05 to/2026-01-01`).
     - Fix: Make sure the start date you enter is before or on the same day as the end date.
 
 ### Find command
