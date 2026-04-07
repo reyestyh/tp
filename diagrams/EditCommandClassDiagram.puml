@@ -10,10 +10,6 @@ Class "EditPersonCommand" as EditPersonCommand
 Class "EditItineraryCommand" as EditItineraryCommand
 Class "EditPersonDescriptor" as EditPersonDescriptor
 Class "EditItineraryDescriptor" as EditItineraryDescriptor
-Class "<<interface>>\nModel" as Model
-Class "Person" as Person
-Class "Itinerary" as Itinerary
-Class "CommandResult" as CommandResult
 
 Command <|-- EditCommand
 EditCommand <|-- EditPersonCommand
