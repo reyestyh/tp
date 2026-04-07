@@ -37,7 +37,8 @@ TripScribe is a desktop app built for **operations executives at tour agencies**
 3. [Data Management](#data-management)
 4. [FAQ](#faq)
 5. [Troubleshooting](#troubleshooting)
-6. [Known Issues](#known-issues)
+6. [Glossary](#glossary)
+7. [Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
