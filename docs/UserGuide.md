@@ -36,7 +36,9 @@ TripScribe is a desktop app built for **operations executives at tour agencies**
     - [Command Summary](#command-summary)
 3. [Data Management](#data-management)
 4. [FAQ](#faq)
-5. [Known Issues](#known-issues)
+5. [Troubleshooting](#troubleshooting)
+6. [Glossary](#glossary)
+7. [Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -77,7 +79,9 @@ TripScribe needs Java `17` or above to run. Here is how to check if you already 
     * **Windows:** `cd C:\Users\YourName\Desktop\TripScribe`
 * Run TripScribe by typing the command `java -jar tripscribe.jar` into the terminal.<br>
  A pop-up window similar to the below should appear in a few seconds. On first start, the app will load sample data so you can explore its features right away.<br>
- ![Ui](images/Ui.png)
+
+<img src="images/Ui.png" alt="drawing" width="600"/>
+
 <div style="page-break-after: always;"></div>
 
 
@@ -135,7 +139,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 ### Viewing help : `help`
 
-Open a help window that summarizes all commands and links to this guide.
+You can open a help window that summarizes all commands and links to this guide.
 
 **Format:**
 ```
@@ -148,7 +152,8 @@ help
 
 ### Adding a Contact: `addc`
 
-Add a contact to TripScribe.
+You can use this to add a contact to TripScribe — either a client or a vendor — and store any of their important details.<br>
+A role, name, phone number, email, and address are all required to add a contact. Tags are optional and can be modified later.
 
 **Format:**
 ```
@@ -162,6 +167,8 @@ addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - A contact can have any number of tags (including zero)
 - Phone numbers should follow the format `(+<Country Code>) <Phone Number>`
   - Example: `(+65) 98765432`.
+- Tags only accept alphanumeric values (no symbols, punctuation, spaces, etc.)
+  - Example: `PeanutAllergy` is allowed, but `Peanut Allergy` is not allowed as it contains a space.
 - TripScribe treats two contacts as duplicates if they share the **same name and phone number**. Duplicate contacts cannot be added.
 
 </box>
@@ -176,7 +183,8 @@ addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 
 ### Adding an Itinerary: `addi`
 
-Add an itinerary to TripScribe.
+You can use this to add an upcoming itinerary to TripScribe, and add relevant people involved with the itinerary. <br>
+An itinerary name, destination, start and end date are all required to add an itinerary.
 
 **Format:** 
 ```
@@ -213,7 +221,7 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
 
 ### Listing Contacts and Itineraries : `list`
 
-See a list of contacts or itineraries based on the specified flag.
+Use this if you want to see a list of contacts or itineraries. The window will be updated based on the specified flag you supply.
 
 **Format:**
 ```
@@ -246,7 +254,7 @@ list /FLAG
 
 ### Editing Contacts and Itineraries : `edit`
 
-Edit an existing contact or itinerary in TripScribe.
+You can edit an existing contact or itinerary in TripScribe whenever you need to update their information
 
 **Formats:**
 ```
@@ -259,7 +267,8 @@ edit /itinerary INDEX [n/NAME] [dest/DESTINATION] [from/START_DATE] [to/END_DATE
 <box type="warning" seamless>
 
 **Warning:**
-When editing contacts, editing tags replaces all existing tags of the contact, it does not add on to them.
+When editing contacts, editing tags replaces all existing tags of the contact, it does not add on to them. 
+If you want to keep the contact's current tags, make sure to add the existing tags and any additional tags you are adding.
 
 </box>
 
@@ -287,7 +296,7 @@ When editing contacts, editing tags replaces all existing tags of the contact, i
 
 ### Showing contacts by itinerary: `show`
 
-Show details of an itinerary and the contacts associated with it in TripScribe.  
+You can show details of an itinerary and the contacts associated with it in TripScribe, helping you find relevant contacts for a trip easily.  
 
 **Format:**
 ```
@@ -344,8 +353,8 @@ Example: `find Hans p/9876` is invalid.
   * Example: `Han` will match `Hans`
 * In general search, a contact is returned if any keyword appears in any searchable field.
 * In multi-field search:
-  * keywords within the same field are matched using `OR`
-  * keywords across different fields are matched using `AND`
+  * If there are multiple keywords within the same field, entries that match any one of the keywords in that field will be shown. 
+  * If there are multiple keywords across different fields, entries that match the keywords in all fields will be shown. 
 
 </box>
 
@@ -365,7 +374,7 @@ Multi-Field Search:
 
 ### Deleting a Contact or Itinerary : `delete`
 
-Delete a specified contact or itinerary from TripScribe.
+You can delete a specified contact or itinerary from TripScribe to clean up contact and itinerary entries, ensuring your data is up-to-date. 
 
 **Format:**
 ```
@@ -397,7 +406,15 @@ delete /FLAG INDEX
 
 ### Clearing All Entries : `clear`
 
-Clear all contacts and itineraries from TripScribe.
+You can clear all contacts and itineraries from TripScribe to start fresh. This can be used whenever a new cycle of itineraries will happen, and you need a clean slate.
+
+<box type="warning" seamless>
+
+**Caution:**
+This command is **irreversible** and will remove **all existing data**. Only use this when you are sure you need to remove all your existing data as this operation cannot be undone. 
+
+</box>
+
 
 **Format:**
 ```
@@ -406,7 +423,7 @@ clear
 
 ### Exiting TripScribe : `exit`
 
-Exit TripScribe.
+You can use this command to exit TripScribe. Data will be saved automatically on exit. 
 
 **Format:**
 ```
@@ -466,19 +483,119 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 **A**: You can resize the window in the same manner as other desktop applications, and the modified window size will be updated in the `preferences.json` file. The next time you start TripScribe, it will start with the same window size you had when you last exited TripScribe.
 
 
+**Q**: Can TripScribe handle multiple data files?<br>
+**A**: No, TripScribe can only use 1 data file while the application is running. One way you can use multiple data file would be to name the data files differently, and update the `addressBookFilePath` field in the `preferences.json` file before each time you start up the application.
+
+
 **Q**: Can itineraries have the same date as the start date and end date?<br>
 **A**: Yes. You can add 1-day itineraries to TripScribe.
 
 
-**Q**: Can TripScribe handle multiple data files?<br>
-**A**: No, TripScribe can only use 1 data file while the application is running. One way you can use multiple data file would be to name the data files differently, and update the in the `addressBookFilePath` field in the `preferences.json` file before each time you start up the application.
+**Q**: How do I add new contacts to an existing itinerary in TripScribe?<br>
+**A**: Follow these steps below: <br>
 
+<details>
 
+<summary>Adding contacts to existing itinerary</summary> 
 
+1. Use the `show` command to find all the relevant contacts associated with the itinerary you are working on. **Note down the contacts and the itinerary details.** 
+2. Using the `delete` command, delete the itinerary you want to add the contact to.
+3. Using the `addi` command, enter the itinerary details (itinerary name, destination, start and end date) you saved in Step 1. Use the `c/` and `v/` prefixes to add the contacts you saved in Step 1, and any new clients you want to add.
 
+</details>
+
+**Q**: How do I manually edit the data file?<br>
+**A**: We recommend that you do not make any manual edits, as it may cause errors when loading the data when you start TripScribe again. However, if you are sure of what do to, take note of the file format below.
+
+<details>
+
+<summary>Manually editing the data file</summary> 
+
+The file is found in the `data` folder, in the same folder where the `TripScribe.jar` program file is in. The name of the data file is 'tripscribe.json'
+
+The format of the file is as follows:
+
+```
+{
+  "persons" : [ {
+    "id" : ID,
+    "role" : ROLE,
+    "name" : NAME,
+    "phone" : PHONE_NUMBER,
+    "email" : EMAIL,
+    "address" : ADDRESS,
+    "tags" : [ TAGS ]
+  } ],
+  "itineraries" : [ {
+    "name" : ITINERARY_NAME,
+    "destination" : ITINERARY_DESTINATION,
+    "startDate" : START_DATE,
+    "endDate" : END_DATE,
+    "clientIds" : [ CLIENT_IDS ],
+    "vendorIds" : [ VENDOR_IDS ]
+  } ]
+}
+
+```
+
+</details>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Troubleshooting
+
+### Adding Contacts
+**Issue**: Cannot add a contact into TripScribe.
+- Scenario: The email you entered is in the wrong format (i.e. `gmail: alexyeoh`).
+    - Fix: Make sure the entered email is of the following format: `local-part@domain`<br>
+      `local-part`: A part of an email consisting of only alphanumeric characters and the following symbols: `+`,`_`, `.`, `-`, It cannot start or end with special characters. (i.e. `alex_yeoh`) <br>
+      `domain`: A part of an email consisting of [domain labels](#glossary) separated by dots `.`. Only alphanumeric characters and hyphens are allowed, and it cannot start or end with a hyphen. The final domain label must be at least 2 characters long. (i.e. `example.domain.com`)
+
+### Adding Itineraries
+
+**Issue**: Cannot add itinerary into TripScribe.
+- Scenario 1: Start date is **after** end date (i.e. `from/2026-01-05 to/2026-01-01`).
+  - Fix: Make sure the start date you enter is before or on the same day as the end date.
+- Scenario 2: Index entered is of the wrong role (i.e. `c/3`, but the contact in view at index 3 is a `vendor`).
+  - Fix: Make sure you put the correct role prefix (either `c/` or `v/`) for each contact.
+
+### Editing Contacts
+**Issue**: All tags for a contact have disappeared.
+- Scenario: No tags specified when using `edit` to modify a contact's tags (i.e. `edit /contact 1 t/`).
+    - Fix: Use the `edit` command again and specify the tags, each prefixed with `t/` (i.e. `t/Vegetarian t/ChineseSpeakingOnly`)
+
+### Editing Itineraries
+**Issue**: Cannot edit itinerary in TripScribe.
+- Scenario 1: The intended edit results in start date being **after** end date (i.e. `from/2026-01-05 to/2026-01-01`).
+    - Fix: Make sure the start date you enter is before or on the same day as the end date.
+
+### Find command
+**Issue**: Find command cannot be entered into command box, does not work.
+- Scenario 1: No keywords entered for command.
+  - Fix: You should enter at least one keyword to search.
+- Scenario 2: Mixing of general search and multi-field search formats (i.e. `find Ryan p/(+65)`)<br>
+  To resolve this, you should follow one of the following fixes:<br>
+  - Fix 1: Use general search format only. `find ryan (+65)`
+  - Fix 2: Use multi-field search format only `find n/Ryan p/(+65)`
+
+
+
+<div style="page-break-after: always;"></div>
+
+## Glossary
+
+* **Alphanumeric characters**: Characters consisting of letters (A–Z, a–z) and numbers (0–9).
+* **Case-Insensitive Text**: Text where uppercase and lowercase letters are treated as equivalent.
+* **Command Line Interface (CLI) Application**: An application that users interact with by typing commands.
+* **Domain-label**: A part of a domain name separated by dots, consisting of alphanumeric characters and hyphens, but not beginning or ending with a hyphen.
+* **Flag**: An option used with a command to specify or modify its behavior.
+* **Graphical User Interface (GUI) Application**: An application that users interact with through graphical elements such as buttons, icons, and menus using a mouse or keyboard.
+* **Index**: The position number of an entry as shown in the currently displayed list. For example, the first entry shown has index `1`. The index changes depending on the current list view. Indexes start from `1`.
+* **Local-part**: A part of an email consisting of only alphanumeric characters and the following symbols: `+`,`_`, `.`, `-`, It cannot start or end with special characters.
+* **Mainstream OS**: Operating systems such as Windows, Linux, Unix and macOS.
+* **Tag**: A label used to categorize any number of entries together.
+
+<div style="page-break-after: always;"></div>
 
 ## Known Issues
 
