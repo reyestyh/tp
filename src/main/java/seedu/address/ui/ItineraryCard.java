@@ -45,8 +45,5 @@ public class ItineraryCard extends UiPart<Region> {
         name.setText(itinerary.getName().fullName);
         destination.setText(itinerary.getDestination().toString());
         dateRange.setText(itinerary.getDateRange().toString());
-
-        name.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
-        destination.maxWidthProperty().bind(cardPane.widthProperty().subtract(PADDING));
     }
 }

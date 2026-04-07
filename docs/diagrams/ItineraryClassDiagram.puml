@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+skinparam nodesep 80
+
+AddressBook *-down-> "1" UniqueItineraryList
+UniqueItineraryList -down-> Itinerary
+
+Itinerary *--> ItineraryName
+Itinerary *--> Destination
+Itinerary *--> DateRange
+
+Itinerary ---> "clients *" Id
+'Unicode symbol to bypass auto bulleted point
+Itinerary ---> "<U+002A> vendors" Id
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "EditCommand" as EditCommand
+Class "EditPersonCommand" as EditPersonCommand
+Class "EditPersonDescriptor" as EditPersonDescriptor
+
+EditCommand <|-- EditPersonCommand
+EditPersonCommand --> EditPersonDescriptor
+
+abstract class EditCommand {
+    # index : Index
+    + execute(model: Model): CommandResult
+    {abstract} # executeEditCommand(model: Model): CommandResult
+}
+
+class EditPersonCommand {
+    - editPersonDescriptor: EditPersonDescriptor
+    + executeEditCommand(model: Model): CommandResult
+    - createEditedPerson(personToEdit: Person, editPersonDescriptor : EditPersonDescriptor) : Person
+}
+
+class EditPersonDescriptor {
+    - role: Role
+    - name: Name
+    - phone: Phone
+    - email: Email
+    - address: Address
+    - tags: Set<Tag>
+    + isAnyFieldEdited(): boolean
+    + setXYZ(xyz: XYZ)
+    + getXYZ(): Optional<XYZ>
+}
+
+note right of EditPersonDescriptor
+`XYZ` is a placeholder for each
+EditPersonDescriptor attribute
+(i.e. role, name, phone, email,
+address, tags).
+end note
+
+@enduml

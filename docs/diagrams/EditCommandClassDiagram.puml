@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{abstract}\nCommand" as Command
+Class "{abstract}\nEditCommand" as EditCommand
+Class "EditPersonCommand" as EditPersonCommand
+Class "EditItineraryCommand" as EditItineraryCommand
+Class "EditPersonDescriptor" as EditPersonDescriptor
+Class "EditItineraryDescriptor" as EditItineraryDescriptor
+
+Command <|-- EditCommand
+EditCommand <|-- EditPersonCommand
+EditCommand <|-- EditItineraryCommand
+EditPersonCommand --> EditPersonDescriptor
+EditItineraryCommand --> EditItineraryDescriptor
+
+note bottom of EditPersonDescriptor
+Contained within EditPersonCommand
+end note
+
+note bottom of EditItineraryDescriptor
+Contained within EditItineraryCommand
+end note
+
+@enduml

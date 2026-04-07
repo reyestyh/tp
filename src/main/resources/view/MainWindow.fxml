@@ -52,7 +52,7 @@
 
                 <VBox styleClass="result-section" VBox.vgrow="NEVER">
                     <StackPane fx:id="resultDisplayPlaceholder"
-                               minHeight="70" prefHeight="70"/>
+                               minHeight="70" prefHeight="70" maxHeight="70"/>
                 </VBox>
 
                 <VBox VBox.vgrow="ALWAYS" styleClass="panels-area" minHeight="300">
