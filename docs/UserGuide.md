@@ -496,7 +496,7 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 
 ### Adding Contacts
 **Issue**: Cannot add a contact into TripScribe.
-- Scenario 1: The email you entered is in the wrong format (i.e. `gmail: alexyeoh`).
+- Scenario: The email you entered is in the wrong format (i.e. `gmail: alexyeoh`).
     - Fix: Make sure the entered email is of the following format: `local-part@domain`<br>
       `local-part`: A part of an email consisting of only alphanumeric characters and the following symbols: `+`,`_`, `.`, `-`, It cannot start or end with special characters. (i.e. `alex_yeoh`)<br>
       `domain`: A part of an email consisting of [domain labels](#glossary) separated by dots `.`. Only alphanumeric characters and hyphens are allowed, and cannot start or end with a hyphen. (i.e. `example.domain.com`)
@@ -510,6 +510,9 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
   - Fix: Make sure you put the correct role prefix (either `c/` or `v/`) for each contact.
 
 ### Editing Contacts
+**Issue**: All tags for a contact have disappeared.
+- Scenario: No tags specified when using `edit` to modify a contact's tags (i.e. `edit /contact 1 t/`).
+    - Fix: Use the `edit` command again and specify the tags, each prefixed with `t/` (i.e. `t/Vegetarian t/ChineseSpeakingOnly`)
 
 ### Editing Itineraries
 **Issue**: Cannot edit itinerary in TripScribe.
