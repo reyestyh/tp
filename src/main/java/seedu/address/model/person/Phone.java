@@ -14,7 +14,7 @@ public class Phone {
             "Invalid phone number: Please use the format: (+COUNTRY_CODE) <PHONE_NUMBER> and ensure:\n"
                     + "1. COUNTRY_CODE is 1-3 digits enclosed in parentheses with a + prefix.\n"
                     + "2. PHONE_NUMBER contains 3-12 digits.\n"
-                    + "Example: (+65) 98765432)";
+                    + "Example: (+65) 98765432";
     public static final String VALIDATION_REGEX = "\\(\\+\\d{1,3}\\)\\d{3,12}";
     public final String value;
 
