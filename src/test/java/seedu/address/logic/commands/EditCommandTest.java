@@ -33,6 +33,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.itinerary.DateRange;
 import seedu.address.model.itinerary.Itinerary;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditItineraryDescriptorBuilder;
@@ -270,7 +271,7 @@ public class EditCommandTest {
                 .withStartDate(startDateAfterEndDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_DATE);
+        assertCommandFailure(editCommand, model, DateRange.MESSAGE_INVALID_DATE_RANGE);
     }
 
     @Test
@@ -281,7 +282,7 @@ public class EditCommandTest {
                 .withEndDate(endDateBeforeStartDate).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_INVALID_DATE);
+        assertCommandFailure(editCommand, model, DateRange.MESSAGE_INVALID_DATE_RANGE);
     }
 
     @Test

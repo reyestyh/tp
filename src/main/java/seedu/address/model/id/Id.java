@@ -12,8 +12,9 @@ import java.util.UUID;
 public class Id {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Id should be a 36-character value consisting of numbers (0 - 9) "
-                    + "and letters (a - f) separated by hyphens. (e.g.123e4567-e89b-12d3-a456-426614174000).";
+            "Invalid ID: Please use a 36-character value consisting of numbers (0 - 9) "
+                    + "and letters (a - f) separated by hyphens.\n"
+                    + "Example: 123e4567-e89b-12d3-a456-426614174000";
     public final UUID value;
 
     /**

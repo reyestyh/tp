@@ -48,9 +48,8 @@ public class AddiCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New itinerary added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "Duplicate itinerary: TripScribe considers "
             + "itineraries with the same name (case-insensitive) as duplicates.";
-    public static final String MESSAGE_PERSON_INDEX_MISSING = "Index not found in current TripScribe window!";
-    public static final String MESSAGE_NOT_CLIENT = "%1s is not a client";
-    public static final String MESSAGE_NOT_VENDOR = "%1s is not a vendor";
+    public static final String MESSAGE_NOT_CLIENT = "Invalid role: %1s is not a client.";
+    public static final String MESSAGE_NOT_VENDOR = "Invalid role: %1s is not a vendor.";
 
 
     private final Itinerary toAdd;
@@ -81,7 +80,7 @@ public class AddiCommand extends Command {
 
         for (Index index : clientIndices) {
             if (index.getZeroBased() >= lastShownContactList.size()) {
-                throw new CommandException(MESSAGE_PERSON_INDEX_MISSING);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person person = lastShownContactList.get(index.getZeroBased());
             if (!person.isClient()) {
@@ -92,7 +91,7 @@ public class AddiCommand extends Command {
 
         for (Index index : vendorIndices) {
             if (index.getZeroBased() >= lastShownContactList.size()) {
-                throw new CommandException(MESSAGE_PERSON_INDEX_MISSING);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person person = lastShownContactList.get(index.getZeroBased());
             if (!person.isVendor()) {

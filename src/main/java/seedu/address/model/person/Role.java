@@ -18,7 +18,7 @@ public class Role {
 
     public static final String DEFAULT_ROLE = "client";
     public static final String MESSAGE_CONSTRAINTS =
-            "Role should be either client or vendor";
+            "Invalid role: Please use either 'client' or 'vendor'.";
 
     public static final String VALIDATION_REGEX = "(?i)client|vendor";
 

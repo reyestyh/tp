@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Destination {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Destinations should not be empty";
+            "Invalid destination: Please provide a non-empty destination.";
 
     public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}].*";
 

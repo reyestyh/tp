@@ -135,7 +135,7 @@ public class AddiCommandTest {
         AddiCommand addiCommandClient = new AddiCommand(validItinerary, clientIndexes, new HashSet<>());
         ModelStub modelStubClient = new ModelStubWithClient();
 
-        assertThrows(CommandException.class, AddiCommand.MESSAGE_PERSON_INDEX_MISSING, ()
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, ()
                      -> addiCommandClient.execute(modelStubClient));
 
         HashSet<Index> vendorIndexes = new HashSet<>();
@@ -143,7 +143,7 @@ public class AddiCommandTest {
         AddiCommand addiCommandVendor = new AddiCommand(validItinerary, new HashSet<>(), vendorIndexes);
         ModelStub modelStubVendor = new ModelStubWithVendor();
 
-        assertThrows(CommandException.class, AddiCommand.MESSAGE_PERSON_INDEX_MISSING, ()
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, ()
                      -> addiCommandVendor.execute(modelStubVendor));
     }
 

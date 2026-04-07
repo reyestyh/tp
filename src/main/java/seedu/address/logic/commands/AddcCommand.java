@@ -21,7 +21,7 @@ public class AddcCommand extends Command {
 
     public static final String COMMAND_WORD = "addc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book with the role. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to TripScribe. "
             + "Parameters: "
             + PREFIX_ROLE + "ROLE "
             + PREFIX_NAME + "NAME "

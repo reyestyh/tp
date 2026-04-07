@@ -24,8 +24,9 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a positive, non-zero number.";
-    public static final String MESSAGE_NOT_INTEGER = "The given index is not an integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Invalid index: Please ensure index is a"
+        + " positive, non-zero integer.";
+    public static final String MESSAGE_NOT_INTEGER = "Invalid index: Please ensure index is an integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -189,10 +190,11 @@ public class ParserUtil {
         requireNonNull(endDateStr);
         String startDateStrTrimmed = startDateStr.trim();
         String endDateStrTrimmed = endDateStr.trim();
-        if (!DateRange.isValidDateRange(startDateStrTrimmed, endDateStrTrimmed)) {
-            throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+        try {
+            return new DateRange(startDateStrTrimmed, endDateStrTrimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-        return new DateRange(startDateStrTrimmed, endDateStrTrimmed);
     }
 
     /**
