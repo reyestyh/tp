@@ -495,6 +495,11 @@ Furthermore, certain edits can cause TripScribe to remove entries (e.g., if a va
 ## Troubleshooting
 
 ### Adding Contacts
+**Issue**: Cannot add a contact into TripScribe.
+- Scenario 1: The email you entered is in the wrong format (i.e. `gmail: alexyeoh`).
+    - Fix: Make sure the entered email is of the following format:
+- Scenario 2: Index entered is of the wrong role (i.e. `c/3`, but the contact in view at index 3 is a `vendor`).
+    - Fix: Make sure you put the correct role prefix (either `c/` or `v/`) for each contact.
 
 ### Adding Itineraries
 
