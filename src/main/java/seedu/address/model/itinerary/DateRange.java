@@ -58,7 +58,7 @@ public class DateRange {
     /**
      * Returns true if a given string matches the YYYY-MM-DD format.
      */
-    private static boolean isValidDateFormat(String date) {
+    public static boolean isValidDateFormat(String date) {
         if (date.length() != 10) {
             return false;
         }

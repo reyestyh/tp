@@ -43,15 +43,21 @@ public class DateRangeTest {
         assertFalse(DateRange.isValidDateRange("2026-02-32", "2026-03-01")); // invalid start date
 
         // valid date ranges
-        assertTrue(DateRange.isValidDateRange("2026-01-01", "2026-01-05"));
+        assertTrue(DateRange.isValidDateRange("2026-01-01", "2026-01-05")); // start date before end date
+        assertTrue(DateRange.isValidDateRange("2026-01-01", "2026-01-01")); // start date same as end date
     }
 
     @Test
     public void isValidDateFormat() {
-        assertFalse(DateRange.isValidDateRange("01 Jan 2026", "2026-01-02")); // alphanumeric date
-        assertFalse(DateRange.isValidDateRange("2026/01/01", "2026-01-02")); // wrong separator
-        assertFalse(DateRange.isValidDateRange("2026-01-010", "2026-01-02")); // extra character
-        assertFalse(DateRange.isValidDateRange("2026-01-1", "2026-01-02")); // missing character
+        // invalid date formats
+        assertFalse(DateRange.isValidDateFormat("01 Jan 2026")); // alphanumeric date
+        assertFalse(DateRange.isValidDateFormat("2026/01/01")); // wrong separator
+        assertFalse(DateRange.isValidDateFormat("2026-01-010")); // extra character
+        assertFalse(DateRange.isValidDateFormat("2026-01-1")); // missing character
+
+        // valid date formats
+        assertTrue(DateRange.isValidDateFormat("2026-01-01")); // normal date
+        assertTrue(DateRange.isValidDateFormat("2026-02-30")); // non-existent date, but correct date format
     }
 
     @Test
