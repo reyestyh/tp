@@ -10,11 +10,14 @@ TripScribe is a desktop app built for **operations executives at tour agencies**
 
 <box type="tip" seamless>
 
-**New to TripScribe?** Start with [Quick Start](#quick-start) to install the app and try your first commands.
+**New to TripScribe?**<br>
+Start with [Quick Start](#quick-start) to install the app and try your first commands.
 
-**Looking for a specific command?** Jump to the [Command Summary](#command-summary) for a quick reference, or pick a feature from the table of contents below.
+**Looking for a specific command?**<br>
+Jump to the [Command Summary](#command-summary) for a quick reference, or pick a feature from the table of contents below.
 
-**Need help with something?** Jump to our [FAQ](#faq) and [Troubleshooting](#troubleshooting) sections.
+**Need help with something?**<br>
+Jump to our [FAQ](#faq) and [Troubleshooting](#troubleshooting) sections.
 
 </box>
 
