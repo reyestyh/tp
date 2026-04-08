@@ -121,7 +121,7 @@ public class EditCommandTest {
         EditPersonDescriptor personDescriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditPersonCommand(INDEX_SECOND, personDescriptor);
 
-        assertCommandFailure(editCommand, model, EditPersonCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditPersonCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editCommand, model, EditPersonCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -221,7 +221,7 @@ public class EditCommandTest {
         EditItineraryDescriptor itineraryDescriptor = new EditItineraryDescriptorBuilder(firstItinerary).build();
         EditCommand editCommand = new EditItineraryCommand(INDEX_SECOND, itineraryDescriptor);
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_DUPLICATE_ITINERARY);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_ITINERARY);
     }
 
     @Test
@@ -233,7 +233,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditItineraryCommand(INDEX_FIRST,
                 new EditItineraryDescriptorBuilder(itineraryInList).build());
 
-        assertCommandFailure(editCommand, model, EditItineraryCommand.MESSAGE_DUPLICATE_ITINERARY);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_ITINERARY);
     }
 
     @Test

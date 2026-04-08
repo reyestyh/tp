@@ -54,7 +54,7 @@ public class AddcCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddcCommand.MESSAGE_DUPLICATE_PERSON, () -> addcCommand.execute(modelStub));
+                Messages.MESSAGE_DUPLICATE_PERSON, () -> addcCommand.execute(modelStub));
     }
 
     @Test

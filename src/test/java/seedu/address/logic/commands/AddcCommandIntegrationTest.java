@@ -42,7 +42,7 @@ public class AddcCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddcCommand(personInList), model,
-                AddcCommand.MESSAGE_DUPLICATE_PERSON);
+                Messages.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class AddcCommandIntegrationTest {
                 .build();
 
         assertCommandFailure(new AddcCommand(duplicateByName), model,
-                AddcCommand.MESSAGE_DUPLICATE_PERSON);
+                Messages.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

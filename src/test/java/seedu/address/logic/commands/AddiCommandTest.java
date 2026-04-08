@@ -101,7 +101,7 @@ public class AddiCommandTest {
         ModelStub modelStub = new ModelStubWithItinerary(validItinerary);
 
         assertThrows(CommandException.class,
-                AddiCommand.MESSAGE_DUPLICATE_ITINERARY, () -> addiCommand.execute(modelStub));
+                Messages.MESSAGE_DUPLICATE_ITINERARY, () -> addiCommand.execute(modelStub));
     }
 
     @Test
