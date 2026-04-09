@@ -686,7 +686,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Run the jar file as per [quick start](UserGuide.md/#3-run-tripscribe). <br>
+   2. Run the jar file as per [quick start](UserGuide.md/#running-tripscribe). <br>
       Expected: GUI is shown with sample contacts
 
 2. Saving window preferences
