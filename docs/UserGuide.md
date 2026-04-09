@@ -241,8 +241,8 @@ addc r/ROLE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 * `addc r/vendor n/Holiday Inn t/FourStar e/holidayinn@gmail.com a/New York City p/(+44) 81234567 t/Hotel`
   * Adds a vendor named "Holiday Inn" with tags "Hotel" and "FourStar".
 
-| <img src="images/AddItineraryBefore.png" alt="Add contact command typed in TripScribe" width="400"/><br>Input | <img src="images/AddcSuccess.png" alt="Add contact executed in TripScribe" width="400"/><br>Expected Output |
-|:-------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:|
+| <img src="images/AddContactBefore.png" alt="Add contact command typed in TripScribe" width="400"/><br>Input | <img src="images/AddContactAfter.png" alt="Add contact executed in TripScribe" width="400"/><br>Expected Output |
+|:-----------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|
 
 <div style="page-break-after: always;"></div>
 
@@ -399,8 +399,11 @@ show INDEX
 </box>
 
 **Examples:**
-* `show 2`
-  * Shows details of the 2nd itinerary, and the contacts associated with it.
+* `show 1`
+  * Shows details of the 1st itinerary, and the contacts associated with it.
+
+| <img src="images/ShowBefore.png" alt="Show command typed in TripScribe" width="400"/><br>Input | <img src="images/ShowAfter.png" alt="Show executed in TripScribe" width="400"/><br>Expected Output |
+|:----------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
 
 
 <div style="page-break-after: always;"></div>
