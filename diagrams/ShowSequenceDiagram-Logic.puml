@@ -54,12 +54,12 @@ activate Model
 Model --> ShowCommand
 deactivate Model
 
-ShowCommand -> Model : updateFilteredItineraryList(itineraryNameMatchesPredicate)
+ShowCommand -> Model : updateFilteredItineraryList(itineraryMatchesPredicate)
 activate Model
 Model --> ShowCommand
 deactivate Model
 
-ShowCommand -> Model : updateFilteredItineraryList(idMatchesPredicate)
+ShowCommand -> Model : updateFilteredPersonList(idMatchesPredicate)
 activate Model
 Model --> ShowCommand
 deactivate Model
