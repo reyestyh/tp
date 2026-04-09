@@ -77,9 +77,9 @@ public class ShowCommandTest {
     }
 
     private void updateModelFilteredList(Model model, Itinerary itinerary) {
-        ItineraryMatchesPredicate itineraryNameMatchesPredicate = new ItineraryMatchesPredicate(
+        ItineraryMatchesPredicate itineraryMatchesPredicate = new ItineraryMatchesPredicate(
                 List.of(itinerary));
-        model.updateFilteredItineraryList(itineraryNameMatchesPredicate);
+        model.updateFilteredItineraryList(itineraryMatchesPredicate);
 
         List<Id> ids = Stream.concat(
                         itinerary.getClientIds().stream(),

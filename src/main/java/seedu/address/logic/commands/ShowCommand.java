@@ -51,9 +51,9 @@ public class ShowCommand extends Command {
 
         Itinerary itineraryToShow = lastShownList.get(index.getZeroBased());
 
-        ItineraryMatchesPredicate itineraryNameMatchesPredicate = new ItineraryMatchesPredicate(
+        ItineraryMatchesPredicate itineraryMatchesPredicate = new ItineraryMatchesPredicate(
                 List.of(itineraryToShow));
-        model.updateFilteredItineraryList(itineraryNameMatchesPredicate);
+        model.updateFilteredItineraryList(itineraryMatchesPredicate);
 
         List<Id> ids = Stream.concat(
                 itineraryToShow.getClientIds().stream(),

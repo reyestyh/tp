@@ -32,8 +32,8 @@ public class ItineraryMatchesPredicate implements Predicate<Itinerary> {
             return false;
         }
 
-        ItineraryMatchesPredicate otherItineraryNameMatchesPredicate = (ItineraryMatchesPredicate) other;
-        return itineraries.equals(otherItineraryNameMatchesPredicate.itineraries);
+        ItineraryMatchesPredicate otherItineraryMatchesPredicate = (ItineraryMatchesPredicate) other;
+        return itineraries.equals(otherItineraryMatchesPredicate.itineraries);
     }
 
     @Override
