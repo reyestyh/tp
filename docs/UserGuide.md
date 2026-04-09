@@ -170,7 +170,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 - Items in square brackets are optional.
     - **Example:** `n/NAME [t/TAG]` can be entered as `n/John Doe t/Bus` or `n/John Doe`.
 - Inputs with `…`​ after them can be used zero or more times.
-    - **Example:**`[t/TAG]…​` can be used as ` ` (used zero times), `t/Bus`, `t/Bus t/Speaks English` etc.
+    - **Example:**`[t/TAG]…​` can be used as ` ` (used zero times), `t/Bus`, `t/Bus t/SpeaksEnglish` etc.
 - Information can be supplied in any order.
   - **Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 - Additional parameters for commands that do not require them (such as `help`, `exit` and `clear`) will be ignored.
@@ -279,13 +279,13 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
 **Examples:**
 * `addi n/Island Time: Bali dest/Bali from/2026-12-01 to/2026-12-05`
   * Add an itinerary named "Island Time: Bali" with no contacts linked.
-* `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/3`
-  * Add an itinerary named "5D4N France Getaway" with the 2nd contact (must be a client) and 3rd contact (must be a vendor) linked to it.
 * `addi n/3D2N China Trip dest/China from/2026-05-02 to/2026-05-07 c/2 c/3 c/5 v/1 v/4`
   * Add an itinerary named "5D4N France Getaway" with three clients (contacts 2, 3, and 5) and two vendors (contacts 1 and 4).
+* `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/3`
+    * Add an itinerary named "5D4N France Getaway" with the 2nd contact (must be a client) and 3rd contact (must be a vendor) linked to it.
 
-| <img src="images/AddItineraryBefore.png" alt="Add itinerary typed in TripScribe" width="400"/><br>Input | <img src="images/AddItineraryAfter.png" alt="Add itinerary executed in TripScribe" width="400"/><br>Expected Output |
-|:-------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+| <img src="images/AddItineraryBefore.png" alt="Add itinerary typed in TripScribe" width="400"/><br>Input (3rd Example) | <img src="images/AddItineraryAfter.png" alt="Add itinerary executed in TripScribe" width="400"/><br>Expected Output |
+|:---------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
 
 <div style="page-break-after: always;"></div>
 
@@ -461,9 +461,7 @@ Multi-Field Search:
 * `find n/alex david`
   * Returns contacts whose names contain `alex` or `david`.
 * `find n/alex p/996`
-  * Returns contacts whose names contain `alex` and whose phone numbers contain `996`.
-* `find n/alex david p/992 281`
-  * Returns contacts whose names contain `alex` or `david` and phone numbers contain `992` or `281`. <br>
+  * Returns contacts whose names contain `alex` and whose phone numbers contain `996`.<br>
 
 
 <div style="page-break-after: always;"></div>
@@ -702,7 +700,7 @@ This section helps you resolve common issues you might encounter while using Tri
 ### Adding Itineraries
 
 **Issue**: "Duplicate contact: ..." error
-- Scenario: TripScribe detected the wrong tag format.
+- Scenario: TripScribe detected a duplicate itinerary (same name).
 - Fix 1: If your intention is to update an existing itinerary, use the [edit command](#editing-contacts-and-itineraries-edit) instead.
 - Fix 2: If your intention is to add a different itinerary, change the name slightly.
 
