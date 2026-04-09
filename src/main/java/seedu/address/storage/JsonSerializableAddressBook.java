@@ -92,7 +92,7 @@ class JsonSerializableAddressBook {
             try {
                 addressBook.addItinerary(itinerary);
             } catch (PersonNotFoundException nfe) {
-                logger.info("Unknown Person Id found in itinerary entry, skipping.");
+                logger.warning("Unknown Person Id found in itinerary entry, skipping.");
             }
         }
         return addressBook;
