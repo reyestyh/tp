@@ -759,7 +759,7 @@ These test cases follow the same steps as manual testing for [Deleting a person]
 1. Dealing with missing data file
 
     1. Prerequisites: Data file is not in the `data` folder
-    2. Test case: TripScribe.json is missing from `data` folder on launch. <br>
+    2. Test case: `tripscribe.json` is missing from `data` folder on launch. <br>
        Expected: TripScribe should still launch and function like normal, but with default set of data in view.
 
 2. Dealing with incorrect fields in data file
