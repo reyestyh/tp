@@ -677,7 +677,7 @@ Use case ends.
       Use case ends.
 
 ---
----
+
 **UC05: Multi-field Find**
 
 **MSS**
