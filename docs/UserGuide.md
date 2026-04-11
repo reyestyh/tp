@@ -303,15 +303,15 @@ list /FLAG
 <box type="tip" seamless>
 
 **Things to note:**
-* `FLAG` specifies the entry type you are listing. It must be one of: `contact`, `client`, `vendor`, `itinerary`, `all`.
+* `/FLAG` specifies the entry type you are listing. It must be one of: `/contact`, `/client`, `/vendor`, `/itinerary`, `/all`.
 
-    | Flag        | What you see                           |
-    |-------------|----------------------------------------|
-    | `contact`   | All contacts, both clients and vendors |
-    | `client`    | Only clients                           |
-    | `vendor`    | Only vendors                           |
-    | `itinerary` | All itineraries                        |
-    | `all`       | All contacts and itineraries           |
+    | Flag         | What you see                           |
+    |--------------|----------------------------------------|
+    | `/contact`   | All contacts, both clients and vendors |
+    | `/client`    | Only clients                           |
+    | `/vendor`    | Only vendors                           |
+    | `/itinerary` | All itineraries                        |
+    | `/all`       | All contacts and itineraries           |
 
 
 * When you view contacts (`/contact`, `/client`, `/vendor`), TripScribe hides the itinerary panel.
@@ -483,7 +483,7 @@ delete /FLAG INDEX
 
 **Things to note:**
 * This will delete the contact or itinerary at the specified `INDEX`.
-* `FLAG` specifies the entry type you are deleting. It must be one of: `contact` , `itinerary`.
+* `/FLAG` specifies the entry type you are deleting. It must be one of: `contact` , `itinerary`.
 * `INDEX` is the index number shown in the displayed person or itinerary list. It **must be a positive, non-zero number** (e.g., 1, 2, 3, …​)
 * When deleting a contact, the contact will be also be removed from any itineraries it is part of.
 
