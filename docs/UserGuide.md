@@ -314,8 +314,8 @@ list /FLAG
     | `all`       | All contacts and itineraries           |
 
 
-* When you view contacts (`/contact`, `/client`, `/vendor`), TripScribe hides the itinerary panel.
-* When you view  itineraries (`/itinerary`), TripScribe hides the contact panel.
+* When you view contacts (`contact`, `client`, `vendor`), TripScribe hides the itinerary panel.
+* When you view itineraries (`itinerary`), TripScribe hides the contact panel.
 </box>
 
 **Examples:**
@@ -358,7 +358,7 @@ If you want to keep the contact's current tags, make sure to add **all existing 
 **Things to note:**
 
 * Edits the contact or itinerary at the specified `INDEX`.
-* `INDEX` is the index number shown in the displayed contact or itinerary list. It **must be a positive, non-zero number** 1, 2, 3, …​
+* `INDEX` is the index number shown in the displayed contact or itinerary list. It **must be a positive, non-zero number** (e.g., 1, 2, 3, …​)
 * You must include at least one field to change.
 * You can remove all tags from a contact by typing `t/` without specifying any tags after it.
 * When editing itineraries, you must ensure that the end date is after the start date. 
@@ -394,7 +394,7 @@ show INDEX
 * Shows contacts and itinerary details of itinerary at specified `INDEX`.
   * The itinerary list will only show the specified itinerary details.
   * The contact panel will only show the contacts linked to that itinerary.
-* `INDEX` is the index number shown in the itinerary list. It **must be a positive, non-zero number** 1, 2, 3, …​
+* `INDEX` is the index number shown in the itinerary list. It **must be a positive, non-zero number** (e.g., 1, 2, 3, …​)
 
 </box>
 
