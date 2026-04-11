@@ -295,11 +295,11 @@ public class EditCommandParserTest {
 
         // invalid start date
         assertParseFailure(parser, ITINERARY_FLAG + " 1"
-                + INVALID_ITINERARY_START_DATE_DESC, DateRange.MESSAGE_CONSTRAINTS);
+                + INVALID_ITINERARY_START_DATE_DESC, DateRange.MESSAGE_INVALID_DATE_FORMAT);
 
         // invalid end date
         assertParseFailure(parser, ITINERARY_FLAG + " 1"
-                + INVALID_ITINERARY_END_DATE_DESC, DateRange.MESSAGE_CONSTRAINTS);
+                + INVALID_ITINERARY_END_DATE_DESC, DateRange.MESSAGE_INVALID_DATE);
 
         // invalid destination followed by valid start date
         assertParseFailure(parser, ITINERARY_FLAG + " 1"
