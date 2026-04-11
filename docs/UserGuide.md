@@ -415,7 +415,7 @@ You can find contacts whose fields match the given keywords using this command. 
 
 * Use general search to search **all** fields of a contact (excluding its role).
     * A contact is returned if the given keyword(s) appears in any of its fields
-* Use multi-field search to search only **specific** field(s) of a contact.
+* Use multi-field search to search only **specific** field(s) of a contact (excluding its role).
     * If a contact contains the given keyword(s) in the specified field(s), it will be returned.
 
 **Formats:**
