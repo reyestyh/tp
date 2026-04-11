@@ -282,7 +282,7 @@ addi n/ITINERARY_NAME dest/DESTINATION from/START_DATE to/END_DATE [c/CLIENT_IND
 * `addi n/3D2N China Trip dest/China from/2026-05-02 to/2026-05-07 c/2 c/3 c/5 v/1 v/4`
   * Add an itinerary named "5D4N France Getaway" with three clients (contacts 2, 3, and 5) and two vendors (contacts 1 and 4).
 * `addi n/5D4N France Getaway dest/France from/2026-10-12 to/2026-10-17 c/2 v/3`
-    * Add an itinerary named "5D4N France Getaway" with the 2nd contact (must be a client) and 3rd contact (must be a vendor) linked to it.
+    * Add an itinerary named "5D4N France Getaway" with one client (contact 2) and one vendor (contact 3) linked to it.
 
 | <img src="images/AddItineraryBefore.png" alt="Add itinerary typed in TripScribe" width="400"/><br>Input (3rd Example) | <img src="images/AddItineraryAfter.png" alt="Add itinerary executed in TripScribe" width="400"/><br>Expected Output |
 |:---------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
