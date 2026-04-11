@@ -746,7 +746,7 @@ Use case ends.
       Use case ends.
 
 * 3a. TripScribe detects a field entered by user is for the wrong entry type (e.g. `from/` for contact).
-    * 2a1. TripScribe displays an error message indicating that at least 1 field must be edited for the entry.
+    * 3a1. TripScribe displays an error message indicating that at least 1 field must be edited for the entry.
 
       Use case ends.
 ---
