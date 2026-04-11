@@ -34,7 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
                     + "  Itinerary format : edit /itinerary INDEX [n/NAME] [dest/DESTINATION]\n"
                     + "                                  [from/START_DATE] [to/END_DATE]\n"
                     + "  Example: edit /contact 1 p/(+65) 91234567 e/new@email.com\n"
-                    + "                    edit /itinerary 2 d/Japan sd/2026-11-01 ed/2026-11-07\n\n"
+                    + "                    edit /itinerary 2 dest/Japan from/2026-11-01 to/2026-11-07\n\n"
                     + "find - Perform a general or multi-field search for contacts\n"
                     + "  General format    : find KEYWORD [MORE_KEYWORDS]...\n"
                     + "  Multi-field format: find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS]\n"
