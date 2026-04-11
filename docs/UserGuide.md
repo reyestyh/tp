@@ -447,7 +447,7 @@ Example: `find Hans p/9876` is invalid.
   * Example: `Hans Bo` will match `Bo Hans`.
 * Partial matches are allowed.
   * Example: `Han` will match `Hans`.
-* This command does not support searching for the role prefix `r/`
+* This command does not support searching for the role prefix `r/`, and does not search the role field.
 
 </box>
 
