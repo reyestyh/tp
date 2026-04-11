@@ -149,17 +149,13 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void equalsMethod() {
-        Prefix lowerCase = new Prefix("aaa");
-        Prefix mixedCase = new Prefix("aaa");
-        Prefix upperCase = new Prefix("aaa");
+        Prefix aaa = new Prefix("aaa");
 
-        assertEquals(lowerCase, lowerCase);
-        assertEquals(lowerCase, mixedCase);
-        assertEquals(lowerCase, upperCase);
-        assertEquals(lowerCase, new Prefix("aaa"));
+        assertEquals(aaa, aaa);
+        assertEquals(aaa, new Prefix("aaa"));
 
-        assertNotEquals(lowerCase, "aaa");
-        assertNotEquals(lowerCase, new Prefix("aab"));
+        assertNotEquals(aaa, "aaa");
+        assertNotEquals(aaa, new Prefix("aab"));
     }
 
 }
