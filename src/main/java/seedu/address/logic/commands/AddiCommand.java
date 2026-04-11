@@ -83,7 +83,7 @@ public class AddiCommand extends Command {
             }
             Person person = lastShownContactList.get(index.getZeroBased());
             if (!person.isClient()) {
-                throw new CommandException(String.format(MESSAGE_NOT_CLIENT, person.getName(), index.getZeroBased()));
+                throw new CommandException(String.format(MESSAGE_NOT_CLIENT, person.getName(), index.getOneBased()));
             }
             clientIds.add(person.getId());
         }
@@ -94,7 +94,7 @@ public class AddiCommand extends Command {
             }
             Person person = lastShownContactList.get(index.getZeroBased());
             if (!person.isVendor()) {
-                throw new CommandException(String.format(MESSAGE_NOT_VENDOR, person.getName(), index.getZeroBased()));
+                throw new CommandException(String.format(MESSAGE_NOT_VENDOR, person.getName(), index.getOneBased()));
             }
             vendorIds.add(person.getId());
         }
