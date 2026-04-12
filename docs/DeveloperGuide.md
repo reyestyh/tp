@@ -672,7 +672,7 @@ Use case ends.
       Use case ends.
 
 * 2a. TripScribe finds zero entries matching.
-    * 2a1. TripScribe displays an empty result message.
+    * 2a1. TripScribe informs the user that no matching entries were found.
 
       Use case ends.
 
