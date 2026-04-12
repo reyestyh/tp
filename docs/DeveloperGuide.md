@@ -682,7 +682,7 @@ Use case ends.
 **UC06: Multi-field Find**
 
 **MSS**
-1. User requests to find contacts based on specific fields and enters keywords with prefixes.
+1. User requests to find contacts by specifying the field(s) and keywords(s) to search.
 2. TripScribe retrieves contacts that match based on the following criteria: <br>
    - within the same field, keywords are matched using OR
    - across different fields, fields are matched using AND
