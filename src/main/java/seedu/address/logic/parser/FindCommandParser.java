@@ -100,6 +100,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the input does not contain any supported field-search prefixes, false otherwise.
      */
     public boolean isGlobalSearch(String trimmedArgs) {
+        trimmedArgs = trimmedArgs.toLowerCase();
         return !(trimmedArgs.contains(" n/") || trimmedArgs.startsWith("n/")
                 || trimmedArgs.contains(" p/") || trimmedArgs.startsWith("p/")
                 || trimmedArgs.contains(" e/") || trimmedArgs.startsWith("e/")
