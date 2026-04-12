@@ -668,7 +668,7 @@ Use case ends.
       Use case ends.
 
 * 1b. TripScribe detects no keywords in the entered command format.
-    * 1b1. TripScribe displays a format error message indicating that at least 1 keyword must be given for search.
+    * 1b1. TripScribe informs the user that no keywords were provided.
 
       Use case ends.
 
