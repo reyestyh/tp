@@ -577,6 +577,7 @@ Use case ends.
       Use case ends.
 ---
 **UC02: Add an itinerary**
+
 **MSS**
 Similar to UC01, except that TripScribe also validates itinerary-specific fields such as dates and referenced contacts.
 
