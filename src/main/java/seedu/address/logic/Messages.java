@@ -27,7 +27,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_PERSON = "Duplicate contact: TripScribe considers contacts with "
             + "the same name (case-insensitive) and phone number as duplicates.";
     public static final String MESSAGE_DUPLICATE_ITINERARY = "Duplicate itinerary: TripScribe considers "
-            + "itineraries with the same name (case-insensitive), destination, and date range as duplicates.";
+            + "itineraries with the same name, destination, and date range as duplicates (case-insensitive).";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

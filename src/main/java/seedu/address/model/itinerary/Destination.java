@@ -46,7 +46,7 @@ public class Destination {
         }
 
         Destination otherDestination = (Destination) other;
-        return destination.equals(otherDestination.destination);
+        return destination.equalsIgnoreCase(otherDestination.destination);
     }
 
     @Override

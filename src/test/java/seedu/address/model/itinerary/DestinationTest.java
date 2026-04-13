@@ -44,8 +44,8 @@ public class DestinationTest {
         // same values -> returns true
         assertTrue(destination.equals(new Destination("Valid Destination")));
 
-        // case-sensitive
-        assertFalse(destination.equals(new Destination("valid destiNATion")));
+        // case-insensitive
+        assertTrue(destination.equals(new Destination("vAlid destiNATion")));
 
         // same object -> returns true
         assertTrue(destination.equals(destination));
