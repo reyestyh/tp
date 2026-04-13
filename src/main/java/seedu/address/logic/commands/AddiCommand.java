@@ -36,8 +36,8 @@ public class AddiCommand extends Command {
             + PREFIX_ITINERARY_DESTINATION + "DESTINATION "
             + PREFIX_ITINERARY_START + "START DATE "
             + PREFIX_ITINERARY_END + "END DATE "
-            + PREFIX_ITINERARY_CLIENT + "CLIENT IDS "
-            + PREFIX_ITINERARY_VENDOR + "VENDOR IDS \n"
+            + "[" + PREFIX_ITINERARY_CLIENT + "CLIENT_INDEX]... "
+            + "[" + PREFIX_ITINERARY_VENDOR + "VENDOR_INDEX]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ITINERARY_NAME + "5D4N France Getaway "
             + PREFIX_ITINERARY_DESTINATION + "France "
@@ -47,8 +47,8 @@ public class AddiCommand extends Command {
             + PREFIX_ITINERARY_VENDOR + "2 ";
 
     public static final String MESSAGE_SUCCESS = "New itinerary added: %1$s";
-    public static final String MESSAGE_NOT_CLIENT = "Invalid role: %1s is not a client.";
-    public static final String MESSAGE_NOT_VENDOR = "Invalid role: %1s is not a vendor.";
+    public static final String MESSAGE_NOT_CLIENT = "Invalid role: %1s (at index %d) is not a client.";
+    public static final String MESSAGE_NOT_VENDOR = "Invalid role: %1s (at index %d) is not a vendor.";
 
 
     private final Itinerary toAdd;
@@ -83,7 +83,7 @@ public class AddiCommand extends Command {
             }
             Person person = lastShownContactList.get(index.getZeroBased());
             if (!person.isClient()) {
-                throw new CommandException(String.format(MESSAGE_NOT_CLIENT, person.getName()));
+                throw new CommandException(String.format(MESSAGE_NOT_CLIENT, person.getName(), index.getOneBased()));
             }
             clientIds.add(person.getId());
         }
@@ -94,7 +94,7 @@ public class AddiCommand extends Command {
             }
             Person person = lastShownContactList.get(index.getZeroBased());
             if (!person.isVendor()) {
-                throw new CommandException(String.format(MESSAGE_NOT_VENDOR, person.getName()));
+                throw new CommandException(String.format(MESSAGE_NOT_VENDOR, person.getName(), index.getOneBased()));
             }
             vendorIds.add(person.getId());
         }

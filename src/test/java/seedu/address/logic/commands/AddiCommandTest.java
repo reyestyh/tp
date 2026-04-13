@@ -111,7 +111,8 @@ public class AddiCommandTest {
         vendorIndexes.add(INDEX_FIRST);
         AddiCommand addiCommand = new AddiCommand(validItinerary, new HashSet<>(), vendorIndexes);
         ModelStub modelStub = new ModelStubWithClient();
-        String expectedMessage = String.format(AddiCommand.MESSAGE_NOT_VENDOR, client.getName());
+        String expectedMessage = String.format(AddiCommand.MESSAGE_NOT_VENDOR, client.getName(),
+                INDEX_FIRST.getOneBased());
 
         assertThrows(CommandException.class, expectedMessage, () -> addiCommand.execute(modelStub));
     }
@@ -123,7 +124,8 @@ public class AddiCommandTest {
         clientIndexes.add(INDEX_FIRST);
         AddiCommand addiCommand = new AddiCommand(validItinerary, clientIndexes, new HashSet<>());
         ModelStub modelStub = new ModelStubWithVendor();
-        String expectedMessage = String.format(AddiCommand.MESSAGE_NOT_CLIENT, vendor.getName());
+        String expectedMessage = String.format(AddiCommand.MESSAGE_NOT_CLIENT, vendor.getName(),
+                INDEX_FIRST.getOneBased());
 
         assertThrows(CommandException.class, expectedMessage, () -> addiCommand.execute(modelStub));
     }
