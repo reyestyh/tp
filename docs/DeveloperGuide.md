@@ -543,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tour agency operation executive           | archive completed itineraries                                                     | keep my workplace uncluttered                           |
 | `* *`    | tour agency operation executive           | add pictures to contacts                                                          | recognize the people I work with                        |
 | `* *`    | tour agency operation executive           | clear all existing data                                                           | start fresh with a new data set                         |
-| `* *`    | tour agency operation executive           | find contacts with specific keywords                                              | search and view all contacts with the keywords          |
+| `* *`    | tour agency operation executive           | find contacts with specific keywords                                              | locate contacts easily                                  |
 | `* *`    | tour agency operation executive           | see contacts associated with an itinerary                                         | view all contacts associated with an itinerary          |
 
 ### Use Cases
