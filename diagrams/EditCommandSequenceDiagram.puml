@@ -26,7 +26,10 @@ note right: XYZ is a placeholder for the type of entry\nbeing edited (either Per
 
 parser -> parser : parse and set values for\nedited fields in descriptor
 
-parser -> parser : isAnyFieldEdited()
+parser -> descriptor : isAnyFieldEdited()
+activate descriptor
+descriptor --> parser
+deactivate descriptor
 
 create command
 parser -> command : new EditXYZCommand(index, descriptor)
@@ -58,10 +61,12 @@ alt duplicate entry
 else valid edit
     command -> model : setXYZ(original, edited)
     activate model
+    model --> command
     deactivate model
 
     command -> model : updateFilteredXYZList()
     activate model
+    model --> command
     deactivate model
 
     [<-- command : CommandResult
