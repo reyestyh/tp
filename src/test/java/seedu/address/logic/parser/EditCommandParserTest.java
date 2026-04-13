@@ -9,8 +9,10 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_DEST_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_END_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_END_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_START_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_START_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -293,13 +295,17 @@ public class EditCommandParserTest {
         assertParseFailure(parser, ITINERARY_FLAG + " 1"
                 + INVALID_ITINERARY_DEST_DESC, Destination.MESSAGE_CONSTRAINTS);
 
-        // invalid start date
+        // invalid date format
         assertParseFailure(parser, ITINERARY_FLAG + " 1"
-                + INVALID_ITINERARY_START_DATE_DESC, DateRange.MESSAGE_CONSTRAINTS);
+                + INVALID_ITINERARY_START_DATE_FORMAT_DESC, DateRange.MESSAGE_INVALID_DATE_FORMAT);
+        assertParseFailure(parser, ITINERARY_FLAG + " 1"
+                + INVALID_ITINERARY_END_DATE_FORMAT_DESC, DateRange.MESSAGE_INVALID_DATE_FORMAT);
 
-        // invalid end date
+        // invalid date
         assertParseFailure(parser, ITINERARY_FLAG + " 1"
-                + INVALID_ITINERARY_END_DATE_DESC, DateRange.MESSAGE_CONSTRAINTS);
+                + INVALID_ITINERARY_START_DATE_DESC, DateRange.MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, ITINERARY_FLAG + " 1"
+                + INVALID_ITINERARY_END_DATE_DESC, DateRange.MESSAGE_INVALID_DATE);
 
         // invalid destination followed by valid start date
         assertParseFailure(parser, ITINERARY_FLAG + " 1"

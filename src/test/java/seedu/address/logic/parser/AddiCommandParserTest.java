@@ -5,8 +5,10 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_CLIENT_
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_VENDOR_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_DEST_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_END_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_END_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_START_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_START_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ITINERARY_CLIENT_IDS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ITINERARY_DEST_DESC_BALI;
 import static seedu.address.logic.commands.CommandTestUtil.ITINERARY_DEST_DESC_FRANCE;
@@ -146,12 +148,18 @@ public class AddiCommandParserTest {
                         + ITINERARY_START_DATE_DESC_BALI + ITINERARY_END_DATE_DESC_BALI,
                 Destination.MESSAGE_CONSTRAINTS);
 
-        // invalid start date
+        // invalid date format
+        assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
+                        + INVALID_ITINERARY_START_DATE_FORMAT_DESC + ITINERARY_END_DATE_DESC_BALI,
+                DateRange.MESSAGE_INVALID_DATE_FORMAT); // start date
+        assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
+                        + ITINERARY_START_DATE_DESC_BALI + INVALID_ITINERARY_END_DATE_FORMAT_DESC,
+                DateRange.MESSAGE_INVALID_DATE_FORMAT); // end date
+
+        // invalid date
         assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
                         + INVALID_ITINERARY_START_DATE_DESC + ITINERARY_END_DATE_DESC_BALI,
-                DateRange.MESSAGE_INVALID_DATE_FORMAT);
-
-        // invalid end date
+                DateRange.MESSAGE_INVALID_DATE);
         assertParseFailure(parser, ITINERARY_NAME_DESC_BALI + ITINERARY_DEST_DESC_BALI
                         + ITINERARY_START_DATE_DESC_BALI + INVALID_ITINERARY_END_DATE_DESC,
                 DateRange.MESSAGE_INVALID_DATE);

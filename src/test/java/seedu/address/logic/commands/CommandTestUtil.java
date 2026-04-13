@@ -104,8 +104,15 @@ public class CommandTestUtil {
 
     public static final String INVALID_ITINERARY_NAME_DESC = " " + PREFIX_ITINERARY_NAME + "_bali_";
     public static final String INVALID_ITINERARY_DEST_DESC = " " + PREFIX_ITINERARY_DESTINATION + " ";
-    public static final String INVALID_ITINERARY_START_DATE_DESC = " " + PREFIX_ITINERARY_START + "december 11 2026";
+
+    // invalid date format
+    public static final String INVALID_ITINERARY_START_DATE_FORMAT_DESC =
+            " " + PREFIX_ITINERARY_START + "december 11 2026";
+    public static final String INVALID_ITINERARY_END_DATE_FORMAT_DESC = " " + PREFIX_ITINERARY_END + "2026/01/01";
+    // invalid date
+    public static final String INVALID_ITINERARY_START_DATE_DESC = " " + PREFIX_ITINERARY_START + "2026-02-30";
     public static final String INVALID_ITINERARY_END_DATE_DESC = " " + PREFIX_ITINERARY_END + "2026-31-02";
+
     public static final String INVALID_INDEX_CLIENT_DESC = " " + PREFIX_ITINERARY_CLIENT + "abc";
     public static final String INVALID_INDEX_VENDOR_DESC = " " + PREFIX_ITINERARY_VENDOR + "___";
 

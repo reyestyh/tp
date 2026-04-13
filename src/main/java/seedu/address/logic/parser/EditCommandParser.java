@@ -166,19 +166,27 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseDestination(argMultimap.getValue(PREFIX_ITINERARY_DESTINATION).get()));
         }
         if (argMultimap.getValue(PREFIX_ITINERARY_START).isPresent()) {
+            String startStr = argMultimap.getValue(PREFIX_ITINERARY_START).get();
+            if (!DateRange.isValidDateFormat(startStr)) {
+                throw new ParseException(DateRange.MESSAGE_INVALID_DATE_FORMAT);
+            }
             try {
                 editItineraryDescriptor.setStartDate(
-                        LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_START).get(), DATE_FORMAT));
+                        LocalDate.parse(startStr, DATE_FORMAT));
             } catch (DateTimeParseException e) {
-                throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+                throw new ParseException(DateRange.MESSAGE_INVALID_DATE);
             }
         }
         if (argMultimap.getValue(PREFIX_ITINERARY_END).isPresent()) {
+            String endStr = argMultimap.getValue(PREFIX_ITINERARY_END).get();
+            if (!DateRange.isValidDateFormat(endStr)) {
+                throw new ParseException(DateRange.MESSAGE_INVALID_DATE_FORMAT);
+            }
             try {
                 editItineraryDescriptor.setEndDate(
-                        LocalDate.parse(argMultimap.getValue(PREFIX_ITINERARY_END).get(), DATE_FORMAT));
+                        LocalDate.parse(endStr, DATE_FORMAT));
             } catch (DateTimeParseException e) {
-                throw new ParseException(DateRange.MESSAGE_CONSTRAINTS);
+                throw new ParseException(DateRange.MESSAGE_INVALID_DATE);
             }
         }
         if (!editItineraryDescriptor.isAnyFieldEdited()) {
