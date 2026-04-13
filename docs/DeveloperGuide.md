@@ -555,24 +555,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a contact and provides the contact details.
-2. TripScribe creates the contact and displays a success message and the updated contact list.
+2. TripScribe creates the contact and displays the updated contact list.
 
 Use case ends.
 
 **Extensions**
 
 * 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe shows a format error message and displays the correct command usage.
+    * 1a1. TripScribe informs the user of the format error.
 
       Use case ends.
 
 * 1b. TripScribe detects invalid values in the entered contact details (e.g., invalid email/phone, empty name).
-
-    * 1b1. TripScribe shows a validation error message and displays the correct command usage (and/or which field is invalid).
+    * 1b1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
+
 * 1c. TripScribe detects a duplicate contact.
-    * 1c1. TripScribe shows a duplicate message and does not create the contact.
+    * 1c1. TripScribe informs the user that the contact already exists.
 
       Use case ends.
 ---
@@ -585,13 +585,13 @@ Similar to UC01, except that TripScribe also validates itinerary-specific fields
 
 * 1a. Similar to UC01 extension 1a.
 
-* 1b. TripScribe detects invalid itinerary details (e.g., invalid date format, end date earlier than start date).
-    * 1b1. TripScribe displays a validation error message.
+* 1b. TripScribe detects invalid values in the entered itinerary details (e.g., invalid date format, end date earlier than start date).
+    * 1b1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
 
 * 1c. TripScribe cannot find a referenced client or vendor.
-    * 1c1. TripScribe displays an error message indicating that the referenced contact does not exist.
+    * 1c1. TripScribe informs the user that the referenced contact does not exist.
 
       Use case ends.
 
@@ -611,15 +611,15 @@ Use case ends.
 **Extensions**
 
 * 1a. TripScribe detects an error in the entered command format (e.g., Typo).
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+    * 1a1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
 * 1b. TripScribe detects an error in the entered command details (e.g., missing category / unrecognized category).
-    * 1b1. TripScribe displays a format error message with the correct command usage and list of supported categories.
+    * 1b1. TripScribe informs the user that the category is invalid.
 
       Use case ends.
 * 2a. TripScribe finds zero entries matching.
-    * 2a1. TripScribe displays an empty result message.
+    * 2a1. TripScribe informs the user that no matching entries were found.
 
       Use case ends.
 
@@ -637,17 +637,17 @@ Use case ends.
 **Extensions**
 
 * 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+    * 1a1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
 
 * 1b. TripScribe detects an invalid index (e.g., not a positive integer or out of range).
-    * 1b1. TripScribe shows an error message indicating that the specified entry does not exist.
+    * 1b1. TripScribe informs the user that the index is invalid.
 
       Use case ends.
 
 * 1c. TripScribe detects an invalid flag.
-    * 1c1. TripScribe displays an error message indicating the valid flags.
+    * 1c1. TripScribe informs the user that the flag provided was invalid.
 
       Use case ends.
 ---
@@ -663,7 +663,7 @@ Use case ends.
 **Extensions**
 
 * 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+    * 1a1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
 
@@ -692,32 +692,18 @@ Use case ends.
 
 **Extensions**
 
-* 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+* 1a. Similar to UC05 extension 1a.
 
-      Use case ends.
+* 1b. Similar to UC05 extension 1b.
 
-* 1b. TripScribe detects no keywords in the entered command format.
-    * 1b1. TripScribe displays a format error message indicating that at least 1 keyword must be given for search.
-
-      Use case ends.
-
-* 1c. TripScribe detects a non-prefixed keyword before the first prefixed keyword.
-    * 1c1. TripScribe displays a format error message with the correct command usage.
-
-      Use case ends.
-
-* 2a. TripScribe finds zero entries matching.
-    * 2a1. TripScribe displays an empty result message.
-
-      Use case ends.
+* 2a. Similar to UC05 extension 2a.
 
 ---
 
 **UC07: Edit**
 
 **MSS**
-1. User requests to edit a contact or itinerary by specifying the entry type and index
+1. User requests to edit a contact or itinerary.
 2. User supplies fields to edit.
 3. TripScribe edits the specified contact or itinerary.
 4. TripScribe displays a success message and the updated list.
@@ -727,27 +713,27 @@ Use case ends.
 **Extensions**
 
 * 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+    * 1a1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
 
 * 1b. TripScribe detects an invalid index (e.g., not a positive integer or out of range).
-    * 1b1. TripScribe shows an error message indicating that the specified entry does not exist.
+    * 1b1. TripScribe informs the user that the index is invalid.
 
       Use case ends.
 
 * 1c. TripScribe detects an invalid flag.
-    * 1c1. TripScribe displays an error message indicating the valid flags.
+    * 1c1. TripScribe informs the user that the flag provided was invalid.
 
       Use case ends.
   
 * 2a. TripScribe detects no fields entered by user to edit.
-  * 2a1. TripScribe displays an error message indicating that at least 1 field must be edited for the entry.
+    * 1b1. TripScribe informs the user that no fields were provided.
     
       Use case ends.
 
 * 3a. TripScribe detects a field entered by user is for the wrong entry type (e.g. `from/` for contact).
-    * 3a1. TripScribe displays an error message indicating that at least 1 field must be edited for the entry.
+    * 3a1. TripScribe informs that the field is for the wrong entity.
 
       Use case ends.
 ---
@@ -763,12 +749,12 @@ Use case ends.
 **Extensions**
 
 * 1a. TripScribe detects an error in the entered command format.
-    * 1a1. TripScribe displays a format error message with the correct command usage.
+    * 1a1. TripScribe informs the user that the input is invalid.
 
       Use case ends.
 
 * 1b. TripScribe detects an invalid index (e.g., not a positive integer or out of range).
-    * 1b1. TripScribe shows an error message indicating that the specified entry does not exist.
+    * 1b1. TripScribe informs the user that the index is invalid.
 
       Use case ends.
 
